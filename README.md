@@ -1,4 +1,4 @@
-![Calarts Creative Computing Logo](https://i.imgur.com/235dOcD.png)
+![Calarts Creative Computing Logo](https://i.imgur.com/XZpdi2e.png)
 
 
 # Seraph
