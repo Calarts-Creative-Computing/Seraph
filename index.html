@@ -71,29 +71,13 @@
     }
 
     .hero-shell {
-      padding: 4rem 0 2rem;
+      padding: 3rem 0 2rem;
     }
 
     .hero-panel {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      border-radius: 1.75rem;
-      background:
-        linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.92)),
-        linear-gradient(135deg, rgba(59, 130, 246, 0.16), rgba(56, 189, 248, 0.04));
-      box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
-    }
-
-    .hero-panel::after {
-      content: "";
-      position: absolute;
-      inset: auto -10% -45% auto;
-      width: 28rem;
-      height: 28rem;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.28), transparent 62%);
-      pointer-events: none;
+      border-radius: 1.25rem;
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.92));
+      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.2);
     }
 
     .eyebrow {
@@ -104,36 +88,20 @@
     }
 
     .hero-panel h1 {
-      font-size: clamp(2.4rem, 5vw, 4.2rem);
-      line-height: 1.02;
-      letter-spacing: -0.03em;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
     }
 
     .hero-panel .lead {
-      max-width: 60rem;
-      color: rgba(226, 232, 240, 0.86);
+      color: rgba(226, 232, 240, 0.82);
+      font-size: 1rem;
     }
 
     .hero-actions .btn {
       border-radius: 999px;
       padding-inline: 1rem;
       font-weight: 600;
-    }
-
-    .hero-metric {
-      height: 100%;
-      border-radius: 1.1rem;
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      background: rgba(255, 255, 255, 0.08);
-      color: #f8fafc;
-      backdrop-filter: blur(14px);
-    }
-
-    .hero-metric .metric-label {
-      color: rgba(191, 219, 254, 0.78);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.72rem;
     }
 
     .docs-layout {
@@ -359,43 +327,14 @@
   <header class="hero-shell">
     <div class="container">
       <div class="hero-panel text-white p-4 p-lg-5">
-        <div class="row g-4 align-items-end position-relative">
-          <div class="col-xl-7">
-            <div class="eyebrow fw-semibold mb-3">Open-source Teensy MIDI Controller Platform</div>
-            <h1 class="fw-semibold mb-3">Professional reference docs for building with Seraph.</h1>
-            <p class="lead mb-4">This GitHub Pages site now presents the Seraph README as a cleaner internal-documentation experience for hardware setup, wiring patterns, MIDI implementation, DAW routing, and BOM review.</p>
-            <div class="d-flex flex-wrap gap-2 hero-actions">
-              <a class="btn btn-light text-dark" href="#overview">Start with the guide</a>
-              <a class="btn btn-outline-light" href="https://github.com/Calarts-Creative-Computing/Seraph/archive/refs/heads/main.zip">Download ZIP</a>
-              <a class="btn btn-outline-light" href="./Gerber/SeraphGerber.zip" download>Download Gerbers</a>
-              <a class="btn btn-outline-light" href="https://creativecomputing.calarts.edu/">Creative Computing @ CalArts</a>
-            </div>
-          </div>
-          <div class="col-xl-5">
-            <div class="row g-3">
-              <div class="col-sm-4 col-xl-12">
-                <div class="hero-metric p-3">
-                  <div class="metric-label mb-2">Documentation scope</div>
-                  <div class="fs-5 fw-semibold">End-to-end onboarding</div>
-                  <div class="small opacity-75">From first boot to DAW integration.</div>
-                </div>
-              </div>
-              <div class="col-sm-4 col-xl-12">
-                <div class="hero-metric p-3">
-                  <div class="metric-label mb-2">Coverage</div>
-                  <div class="fs-5 fw-semibold">6 core guides + BOM</div>
-                  <div class="small opacity-75">Hardware, sensors, MIDI, and routing references.</div>
-                </div>
-              </div>
-              <div class="col-sm-4 col-xl-12">
-                <div class="hero-metric p-3">
-                  <div class="metric-label mb-2">Audience</div>
-                  <div class="fs-5 fw-semibold">Builders and teaching labs</div>
-                  <div class="small opacity-75">Designed to feel like internal product documentation.</div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="eyebrow fw-semibold mb-3">Open-source Teensy MIDI Controller Platform</div>
+        <h1 class="fw-semibold mb-2">Seraph</h1>
+        <p class="lead mb-4">An open-source platform for building USB-MIDI controllers and sensor-based interactive art projects. PCB design, demo code, and step-by-step guides to help you build and customize your own MIDI devices.</p>
+        <div class="d-flex flex-wrap gap-2 hero-actions">
+          <a class="btn btn-light text-dark" href="#overview">Getting Started</a>
+          <a class="btn btn-outline-light" href="https://github.com/Calarts-Creative-Computing/Seraph/archive/refs/heads/main.zip">Download ZIP</a>
+          <a class="btn btn-outline-light" href="./Gerber/SeraphGerber.zip" download>Download Gerbers</a>
+          <a class="btn btn-outline-light" href="https://creativecomputing.calarts.edu/">Creative Computing @ CalArts</a>
         </div>
       </div>
     </div>
@@ -480,7 +419,7 @@
 
         <section class="doc card border-0 shadow-sm" id="section-01">
       <h2>01 — Board Overview &amp; Hardware Setup</h2>
-      <p>Seraph is a breakout board for the Teensy 4.1 that simplifies wiring, power regulation, and I/O routing so you can focus on instrument and installation design.</p>
+      <p>Seraph is a breakout board for the Teensy 4.1 microcontroller. It handles all the messy wiring, power regulation, and I/O routing so you can focus on building your instrument or installation — not on debugging circuits.</p>
       <h3>What's on the Board</h3>
       <div class="grid-2">
         <figure>
@@ -494,34 +433,39 @@
       </div>
       <h3>First-Time Setup</h3>
       <h4>Step 1 — Install Arduino IDE &amp; Teensyduino</h4>
+      <p>Seraph uses the Arduino IDE with the Teensyduino add-on, which gives your computer the tools to compile code and talk to the Teensy 4.1.</p>
       <ol>
         <li>Download Arduino IDE from <a href="https://arduino.cc/en/software">arduino.cc/en/software</a>.</li>
         <li>Download Teensyduino from <a href="https://www.pjrc.com/teensy/teensyduino.html">pjrc.com/teensy/teensyduino.html</a>.</li>
-        <li>Run Teensyduino installer and let it detect your Arduino IDE.</li>
-        <li>Verify Teensy boards appear in <code>Tools &gt; Board &gt; Teensyduino</code>.</li>
+        <li>Run the Teensyduino installer — it will find your Arduino IDE automatically.</li>
+        <li>Open Arduino IDE. You should now see Teensy boards in <code>Tools &gt; Board &gt; Teensyduino</code>.</li>
       </ol>
       <h4>Step 2 — Mount the Teensy on Seraph</h4>
-      <ul>
-        <li>Use header pins (do not solder Teensy directly to the board).</li>
-        <li>Seat Teensy 4.1 in the socket with USB facing the board edge.</li>
-        <li>Verify all pins are aligned and fully seated.</li>
-      </ul>
-      <h4>Step 3 — Configure USB-MIDI Mode</h4>
-      <ol>
-        <li>Select <code>Tools &gt; Board &gt; Teensy 4.1</code>.</li>
-        <li>Select <code>Tools &gt; USB Type &gt; Serial + MIDI</code>.</li>
-        <li>Connect over USB and verify serial + MIDI device visibility.</li>
+      <p>⚠️ Always use header pins when mounting the Teensy. Soldering it directly means you cannot reuse it in other projects.</p>
+      <ol start="5">
+        <li>Solder male header pins to the Teensy 4.1 (if not pre-soldered).</li>
+        <li>Press the Teensy firmly into the MCU socket on the Seraph board — the USB port should face toward the board edge.</li>
+        <li>Double-check alignment: all pins seated, none bent.</li>
       </ol>
+      <h4>Step 3 — Configure USB-MIDI Mode</h4>
+      <p>This is the most important setting. Without it, your computer won't recognise the Teensy as a MIDI device.</p>
+      <ol>
+        <li>In Arduino IDE, go to <code>Tools &gt; Board</code> and select <code>Teensy 4.1</code>.</li>
+        <li>Go to <code>Tools &gt; USB Type</code> and select <code>Serial + MIDI</code>.</li>
+        <li>Connect the Teensy to your computer via USB.</li>
+        <li>You should see it appear in your system as both a serial port and a MIDI device.</li>
+      </ol>
+      <p>💡 On macOS, check Audio MIDI Setup (Applications &gt; Utilities) to confirm the device appears. On Windows, check Device Manager.</p>
     </section>
 
         <section class="doc card border-0 shadow-sm" id="section-02">
       <h2>02 — First Wiring Tutorial: Button &amp; LED</h2>
-      <p>Build your first test circuit: button press drives LED output and sends MIDI Note On/Off events.</p>
+      <p>This is your first circuit. You'll wire a push button and an LED to Seraph, then upload code that lights the LED when the button is pressed and sends a MIDI Note On message to your computer.</p>
       <h3>What You'll Need</h3>
       <div class="grid-3">
         <div class="tile"><strong>Seraph + Teensy 4.1</strong><br>Mounted and powered.</div>
         <div class="tile"><strong>1x momentary push button</strong><br>Digital input trigger.</div>
-        <div class="tile"><strong>1x LED + 470Ω resistor</strong><br>Visual output indicator.</div>
+        <div class="tile"><strong>1x LED + 470Ω resistor</strong><br>Visual output with current limiting.</div>
         <div class="tile"><strong>Jumper wires</strong><br>For signal and ground routing.</div>
       </div>
       <h3>Wiring Diagram</h3>
@@ -536,60 +480,70 @@
         </figure>
       </div>
       <div class="tile">
-        <p>Digital channel strips provide <strong>+</strong>, <strong>−</strong>, and <strong>S</strong> pins.</p>
-        <ul>
-          <li>Buttons use <strong>S</strong> + <strong>−</strong>.</li>
-          <li>LEDs use <strong>S</strong> + <strong>−</strong> with current-limiting resistor.</li>
-        </ul>
+        <p>💡 Each channel strip on the digital bank has three pins in a row: <strong>+</strong> (power/3.3V), <strong>−</strong> (ground), and <strong>S</strong> (signal). For buttons, you only need S and −. For LEDs, S and −, with a resistor in series.</p>
       </div>
       <h3>The Code</h3>
-      <pre><code>const int BUTTON_PIN = 1;
-const int LED_PIN = 2;
-const int MIDI_CHANNEL = 1;
-const int MIDI_NOTE = 60;
+      <p>Create a new sketch in Arduino IDE and paste in the following code. This is adapted from the Seraph_ButtonDemo in the GitHub repository.</p>
+      <pre><code>// Seraph — Button + LED Demo
+// Digital Channel 1 = Button input
+// Digital Channel 2 = LED output
+
+const int BUTTON_PIN = 1;   // Change to match your wiring
+const int LED_PIN    = 2;   // Change to match your wiring
+
+const int MIDI_CHANNEL = 1;  // MIDI channel 1
+const int MIDI_NOTE    = 60; // Middle C
 const int MIDI_VELOCITY = 100;
-int lastButtonState = HIGH;
+
+int lastButtonState = HIGH; // Buttons default HIGH (internal pullup)
 
 void setup() {
-  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  pinMode(BUTTON_PIN, INPUT_PULLUP); // Enable internal pullup resistor
   pinMode(LED_PIN, OUTPUT);
 }
 
 void loop() {
   int buttonState = digitalRead(BUTTON_PIN);
 
+  // Button pressed (LOW because of pullup)
   if (buttonState == LOW &amp;&amp; lastButtonState == HIGH) {
-    digitalWrite(LED_PIN, HIGH);
+    digitalWrite(LED_PIN, HIGH); // Turn LED on
     usbMIDI.sendNoteOn(MIDI_NOTE, MIDI_VELOCITY, MIDI_CHANNEL);
   }
 
+  // Button released
   if (buttonState == HIGH &amp;&amp; lastButtonState == LOW) {
-    digitalWrite(LED_PIN, LOW);
+    digitalWrite(LED_PIN, LOW); // Turn LED off
     usbMIDI.sendNoteOff(MIDI_NOTE, 0, MIDI_CHANNEL);
   }
 
   lastButtonState = buttonState;
+
+  // Always flush MIDI at the end of loop()
   while (usbMIDI.read()) {}
 }</code></pre>
       <h3>INPUT_PULLUP</h3>
-      <p>Internal pullup keeps input HIGH by default and reads LOW on button press, removing need for an external resistor for simple buttons.</p>
+      <p>When you use <code>INPUT_PULLUP</code>, the Teensy internally connects the pin to 3.3V through a resistor. This means the pin reads HIGH when nothing is connected, and LOW when the button pulls it to ground. This is why you only need two wires for a button — no external resistor needed.</p>
       <h3>Event-Based MIDI</h3>
-      <p>Transmit only on state transitions to avoid MIDI flooding and preserve timing stability.</p>
+      <p>Notice the code only sends MIDI when the button state changes — not every loop iteration. This is called event-based transmission, and it's important: sending MIDI every millisecond would flood the connection with redundant messages. Always track the previous state and only transmit on transitions.</p>
       <h3>usbMIDI.read()</h3>
-      <p>Always flush USB MIDI at loop end with <code>while (usbMIDI.read()) {}</code> to maintain connection stability.</p>
+      <p>The line <code>while (usbMIDI.read()) {}</code> at the end of <code>loop()</code> flushes any incoming MIDI data. Even if you're not receiving MIDI, the USB library needs this to maintain a stable connection. Always include it.</p>
       <h3>Testing</h3>
       <ol>
-        <li>Set USB Type to <code>Serial + MIDI</code>.</li>
-        <li>Upload sketch.</li>
-        <li>Open MIDI monitor (MIDI Monitor or MIDI-OX).</li>
-        <li>Confirm LED response and Note On/Off output.</li>
+        <li>Select <code>Tools &gt; USB Type &gt; Serial + MIDI</code> in Arduino IDE.</li>
+        <li>Upload the sketch (<code>Ctrl+U</code> / <code>Cmd+U</code>).</li>
+        <li>Open a MIDI monitor app (e.g. MIDI Monitor on macOS, MIDI-OX on Windows) to confirm notes are being sent.</li>
+        <li>Press the button — the LED should light and you should see a Note On message for Middle C.</li>
       </ol>
+      <p>💡 If nothing happens, check that the Teensy appears as a MIDI device in your system, and that your pin numbers in the code match where you physically wired the components.</p>
     </section>
 
         <section class="doc card border-0 shadow-sm" id="section-03">
       <h2>03 — Analog Sensors: Potentiometers &amp; FSRs</h2>
-      <p>Analog channels convert variable voltages into usable data for expressive MIDI control.</p>
+      <p>Analog sensors output a continuously varying voltage rather than just on/off. Seraph's analog bank reads these voltages and converts them to numbers your code can use. This section covers the two most common types: potentiometers (knobs) and FSRs (force-sensitive resistors).</p>
       <h3>3A — Potentiometer (No Pulldown Required)</h3>
+      <p>Potentiometers are the simplest analog sensors — they're essentially volume knobs. They have three leads: power, ground, and a wiper that outputs a voltage proportional to rotation.</p>
+      <h4>Wiring Diagram</h4>
       <div class="grid-2">
         <figure>
          <img src="https://i.imgur.com/VT83PWb.png" alt="Potentiometer wiring overview">
@@ -600,17 +554,38 @@ void loop() {
          <figcaption>Potentiometer wiring detail</figcaption>
        </figure>
      </div>
-     <div class="tile">
-       <p>Potentiometers use power, ground, and signal; map 0–1023 analog values to 0–127 MIDI CC values and send only changed values.</p>
-       <pre><code>int rawValue = analogRead(A1);
-int ccValue = map(rawValue, 0, 1023, 0, 127);
-if (ccValue != lastCCValue) {
-  usbMIDI.sendControlChange(74, ccValue, 1);
+     <p>💡 The left/right orientation depends on how you're holding the pot. If your value goes the wrong direction when you turn it, just swap the + and − leads.</p>
+      <pre><code>// Seraph — Potentiometer Demo
+// Maps pot position to MIDI CC (Control Change)
+
+const int POT_PIN      = A1;  // Analog channel 1
+const int MIDI_CC      = 74;  // CC 74 = Filter Cutoff (common choice)
+const int MIDI_CHANNEL = 1;
+
+int lastCCValue = -1; // Track last sent value to avoid redundant messages
+
+void setup() {
+  // No pinMode needed for analog inputs
+}
+
+void loop() {
+  int rawValue = analogRead(POT_PIN);  // 0-1023
+
+  // Map 10-bit ADC range to 7-bit MIDI CC range (0-127)
+  int ccValue = map(rawValue, 0, 1023, 0, 127);
+
+  // Only send if value has changed
+  if (ccValue != lastCCValue) {
+    usbMIDI.sendControlChange(MIDI_CC, ccValue, MIDI_CHANNEL);
+    lastCCValue = ccValue;
+  }
+
+  while (usbMIDI.read()) {}
 }</code></pre>
-     </div>
       <h3>3B — FSR / LDR (Pulldown Resistor Required)</h3>
+      <p>Force-Sensitive Resistors (FSRs) and Light-Dependent Resistors (LDRs) change their resistance based on physical input. Unlike potentiometers, they only have two leads — you need to add a pulldown resistor to create the voltage divider that makes them readable.</p>
       <h4>Why a Pulldown Resistor?</h4>
-      <p>FSRs/LDRs are variable resistors; use a fixed pulldown resistor to form a voltage divider so the analog pin reads a stable voltage.</p>
+      <p>An FSR is just a variable resistor. To read it as a voltage, you pair it with a fixed resistor to form a voltage divider. Seraph has a resistor footprint on each analog channel strip for exactly this purpose — no breadboard required.</p>
       <h4>Wiring Diagram</h4>
       <div class="grid-2">
         <figure>
@@ -622,38 +597,67 @@ if (ccValue != lastCCValue) {
           <figcaption>FSR / LDR wiring detail</figcaption>
         </figure>
       </div>
+      <p>⚠️ Place the pulldown resistor in the resistor slot on the same channel row as your FSR. The Seraph PCB has a dedicated footprint for this — it connects the signal line to ground through the resistor without any extra wiring.</p>
       <h4>Recommended Resistor Values</h4>
       <figure>
         <img src="https://i.imgur.com/k0FOzIM.png" alt="Recommended resistor values for FSR and LDR sensors">
         <figcaption>Recommended resistor values</figcaption>
       </figure>
-      <ul>
-        <li>Start with <strong>10kΩ</strong> for FSR/LDR channels.</li>
-        <li>Tune resistor value based on sensor sensitivity and target dynamic range.</li>
-      </ul>
       <h4>Code</h4>
-      <pre><code>const int FSR_MIN = 50;
-const int FSR_MAX = 900;
-int rawValue = analogRead(A2);
-int ccValue = map(constrain(rawValue, FSR_MIN, FSR_MAX), FSR_MIN, FSR_MAX, 0, 127);
-usbMIDI.sendControlChange(11, ccValue, 1);</code></pre>
+      <pre><code>// Seraph — FSR Demo
+// FSR maps pressure to MIDI velocity / aftertouch
+
+const int FSR_PIN      = A2;
+const int MIDI_CHANNEL = 1;
+
+// Calibration — adjust these to match your sensor's actual range
+const int FSR_MIN = 50;   // Value when barely touched
+const int FSR_MAX = 900;  // Value at maximum pressure
+
+int lastCCValue = -1;
+
+void loop() {
+  int rawValue = analogRead(FSR_PIN);
+
+  int ccValue = map(
+    constrain(rawValue, FSR_MIN, FSR_MAX),
+    FSR_MIN,
+    FSR_MAX,
+    0,
+    127
+  );
+
+  if (ccValue != lastCCValue) {
+    // CC 11 = Expression — works well for pressure control
+    usbMIDI.sendControlChange(11, ccValue, MIDI_CHANNEL);
+    lastCCValue = ccValue;
+  }
+
+  while (usbMIDI.read()) {}
+}</code></pre>
+      <p>💡 Use <code>constrain()</code> before <code>map()</code> when your sensor's real-world range doesn't match the theoretical 0–1023. This prevents the mapped value from going outside 0–127.</p>
     </section>
 
         <section class="doc card border-0 shadow-sm" id="section-04">
       <h2>04 — I²C Devices: IMUs, Displays &amp; More</h2>
-      <p>I²C lets multiple devices share SDA and SCL lines; Seraph provides I²C blocks A/B/C on the same I²C0 bus.</p>
+      <p>I²C (Inter-Integrated Circuit) is a communication protocol that lets you connect multiple sensors to just two wires: SDA (data) and SCL (clock). Seraph exposes three I²C blocks (A, B, C), all defaulting to the Teensy's I2C0 port for maximum compatibility.</p>
       <h3>Common I²C Devices for NIME Projects</h3>
       <div class="grid-3">
-        <div class="tile"><strong>MPU-6050 / BNO055</strong><br>Motion and gesture control.</div>
-        <div class="tile"><strong>SSD1306 OLED</strong><br>Parameter and status display.</div>
-        <div class="tile"><strong>ADS1115</strong><br>Additional high-res analog inputs.</div>
-        <div class="tile"><strong>VL53L0X</strong><br>Distance sensing.</div>
-        <div class="tile"><strong>TCS34725</strong><br>Color sensing for interactive systems.</div>
+        <div class="tile"><strong>MPU-6050 / BNO055</strong><br>6-axis or 9-axis motion sensing for gesture control.</div>
+        <div class="tile"><strong>SSD1306 OLED</strong><br>Small screen for parameter feedback.</div>
+        <div class="tile"><strong>ADS1115</strong><br>Adds 4 extra high-resolution analog inputs.</div>
+        <div class="tile"><strong>VL53L0X</strong><br>Time-of-flight distance measuring.</div>
+        <div class="tile"><strong>TCS34725</strong><br>Reads RGB color values.</div>
       </div>
       <h3>Wiring</h3>
+      <figure>
+        <img src="https://i.imgur.com/VopP0T5.png" alt="I2C wiring diagram">
+        <figcaption>I²C block wiring overview</figcaption>
+      </figure>
+      <p>All I²C devices use the same four-pin connection regardless of which sensor you're using:</p>
       <div class="table-wrap">
         <table class="table table-striped table-hover align-middle mb-0">
-          <caption>I²C sensor wiring reference (pins, suggested wire colors, and Seraph header mapping)</caption>
+          <caption>I²C Device (e.g. MPU-6050 IMU) — sensor wiring reference</caption>
           <thead>
             <tr><th>Component Pin</th><th>Wire Color</th><th>Seraph Header</th></tr>
           </thead>
@@ -665,115 +669,237 @@ usbMIDI.sendControlChange(11, ccValue, 1);</code></pre>
           </tbody>
         </table>
       </div>
-      <p>The pin/function labels are the primary reference; wire colors are suggested only and can be replaced with any clear labeling scheme.</p>
+      <p>💡 If your sensor has additional pins (INT, ADDR, etc.) beyond the four core I²C pins, refer to your sensor's datasheet. ADDR pins often let you change the I²C address to avoid conflicts when using multiple devices of the same type.</p>
       <h3>Using Multiple I²C Devices</h3>
+      <p>Multiple I²C devices can share the same two wires as long as each has a unique address. Seraph's three I²C blocks (A, B, C) are all wired to the same I2C0 bus — they're just convenient connection points, not separate buses.</p>
       <ul>
-        <li>All blocks share one bus, so each device needs a unique address.</li>
-        <li>For dual MPU-6050, choose either one of the two sensors and set its ADDR pin high (tie ADDR to 3.3V/VCC) to shift that device from <code>0x68</code> to <code>0x69</code>.</li>
-        <li>Mixed device types generally work with default addresses.</li>
+        <li>Connecting two MPU-6050s: bridge the ADDR pin on one to 3.3V to change its address from <code>0x68</code> to <code>0x69</code>.</li>
+        <li>Connecting an OLED + IMU: different device types usually have different addresses by default — no configuration needed.</li>
       </ul>
       <h3>Code Example: MPU-6050 IMU to MIDI Pitch Bend</h3>
-      <pre><code>#include "Wire.h"
+      <p>Install the Adafruit MPU6050 library via <code>Tools &gt; Manage Libraries</code> in Arduino IDE before uploading this sketch.</p>
+      <pre><code>// Seraph — IMU (MPU-6050) to MIDI Pitch Bend Demo
+
+#include "Wire.h"
 #include "Adafruit_MPU6050.h"
+
 Adafruit_MPU6050 mpu;
+
+const int MIDI_CHANNEL = 1;
 
 void setup() {
   Wire.begin();
+
   mpu.begin();
+
   mpu.setAccelerometerRange(MPU6050_RANGE_2_G);
   mpu.setGyroRange(MPU6050_RANGE_250_DEG);
 }
 
 void loop() {
   sensors_event_t accel, gyro, temp;
+
   mpu.getEvent(&amp;accel, &amp;gyro, &amp;temp);
-  int pitchBend = map(constrain(accel.acceleration.x * 100, -1000, 1000), -1000, 1000, -8192, 8191);
-  usbMIDI.sendPitchBend(pitchBend, 1);
-  delay(10);
+
+  // Map X-axis tilt (-10 to +10 m/s^2)
+  // to MIDI pitch bend (-8192 to +8191)
+  int pitchBend = map(
+    constrain(accel.acceleration.x * 100, -1000, 1000),
+    -1000,
+    1000,
+    -8192,
+    8191
+  );
+
+  usbMIDI.sendPitchBend(pitchBend, MIDI_CHANNEL);
+
+  delay(10); // ~100 updates/second
+
   while (usbMIDI.read()) {}
 }</code></pre>
       <h3>Troubleshooting I²C</h3>
-      <ul>
-        <li>Check sensor power and shared ground.</li>
-        <li>Verify address conflicts and required pullups for your module.</li>
-        <li>Confirm libraries are installed and bus initialized with <code>Wire.begin()</code>.</li>
-      </ul>
+      <figure>
+        <img src="https://i.imgur.com/9vpSpay.png" alt="I2C troubleshooting reference">
+        <figcaption>I²C troubleshooting reference</figcaption>
+      </figure>
+    </section>
     </section>
 
         <section class="doc card border-0 shadow-sm" id="section-05">
       <h2>05 — MIDI Mapping in Code</h2>
-      <p>Use Teensyduino USB-MIDI primitives to map sensors to musical control behavior.</p>
+      <p>This section explains the core MIDI message types you'll use in Seraph projects and how to send them using the Teensyduino USB-MIDI library. Understanding these building blocks lets you map any sensor to any parameter in your DAW or audio software.</p>
       <h3>Core MIDI Message Types</h3>
-      <div class="grid-3">
-        <div class="tile"><strong>Note On/Off</strong><br>Trigger and release note events.</div>
-        <div class="tile"><strong>Control Change</strong><br>Continuous parameter control (0–127).</div>
-        <div class="tile"><strong>Pitch Bend</strong><br>Signed bend range: −8192 to +8191.</div>
-        <div class="tile"><strong>Program Change</strong><br>Patch switching per channel.</div>
-      </div>
+      <figure>
+        <img src="https://i.imgur.com/09eKWef.png" alt="Core MIDI message types reference">
+        <figcaption>Core MIDI message types</figcaption>
+      </figure>
       <h3>usbMIDI Cheat Sheet</h3>
-      <pre><code>usbMIDI.sendNoteOn(note, velocity, channel);
+      <p>These are the most commonly used usbMIDI functions in Seraph projects:</p>
+      <pre><code>// Note On — play a note
+usbMIDI.sendNoteOn(note, velocity, channel);
+
+//   note:     0–127  (60 = Middle C)
+//   velocity: 0–127  (0 = silent, 127 = max)
+//   channel:  1–16
+
+
+// Note Off — stop a note
 usbMIDI.sendNoteOff(note, 0, channel);
-usbMIDI.sendControlChange(ccNumber, value, channel);
+
+
+// Control Change — continuous parameter
+usbMIDI.sendControlChange(cc_number, value, channel);
+
+//   cc_number: 0–127 (see MIDI CC list below)
+//   value:     0–127
+
+
+// Pitch Bend — continuous pitch movement
 usbMIDI.sendPitchBend(value, channel);
+
+//   value: -8192 to +8191
+//   0 = center / no bend
+
+
+// Program Change — switch patches
 usbMIDI.sendProgramChange(program, channel);
+
+//   program: 0–127
+
+
+// Always flush MIDI messages at end of loop()
 while (usbMIDI.read()) {}</code></pre>
       <h3>Useful MIDI CC Numbers</h3>
-      <ul>
-        <li>CC 1: Mod Wheel</li>
-        <li>CC 7: Volume</li>
-        <li>CC 10: Pan</li>
-        <li>CC 11: Expression</li>
-        <li>CC 74: Filter Cutoff</li>
-      </ul>
+      <p>CC numbers are standardized. Here are the ones most useful for NIME and music production:</p>
+      <figure>
+        <img src="https://i.imgur.com/8wxerxz.png" alt="Useful MIDI CC numbers reference">
+        <figcaption>Useful MIDI CC numbers</figcaption>
+      </figure>
       <h3>Combining Multiple Sensors</h3>
-      <pre><code>// Pot -> CC74, FSR -> CC11, Button -> Note On/Off
-// Track previous states and only send on change.
-// End loop with while (usbMIDI.read()) {}</code></pre>
+      <p>Real Seraph projects typically combine several sensors sending different MIDI messages. Here's the structure to follow:</p>
+      <pre><code>// Multi-sensor Seraph template
+
+const int POT_PIN    = A1;
+const int FSR_PIN    = A2;
+const int BUTTON_PIN = 1;
+
+int lastPotCC = -1;
+int lastFSRCC = -1;
+int lastBtn   = HIGH;
+
+void setup() {
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+}
+
+void loop() {
+
+  // --- Potentiometer -> CC 74 (Filter) ---
+  int potCC = map(
+    analogRead(POT_PIN),
+    0,
+    1023,
+    0,
+    127
+  );
+
+  if (potCC != lastPotCC) {
+    usbMIDI.sendControlChange(74, potCC, 1);
+    lastPotCC = potCC;
+  }
+
+
+  // --- FSR -> CC 11 (Expression) ---
+  int fsrCC = map(
+    constrain(analogRead(FSR_PIN), 50, 900),
+    50,
+    900,
+    0,
+    127
+  );
+
+  if (fsrCC != lastFSRCC) {
+    usbMIDI.sendControlChange(11, fsrCC, 1);
+    lastFSRCC = fsrCC;
+  }
+
+
+  // --- Button -> Note On/Off ---
+  int btn = digitalRead(BUTTON_PIN);
+
+  if (btn == LOW &amp;&amp; lastBtn == HIGH) {
+    usbMIDI.sendNoteOn(60, 100, 1);
+  }
+
+  if (btn == HIGH &amp;&amp; lastBtn == LOW) {
+    usbMIDI.sendNoteOff(60, 0, 1);
+  }
+
+  lastBtn = btn;
+
+
+  // Always flush MIDI messages
+  while (usbMIDI.read()) {}
+}</code></pre>
     </section>
 
         <section class="doc card border-0 shadow-sm" id="section-06">
       <h2>06 — Connecting to a DAW</h2>
-      <p>Route Seraph MIDI into Ableton, Max/MSP, and any DAW supporting USB MIDI input.</p>
+      <p>Once your Seraph is sending MIDI, the final step is getting that data into your DAW or audio software. This section covers Ableton Live, Max/MSP, and general MIDI routing — the three most common environments in NIME and music production contexts.</p>
       <h3>6A — Ableton Live</h3>
       <h4>Enable MIDI Input</h4>
       <ol>
-        <li>Open Preferences and go to Link / Tempo / MIDI.</li>
-        <li>Enable <strong>Track</strong> for Teensy MIDI input.</li>
-        <li>Enable <strong>Remote</strong> when mapping controls.</li>
+        <li>Go to <strong>Live &gt; Preferences</strong> (Mac) or <strong>Options &gt; Preferences</strong> (PC).</li>
+        <li>Click the <strong>Link / Tempo / MIDI</strong> tab.</li>
+        <li>Find your Teensy in the MIDI Ports list — it will appear as something like "Teensy MIDI".</li>
+        <li>Turn ON <strong>Track</strong> under the Input column for your Teensy.</li>
+        <li>Optionally turn ON <strong>Remote</strong> if you want to use it for Live's remote control.</li>
       </ol>
+      <p>💡 If your Teensy doesn't appear, check that USB Type is set to <code>Serial + MIDI</code> in Arduino IDE and that the sketch is running (the board is powered and the code is uploaded).</p>
       <h4>Mapping CC to a Parameter</h4>
-      <ol>
-        <li>Enter MIDI Map Mode (<code>Cmd/Ctrl + M</code>).</li>
-        <li>Select parameter and move Seraph control.</li>
-        <li>Exit map mode and fine-tune min/max ranges.</li>
+      <ol start="6">
+        <li>Enter MIDI Map Mode (<code>Cmd+M</code> on Mac, <code>Ctrl+M</code> on PC) — everything mappable turns blue.</li>
+        <li>Click the parameter you want to control (e.g. a filter knob on an instrument).</li>
+        <li>Turn your potentiometer on Seraph — Live will detect the CC and assign it.</li>
+        <li>Exit MIDI Map Mode (<code>Cmd+M</code> / <code>Ctrl+M</code> again).</li>
       </ol>
+      <p>💡 In MIDI Map Mode you can also set min/max ranges for each mapping. This lets you limit a potentiometer to only sweep part of a parameter's range.</p>
       <h4>Triggering Clips with Buttons</h4>
-      <ol>
+      <ol start="10">
         <li>Enter MIDI Map Mode.</li>
-        <li>Select clip slot and press Seraph button.</li>
-        <li>Exit map mode.</li>
+        <li>Click a clip slot in Session View.</li>
+        <li>Press your button on Seraph — Live assigns it.</li>
+        <li>Exit MIDI Map Mode.</li>
       </ol>
 
       <h3>6B — Max/MSP</h3>
-      <p>Use <code>notein</code>, <code>ctlin</code>, and <code>bendin</code> objects for USB MIDI workflows.</p>
+      <p>Max/MSP is the most common environment for custom interactive music systems. Use the <code>midiin</code> or <code>notein</code> / <code>ctlin</code> objects to receive MIDI from Seraph:</p>
       <h4>Receiving MIDI in Max</h4>
-      <pre><code>[notein]
-[ctlin]
-[bendin]
+      <pre><code>// In a Max patch, create these objects:
 
-[notein Teensy MIDI]
+[notein]          // receives Note On/Off from any MIDI device
+[ctlin]           // receives Control Change messages
+[bendin]          // receives Pitch Bend
+
+
+// To receive from Seraph specifically:
+
+[notein Teensy MIDI]    // specify device name in the argument
 [ctlin Teensy MIDI]
 
-[ctlin 74 Teensy MIDI]
-    |
- [/ 127.]
-    |
- [cutoff~]</code></pre>
+
+// Example: map CC 74 to a filter cutoff
+
+[ctlin 74 Teensy MIDI]  // only listens to CC 74 from Teensy
+        |
+     [/ 127.]           // normalize 0-127 to 0.0-1.0
+        |
+    [cutoff~]           // connect to your audio object</code></pre>
+      <p>💡 If Max doesn't list your Teensy as a MIDI device, go to <strong>Max &gt; Preferences &gt; MIDI</strong> and click Refresh. Make sure the Teensy is plugged in and the sketch is running.</p>
       <h4>Serial vs USB-MIDI in Max</h4>
-      <p>Default Seraph sketches use USB MIDI; some advanced projects use serial streams that require manual parsing with Max's <code>serial</code> object.</p>
+      <p>Seraph defaults to USB-MIDI, but some advanced Seraph projects communicate over serial instead, sending raw data rather than formatted MIDI messages. For USB-MIDI, use <code>notein</code>/<code>ctlin</code> as above. For serial, use the <code>serial</code> object and parse the data manually.</p>
 
       <h3>6C — General MIDI Routing (Any DAW)</h3>
-      <h4><span aria-hidden="true">🎛️</span> DAW / Software MIDI Setup</h4>
+      <h4>🎛️ DAW / Software MIDI Setup</h4>
       <div class="table-wrap">
         <table class="table table-striped table-hover align-middle mb-0">
           <caption>Common DAW and software locations for enabling Seraph MIDI input</caption>
@@ -781,33 +907,54 @@ while (usbMIDI.read()) {}</code></pre>
             <tr><th>DAW / Software</th><th>Where to Enable MIDI</th></tr>
           </thead>
           <tbody>
-            <tr><td>Ableton Live</td><td>Preferences → MIDI → Enable Track Input for Teensy</td></tr>
-            <tr><td>Logic Pro</td><td>File → Project Settings → MIDI → Input Devices</td></tr>
-            <tr><td>Bitwig Studio</td><td>Preferences → Controllers → Add Generic MIDI</td></tr>
-            <tr><td>Reaper</td><td>Options → Preferences → MIDI Devices → Enable Input</td></tr>
-            <tr><td>GarageBand</td><td>Auto-detects USB MIDI</td></tr>
-            <tr><td>Pure Data</td><td>Use <code>[notein]</code> / <code>[ctlin]</code></td></tr>
-            <tr><td>SuperCollider</td><td><code>MIDIClient.init;</code> + <code>MIDIIn.connectAll;</code></td></tr>
+            <tr><td><strong>Ableton Live</strong></td><td>Preferences → MIDI → Enable <strong>Track Input</strong> for Teensy</td></tr>
+            <tr><td><strong>Logic Pro</strong></td><td>File → Project Settings → MIDI → Input Devices</td></tr>
+            <tr><td><strong>Bitwig Studio</strong></td><td>Preferences → Controllers → Add Controller → Generic MIDI</td></tr>
+            <tr><td><strong>Reaper</strong></td><td>Options → Preferences → MIDI Devices → Enable Teensy Input</td></tr>
+            <tr><td><strong>GarageBand</strong></td><td>Auto-detects USB MIDI — just connect and play</td></tr>
+            <tr><td><strong>Pure Data</strong></td><td>Use <code>[notein]</code> / <code>[ctlin]</code> objects (same as Max/MSP)</td></tr>
+            <tr><td><strong>SuperCollider</strong></td><td><code>MIDIClient.init;</code> → <code>MIDIIn.connectAll;</code> → <code>MIDIdef.cc(...)</code></td></tr>
           </tbody>
         </table>
       </div>
 
       <h4>Common DAW Issues</h4>
       <ul>
-        <li>Device missing: verify <code>Serial + MIDI</code> and re-upload.</li>
-        <li>Stuck notes: ensure every Note On has matching Note Off.</li>
-        <li>Noisy CC: apply smoothing and tune resistor/sensor setup.</li>
-        <li>Channel mismatch: align DAW channel input with sketch output channel.</li>
+        <li>MIDI device not appearing: Confirm USB Type is <code>Serial + MIDI</code> in Arduino IDE and re-upload the sketch.</li>
+        <li>Notes stuck on: Add <code>usbMIDI.sendNoteOff()</code> for every Note On — always pair them.</li>
+        <li>CC values jumpy or noisy: Add smoothing in your sketch (see below), or adjust the sensor's pulldown resistor value.</li>
+        <li>Wrong channel: Make sure the MIDI channel in your sketch matches what the DAW is listening on.</li>
       </ul>
 
       <h4>Adding Smoothing to Reduce Jitter</h4>
-      <pre><code>float smoothed = 0;
+      <pre><code>// Exponential moving average — reduces sensor noise
+
+float smoothed = 0;
+
 const float ALPHA = 0.1;
+// Lower = smoother, less responsive
+// Higher = faster response, more jitter
 
 void loop() {
+
   float raw = analogRead(A1);
+
+  // Smooth incoming sensor data
   smoothed = ALPHA * raw + (1.0 - ALPHA) * smoothed;
-  int ccValue = map((int)smoothed, 0, 1023, 0, 127);
+
+  // Convert analog range (0-1023)
+  // into MIDI range (0-127)
+  int ccValue = map(
+    (int)smoothed,
+    0,
+    1023,
+    0,
+    127
+  );
+
+  // Send MIDI as normal
+  // usbMIDI.sendControlChange(CC, ccValue, CHANNEL);
+
   while (usbMIDI.read()) {}
 }</code></pre>
       <p><strong>You're ready to build.</strong></p>
@@ -858,7 +1005,7 @@ void loop() {
       <p><a class="btn btn-outline-dark" href="https://creativecomputing.calarts.edu/">Learn More</a></p>
     </section>
 
-          <footer class="pt-2 pb-4 text-center">Refined GitHub Pages documentation experience for Seraph, built from the repository guide and optimized for a cleaner technical-docs presentation.</footer>
+          <footer class="pt-2 pb-4 text-center">Seraph — Open-Source Teensy MIDI Controller Platform · <a href="https://creativecomputing.calarts.edu/">Creative Computing @ CalArts</a></footer>
         </div>
       </div>
     </div>
