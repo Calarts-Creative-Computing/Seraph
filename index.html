@@ -5,19 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Seraph | Developer Docs + Getting Started</title>
   <meta name="description" content="Seraph developer-focused documentation site for hardware setup, wiring tutorials, MIDI mapping, DAW integration, and BOM.">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAAAYFBMVEUKi7n///8olL4Yj7wAhLUAibgAh7ft9PhUoMX0+fslj7uawNgAgLOHudNrpskAerCixtzf7POy0uNDl8Bdpsi/2Oapy96Vwtl8tNDR4+2Pu9Rsq8s2k712r87Z5/DG3ekivg6PAAAENUlEQVR4nO2a246DOAyGoY3NYUIhoVBObd//LddOgIa2mb3Zi9HK32gkyMH5E8dOkJqc/iAJ/EESQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRD+SwAVIv0HJUohhCVU/a2nUgrCTg6EV23AaozHCtrEUHjvbWebq14HxjqfbEcls14tqarry8/JLD8/TbuZh/P0w0xDrjQXKv++cQcnaW6sJcvfJ7mvQdkUqScb3AA4mHQrubu+kFOT5sOMulGTbi8us61b0ZdAE0mP5JDgvLUpmt805Sbo1yNPMLRUqbiommeTtZ+iqPSEqnkTNQMOb2PFNHndmXEWC5qN6vnBPB7GreAVY6LU3fW9beUsqjDGWzIIpTHrW8YPzwUXp5csc+EtKqp069RfSyhnm6Yj+Q/KIr1dQGuVd1RndUwUjH5COhBlaQsvFbUurgAqoX924gWBXAduunbRGtvJjEtsr/tVySmE6E+dBieeo8j9Sg40Sc7qiCiYeQj6H1QgCsmSZsexLVh31sX/7M6ZK51lCsDYOiXIHpq3egiTAqNZc0xUTetYII0z4kFU4oVUvnQV5Z5ZVJrrf/ldIF6p1Vi/F4OCJScu8yMuCk5UN9WN885LlFZKlyMvfyjKP7s5pt29PetfZLmYHt43HGIzmoLwURIRxSNklKTWbbeKetx+GssL8lhbh6KgXUPzYfM6Kktbnz6OmuZjJEdEtW5dvIkzbKL2lLC5KBQV5h9ziQXfN1HOpT6sTDdGRSEPdlaouLmvCkT1e2gdRCW43PZGc0SVd9+bW7hXl9eO+Eavi/SFWTZRj8Yet+lRFL3XydD59fo8t7zw/HOjn3mQ2lvBqKg3H98x2TZ6zapuW+76EMVFqrzzlKpIVsAsTAmKzl9gnVuSjovixFlkHqozehNFafIR+uYgCtYjH1T+io9PURzRRcv3D0BdmRxdhFgfsqi7L6Jc8mOj1dIyC9vgBLDmKbf82TdRgF0HnJfB7UQby5/I00qba1ku9yefo4nmgiHRdMzMT35ecBWVlMyJB/Bq/WYGjsPuJSrR4eUhFKXYXn9pl5wPIneqfhfVug0bHMju5EnN0z7X8O2VF1UY5yxjzuCy0+5OVlhQxtpEQcJBO3wmz5MfwzmchogndmwfwYadSEDyDMKqcDnDidoZUK2Jc/Vn6yXuxwws3PxTlAv23XT7S1bH8raNOF7d5Qnt+l50eHMXJjyIalF14eUuUSOLgnO2XZJYSebrFV+hLlsmzZ+76SV6c3ETVXRF7W0/tduJpMsfuh73Ex1Rqrct9T5VL2grQGm7U3A5b/uJ3tRst6SJk+vmhPT2dZCBPlW9tX1VRiIvXK3wZp+s3w3KL5v/MsDjBwCow4ZA//2AuH9GBB8UoWF/aTl8bgiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiC8D/l/Af5ByY8PAXZ72kjAAAAAElFTkSuQmCC">
   <style>
     :root {
       color-scheme: light;
-      --bg: #f4f8fd;
-      --bg-soft: #e6f0fb;
+      --bg: #f7f7f7;
+      --bg-soft: #efefef;
       --card: #ffffff;
-      --card-2: #edf4ff;
-      --text: #17324d;
-      --muted: #4e6781;
-      --accent: #1f6feb;
-      --accent-2: #3a8cff;
-      --border: #c9d9ec;
-      --shadow: 0 18px 45px rgba(31, 84, 147, .12);
+      --card-2: #f2f2f2;
+      --text: #101010;
+      --muted: #2f2f2f;
+      --accent: #000000;
+      --accent-2: #000000;
+      --border: #d7d7d7;
+      --shadow: 0 14px 30px rgba(0, 0, 0, .08);
       --mono: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
     }
 
@@ -26,7 +27,7 @@
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(circle at top, #dbeafe 0%, var(--bg) 42%);
+      background: radial-gradient(circle at top, #f1f1f1 0%, var(--bg) 42%);
       color: var(--text);
       line-height: 1.65;
     }
@@ -67,6 +68,7 @@
       border-radius: 6px;
       border: 1px solid var(--border);
       background: #fff;
+      filter: grayscale(100%);
     }
 
     .nav-links {
@@ -78,7 +80,7 @@
 
     .nav-links a {
       border: 1px solid var(--border);
-      background: rgba(31, 111, 235, .08);
+      background: rgba(0, 0, 0, .04);
       padding: .3rem .6rem;
       border-radius: 999px;
       font-size: .82rem;
@@ -91,7 +93,7 @@
 
     .hero-card {
       border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(31, 111, 235, .12), rgba(58, 140, 255, .1)), var(--card);
+      background: linear-gradient(135deg, rgba(0, 0, 0, .04), rgba(0, 0, 0, .01)), var(--card);
       box-shadow: var(--shadow);
       border-radius: 20px;
       padding: 1.5rem;
@@ -160,7 +162,7 @@
     .tile {
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: rgba(31, 111, 235, .05);
+      background: rgba(0, 0, 0, .03);
       padding: .85rem;
     }
 
@@ -172,8 +174,8 @@
       overflow: auto;
       border-radius: 10px;
       border: 1px solid var(--border);
-      background: #eef5ff;
-      color: #204266;
+      background: #f3f3f3;
+      color: #111;
       font-family: var(--mono);
       font-size: .85rem;
       line-height: 1.45;
@@ -181,11 +183,11 @@
 
     code {
       font-family: var(--mono);
-      background: rgba(31, 111, 235, .08);
+      background: rgba(0, 0, 0, .06);
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: .08rem .34rem;
-      color: #1d4d8f;
+      color: #111;
     }
 
     table {
@@ -204,7 +206,7 @@
       font-size: .91rem;
     }
 
-    th { color: var(--text); background: rgba(31, 111, 235, .08); }
+    th { color: var(--text); background: rgba(0, 0, 0, .05); }
 
     figure { margin: .6rem 0; }
 
@@ -299,52 +301,6 @@
         <li><a href="#section-06">6 — Connecting to a DAW</a></li>
       </ul>
 
-      <h3>README Coverage Map</h3>
-      <ol class="doc-index">
-        <li>01 — Board Overview &amp; Hardware Setup</li>
-        <li>What's on the Board</li>
-        <li>First-Time Setup</li>
-        <li>Step 1 — Install Arduino IDE &amp; Teensyduino</li>
-        <li>Step 2 — Mount the Teensy on Seraph</li>
-        <li>Step 3 — Configure USB-MIDI Mode</li>
-        <li>02 — First Wiring Tutorial: Button &amp; LED</li>
-        <li>What You'll Need</li>
-        <li>Wiring Diagram</li>
-        <li>The Code</li>
-        <li>INPUT_PULLUP</li>
-        <li>Event-Based MIDI</li>
-        <li>usbMIDI.read()</li>
-        <li>Testing</li>
-        <li>03 — Analog Sensors: Potentiometers &amp; FSRs</li>
-        <li>3A — Potentiometer (No Pulldown Required)</li>
-        <li>3B — FSR / LDR (Pulldown Resistor Required)</li>
-        <li>Why a Pulldown Resistor?</li>
-        <li>Recommended Resistor Values</li>
-        <li>04 — I²C Devices: IMUs, Displays &amp; More</li>
-        <li>Common I²C Devices for NIME Projects</li>
-        <li>Wiring</li>
-        <li>Using Multiple I²C Devices</li>
-        <li>Code Example: MPU-6050 IMU to MIDI Pitch Bend</li>
-        <li>Troubleshooting I²C</li>
-        <li>05 — MIDI Mapping in Code</li>
-        <li>Core MIDI Message Types</li>
-        <li>usbMIDI Cheat Sheet</li>
-        <li>Useful MIDI CC Numbers</li>
-        <li>Combining Multiple Sensors</li>
-        <li>06 — Connecting to a DAW</li>
-        <li>6A — Ableton Live</li>
-        <li>Enable MIDI Input</li>
-        <li>Mapping CC to a Parameter</li>
-        <li>Triggering Clips with Buttons</li>
-        <li>6B — Max/MSP</li>
-        <li>Receiving MIDI in Max</li>
-        <li>Serial vs USB-MIDI in Max</li>
-        <li>6C — General MIDI Routing (Any DAW)</li>
-        <li>DAW / Software MIDI Setup</li>
-        <li>Common DAW Issues</li>
-        <li>Adding Smoothing to Reduce Jitter</li>
-        <li>Seraph — Bill of Materials (BOM)</li>
-      </ol>
     </section>
 
     <section class="doc" id="section-01">
