@@ -246,6 +246,43 @@ An FSR is just a variable resistor. To read it as a voltage, you pair it with a 
 ![](https://i.imgur.com/k0FOzIM.png)
 
 
+### Code
+```cpp
+// Seraph — FSR Demo
+// FSR maps pressure to MIDI velocity / aftertouch
+
+const int FSR_PIN      = A2;
+const int MIDI_CHANNEL = 1;
+
+// Calibration — adjust these to match your sensor's actual range
+const int FSR_MIN = 50;   // Value when barely touched
+const int FSR_MAX = 900;  // Value at maximum pressure
+
+int lastCCValue = -1;
+
+void loop() {
+  int rawValue = analogRead(FSR_PIN);
+
+  int ccValue = map(
+    constrain(rawValue, FSR_MIN, FSR_MAX),
+    FSR_MIN,
+    FSR_MAX,
+    0,
+    127
+  );
+
+  if (ccValue != lastCCValue) {
+    // CC 11 = Expression — works well for pressure control
+    usbMIDI.sendControlChange(11, ccValue, MIDI_CHANNEL);
+    lastCCValue = ccValue;
+  }
+
+  while (usbMIDI.read()) {}
+}
+```
+💡 Use constrain() before map() when your sensor's real-world range doesn't match the theoretical 0–1023. This prevents the mapped value from going outside 0–127.
+
+
 Creative Computing at California Institute of the Arts is a forward-thinking interdisciplinary program that fuses the power of computational engineering skills with the limitless possibilities of artistic expression. This innovative degree encourages students to explore the intersection of technology and creativity, using computational tools to craft work that is both personally and culturally meaningful, while preparing them for industry. Our program is designed to provide an integrative learning experience that equips students with the skills to push the boundaries of art, music, and technology. With a strong foundation in computer science, electrical engineering, signal processing, and emerging technologies including virtual/augmented reality, robotics, and machine learning, students will be empowered to innovate, experiment, and reimagine what technology can do in artistic contexts.
 
 <p align="center">
