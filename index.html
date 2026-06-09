@@ -3,236 +3,723 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Seraph | Open-Source Teensy MIDI Controller Platform</title>
+  <title>Seraph | Developer Docs + Getting Started</title>
+  <meta name="description" content="Seraph developer-focused documentation site for hardware setup, wiring tutorials, MIDI mapping, DAW integration, and BOM.">
   <style>
     :root {
-      --bg: #f2f8fb;
-      --panel: #ffffff;
-      --text: #163244;
-      --muted: #3f5f70;
-      --accent: #2c9fc0;
-      --border: #c6dbe7;
-      --shadow: 0 10px 28px rgba(22, 50, 68, 0.08);
+      color-scheme: dark;
+      --bg: #090f1a;
+      --bg-soft: #111b2b;
+      --card: #132236;
+      --card-2: #1a2b42;
+      --text: #e8eef7;
+      --muted: #9fb2c8;
+      --accent: #59d0ff;
+      --accent-2: #7dffce;
+      --border: #294766;
+      --shadow: 0 18px 45px rgba(2, 8, 24, .45);
+      --mono: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
     }
+
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: var(--bg);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top, #16263d 0%, var(--bg) 35%);
       color: var(--text);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      line-height: 1.6;
+      line-height: 1.65;
     }
+
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    main { max-width: 1120px; margin: 0 auto; padding: 2rem 1rem 4rem; }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.3rem;
-      box-shadow: var(--shadow);
-      margin-bottom: 1rem;
+
+    .container { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(9, 15, 26, .88);
+      border-bottom: 1px solid var(--border);
     }
-    .hero h1 { margin: 0; font-size: clamp(1.7rem, 3.3vw, 2.5rem); }
-    .hero p { margin: .6rem 0 0; color: var(--muted); }
-    .hero-logo {
-      max-width: 280px;
-      border: 0;
-      background: transparent;
-      border-radius: 0;
+
+    .topbar-inner {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: .9rem 0;
     }
-    .hero-links { margin-top: 1rem; display: flex; gap: .7rem; flex-wrap: wrap; }
-    .pill {
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
       border: 1px solid var(--border);
-      background: #eef7fb;
+      background: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      border: 1px solid var(--border);
+      background: rgba(89, 208, 255, .08);
+      padding: .3rem .6rem;
       border-radius: 999px;
-      padding: .35rem .7rem;
+      font-size: .82rem;
       color: var(--text);
-      font-size: .9rem;
     }
-    h2 { margin: 0 0 .75rem; font-size: 1.35rem; }
-    h3 { margin: 1rem 0 .4rem; font-size: 1.05rem; }
-    p, li, td { color: var(--muted); }
-    ul, ol { margin: .5rem 0; padding-left: 1.2rem; }
-    .grid-2 {
+
+    header.hero {
+      padding: 3.4rem 0 1.2rem;
+    }
+
+    .hero-card {
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(89, 208, 255, .12), rgba(125, 255, 206, .1)), var(--card);
+      box-shadow: var(--shadow);
+      border-radius: 20px;
+      padding: 1.5rem;
+    }
+
+    h1 {
+      margin: .3rem 0;
+      font-size: clamp(1.85rem, 5vw, 3rem);
+      line-height: 1.15;
+    }
+
+    .kicker {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+
+    .lead { color: var(--muted); max-width: 80ch; }
+
+    .hero-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .52rem .86rem;
+      display: inline-block;
+      color: var(--text);
+      background: var(--card-2);
+      font-weight: 600;
+    }
+
+    main { padding: 1rem 0 3rem; }
+
+    section.doc {
+      margin-top: .9rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 1.2rem;
+    }
+
+    h2, h3, h4 { line-height: 1.25; margin: .15rem 0 .7rem; }
+    h2 { font-size: clamp(1.3rem, 2.8vw, 1.8rem); }
+    h3 { font-size: 1.1rem; }
+    h4 { font-size: 1rem; color: var(--accent-2); }
+
+    p, li, td, th { color: var(--muted); }
+    ul, ol { padding-left: 1.2rem; margin: .5rem 0; }
+
+    .grid-2, .grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: .9rem;
+      gap: .75rem;
     }
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: .9rem;
+
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+    .tile {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(159, 178, 200, .07);
+      padding: .85rem;
     }
-    figure { margin: 0; }
+
+    .tile strong { color: var(--text); }
+
+    pre {
+      margin: .5rem 0;
+      padding: .8rem;
+      overflow: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1525;
+      color: #d7e8ff;
+      font-family: var(--mono);
+      font-size: .85rem;
+      line-height: 1.45;
+    }
+
+    code {
+      font-family: var(--mono);
+      background: rgba(137, 193, 255, .12);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .08rem .34rem;
+      color: #c6dcff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 420px;
+    }
+
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: .48rem .55rem;
+      text-align: left;
+      vertical-align: top;
+      font-size: .91rem;
+    }
+
+    th { color: var(--text); background: rgba(89, 208, 255, .1); }
+
+    figure { margin: .6rem 0; }
+
     img {
       width: 100%;
-      border-radius: 12px;
       border: 1px solid var(--border);
-      background: #f5fbff;
+      border-radius: 12px;
+      background: #fff;
       display: block;
     }
+
     figcaption {
+      font-size: .82rem;
       text-align: center;
-      font-size: .86rem;
       color: var(--muted);
       margin-top: .35rem;
     }
-    .mini-card {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: .8rem;
-      background: #f9fcfe;
+
+    .doc-index {
+      columns: 2;
+      column-gap: 1.5rem;
     }
-    .code-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: .8rem; }
-    .code-links a { font-weight: 600; }
-    .code-links p { margin: .35rem 0 0; }
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 560px; }
-    th, td { border: 1px solid var(--border); padding: .5rem .6rem; text-align: left; font-size: .92rem; }
-    th { background: #edf6fb; color: var(--text); }
-    .pdf-fullbleed {
-      width: min(100vw, 1500px);
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      margin-top: .4rem;
+
+    .doc-index li { break-inside: avoid; margin-bottom: .2rem; }
+
+    footer {
+      margin: 2rem 0 1rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: .9rem;
     }
-    .pdf-fullbleed iframe { width: 100%; height: 100vh; border: 0; display: block; }
+
+    @media (max-width: 760px) {
+      .doc-index { columns: 1; }
+      .topbar-inner { align-items: flex-start; flex-direction: column; }
+      .nav-links {
+        max-height: 6.2rem;
+        overflow-y: auto;
+        width: 100%;
+        justify-content: flex-start;
+        padding-right: .2rem;
+      }
+    }
   </style>
 </head>
 <body>
-<main>
-  <section class="card hero">
-    <img class="hero-logo" src="https://i.imgur.com/XZpdi2e.png" alt="CalArts Creative Computing logo">
-    <h1>Seraph</h1>
-    <p><strong>Open-Source Teensy MIDI Controller Platform</strong> for building USB-MIDI controllers and sensor-based interactive art projects.</p>
-    <div class="hero-links">
-      <a class="pill" href="https://github.com/Calarts-Creative-Computing/Seraph">Repository</a>
-      <a class="pill" href="https://github.com/Calarts-Creative-Computing/Seraph/archive/refs/heads/main.zip">Download ZIP</a>
-      <a class="pill" href="./Gerber/SeraphGerber.zip" download>Download Gerber Files</a>
-      <a class="pill" href="https://creativecomputing.calarts.edu/">Creative Computing @ CalArts</a>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <img src="https://i.imgur.com/XZpdi2e.png" alt="CalArts Creative Computing logo">
+        <span>Seraph Docs</span>
+      </div>
+      <nav class="nav-links" aria-label="Section navigation">
+        <a href="#overview">Overview</a>
+        <a href="#section-01">01 Setup</a>
+        <a href="#section-02">02 Button + LED</a>
+        <a href="#section-03">03 Analog</a>
+        <a href="#section-04">04 I²C</a>
+        <a href="#section-05">05 MIDI</a>
+        <a href="#section-06">06 DAW</a>
+        <a href="#bom">BOM</a>
+      </nav>
     </div>
-  </section>
-
-  <section class="card">
-    <h2>Getting Started Guide Overview</h2>
-    <div class="grid-3">
-      <div class="mini-card"><strong>01.</strong> Board Overview & Hardware Setup</div>
-      <div class="mini-card"><strong>02.</strong> First Wiring Tutorial: Button & LED</div>
-      <div class="mini-card"><strong>03.</strong> Analog Sensors: Potentiometers & FSRs</div>
-      <div class="mini-card"><strong>04.</strong> I²C Devices: IMUs, Displays & More</div>
-      <div class="mini-card"><strong>05.</strong> MIDI Mapping in Code</div>
-      <div class="mini-card"><strong>06.</strong> Connecting to a DAW</div>
-    </div>
-    <h3>First-Time Setup</h3>
-    <ol>
-      <li>Install Arduino IDE and Teensyduino.</li>
-      <li>Mount Teensy 4.1 to Seraph using headers.</li>
-      <li>Set <strong>Tools → USB Type → Serial + MIDI</strong>.</li>
-      <li>Upload a demo sketch and verify MIDI connectivity in your system.</li>
-    </ol>
-  </section>
-
-  <section class="card">
-    <h2>Board Images</h2>
-    <div class="grid-3">
-      <figure>
-        <img src="./Images/Seraph_Front.png" alt="Seraph PCB front view">
-        <figcaption>Seraph Front</figcaption>
-      </figure>
-      <figure>
-        <img src="./Images/Seraph_Back.jpg" alt="Seraph PCB back view">
-        <figcaption>Seraph Back</figcaption>
-      </figure>
-      <figure>
-        <img src="./Images/Seraph_TraceView.png" alt="Seraph PCB trace view">
-        <figcaption>Seraph Trace View</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="card">
-    <h2>Quickstart Tutorials & Wiring Diagrams</h2>
-    <div class="grid-2">
-      <figure>
-        <img src="./Tutorial%20Diagrams/SeraphButton_Diagram.png" alt="Button and LED wiring diagram">
-        <figcaption>Button + LED Tutorial</figcaption>
-      </figure>
-      <figure>
-        <img src="./Tutorial%20Diagrams/SeraphPot_Diagram.png" alt="Potentiometer wiring diagram">
-        <figcaption>Potentiometer Tutorial</figcaption>
-      </figure>
-      <figure>
-        <img src="./Tutorial%20Diagrams/SeraphLDR_Diagram.png" alt="LDR and FSR wiring diagram">
-        <figcaption>LDR / FSR Tutorial</figcaption>
-      </figure>
-      <figure>
-        <img src="./Tutorial%20Diagrams/SeraphI2C_Diagram.png" alt="I2C device wiring diagram">
-        <figcaption>I²C Sensor Tutorial</figcaption>
-      </figure>
-    </div>
-    <p>For the full editable tutorial source file, see <a href="./Tutorial%20Diagrams/Seraph%20Quickstart%20Tutorials%20%2B%20Diagrams.docx">Seraph Quickstart Tutorials + Diagrams.docx</a>.</p>
-  </section>
-
-  <section class="card">
-    <h2>Codebase Overview</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Area</th><th>Purpose</th><th>Path</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>GitHub Pages Site</td><td>Project homepage and onboarding guide</td><td><code>index.html</code></td></tr>
-          <tr><td>Board Assets</td><td>Front/back/trace PCB renders</td><td><code>Images/</code></td></tr>
-          <tr><td>Tutorial Diagrams</td><td>Sensor and wiring quickstarts</td><td><code>Tutorial Diagrams/</code></td></tr>
-          <tr><td>Demo Sketches</td><td>Ready-to-upload Teensy USB-MIDI examples</td><td><code>Demo Code/</code></td></tr>
-          <tr><td>Fabrication Files</td><td>PCB manufacturing package</td><td><code>Gerber/SeraphGerber.zip</code></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="card">
-    <h2>Demo Code</h2>
-    <p>Use these Teensy sketches as starting points for MIDI mapping, interaction design, and performance workflows.</p>
-    <div class="code-links">
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_PotentiometerDemo/Seraph_PotentiometerDemo.ino">Seraph_PotentiometerDemo.ino</a><p>Analog potentiometer to MIDI CC.</p></div>
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_FSRDemo/Seraph_FSRDemo.ino">Seraph_FSRDemo.ino</a><p>Pressure/light sensor with smoothing.</p></div>
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_ButtonDemo/Seraph_ButtonDemo.ino">Seraph_ButtonDemo.ino</a><p>Button trigger + LED + MIDI notes.</p></div>
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_6ButtonDemo/Seraph_6ButtonDemo.ino">Seraph_6ButtonDemo.ino</a><p>Multiple button lanes for notes and CC.</p></div>
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_AccelDemo/Seraph_accelDemo/Seraph_accelDemo.ino">Seraph_accelDemo.ino</a><p>Built-in accelerometer to MIDI CC.</p></div>
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_Accel_Pot_ButtonDemo/Seraph_Accel_Pot_ButtonDemo.ino">Seraph_Accel_Pot_ButtonDemo.ino</a><p>Combined accelerometer, pot, and button mapping.</p></div>
-    </div>
-  </section>
-
-  <section class="card">
-    <h2>MIDI + DAW Integration Highlights</h2>
-    <ul>
-      <li>Core messages: Note On/Off, Control Change, Pitch Bend, Program Change.</li>
-      <li>Use event-based transmission and simple filtering to avoid MIDI flooding.</li>
-      <li>Ableton, Max/MSP, Logic, Bitwig, Reaper, Pure Data, and SuperCollider workflows are covered in the README guide.</li>
-      <li>For stable operation, keep <code>while (usbMIDI.read()) {}</code> at the end of your loop.</li>
-    </ul>
-  </section>
-
-  <section class="card">
-    <h2>Bill of Materials (BOM) Snapshot</h2>
-    <p>The README includes a full BOM covering Teensy 4.1, ADXL335, ULN2003A, headers, sockets, resistors, buttons, potentiometers, FSRs, LEDs, and common I²C sensors (MPU-6050, SSD1306, TCS34725, VL53L0X), plus assembly consumables.</p>
-  </section>
-</main>
-
-<section style="margin-top:.4rem;">
-  <div style="max-width:1120px;margin:0 auto;padding:0 1rem;">
-    <h2 style="margin:0;">Embedded Getting Started Guide PDF</h2>
   </div>
-  <div class="pdf-fullbleed">
-    <iframe src="https://mtiid.calarts.edu/wp-content/uploads/2026/06/Seraph_Getting_Started_Guide.pdf#view=FitH&zoom=page-fit"
-            title="Seraph Getting Started Guide PDF"
-            aria-label="Embedded Seraph Getting Started Guide PDF">
-      <p>Your browser cannot display the embedded PDF. <a href="https://mtiid.calarts.edu/wp-content/uploads/2026/06/Seraph_Getting_Started_Guide.pdf">Open the guide directly</a>.</p>
-    </iframe>
-  </div>
-</section>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="kicker">Open-Source Teensy MIDI Controller Platform</div>
+        <h1>Seraph</h1>
+        <p class="lead">An open-source platform for building USB-MIDI controllers and sensor-based interactive art projects. This developer-focused site mirrors the complete README guide and organizes setup, wiring, code patterns, and DAW integration into clear sections.</p>
+        <div class="hero-actions">
+          <a class="btn" href="https://github.com/Calarts-Creative-Computing/Seraph">GitHub Repository</a>
+          <a class="btn" href="https://github.com/Calarts-Creative-Computing/Seraph/archive/refs/heads/main.zip">Download ZIP</a>
+          <a class="btn" href="./Gerber/SeraphGerber.zip" download>Download Gerbers</a>
+          <a class="btn" href="https://creativecomputing.calarts.edu/">Creative Computing @ CalArts</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="doc" id="overview">
+      <h2>Getting Started Guide</h2>
+      <p>What you'll learn:</p>
+      <ul>
+        <li><a href="#section-01">1 — Board Overview &amp; Hardware Setup</a></li>
+        <li><a href="#section-02">2 — First Wiring Tutorial: Button &amp; LED</a></li>
+        <li><a href="#section-03">3 — Analog Sensors: Potentiometers &amp; FSRs</a></li>
+        <li><a href="#section-04">4 — I²C Devices: IMUs, Displays &amp; More</a></li>
+        <li><a href="#section-05">5 — MIDI Mapping in Code</a></li>
+        <li><a href="#section-06">6 — Connecting to a DAW</a></li>
+      </ul>
+
+      <h3>README Coverage Map</h3>
+      <ol class="doc-index">
+        <li>01 — Board Overview &amp; Hardware Setup</li>
+        <li>What's on the Board</li>
+        <li>First-Time Setup</li>
+        <li>Step 1 — Install Arduino IDE &amp; Teensyduino</li>
+        <li>Step 2 — Mount the Teensy on Seraph</li>
+        <li>Step 3 — Configure USB-MIDI Mode</li>
+        <li>02 — First Wiring Tutorial: Button &amp; LED</li>
+        <li>What You'll Need</li>
+        <li>Wiring Diagram</li>
+        <li>The Code</li>
+        <li>INPUT_PULLUP</li>
+        <li>Event-Based MIDI</li>
+        <li>usbMIDI.read()</li>
+        <li>Testing</li>
+        <li>03 — Analog Sensors: Potentiometers &amp; FSRs</li>
+        <li>3A — Potentiometer (No Pulldown Required)</li>
+        <li>3B — FSR / LDR (Pulldown Resistor Required)</li>
+        <li>Why a Pulldown Resistor?</li>
+        <li>Recommended Resistor Values</li>
+        <li>04 — I²C Devices: IMUs, Displays &amp; More</li>
+        <li>Common I²C Devices for NIME Projects</li>
+        <li>Wiring</li>
+        <li>Using Multiple I²C Devices</li>
+        <li>Code Example: MPU-6050 IMU to MIDI Pitch Bend</li>
+        <li>Troubleshooting I²C</li>
+        <li>05 — MIDI Mapping in Code</li>
+        <li>Core MIDI Message Types</li>
+        <li>usbMIDI Cheat Sheet</li>
+        <li>Useful MIDI CC Numbers</li>
+        <li>Combining Multiple Sensors</li>
+        <li>06 — Connecting to a DAW</li>
+        <li>6A — Ableton Live</li>
+        <li>Enable MIDI Input</li>
+        <li>Mapping CC to a Parameter</li>
+        <li>Triggering Clips with Buttons</li>
+        <li>6B — Max/MSP</li>
+        <li>Receiving MIDI in Max</li>
+        <li>Serial vs USB-MIDI in Max</li>
+        <li>6C — General MIDI Routing (Any DAW)</li>
+        <li>DAW / Software MIDI Setup</li>
+        <li>Common DAW Issues</li>
+        <li>Adding Smoothing to Reduce Jitter</li>
+        <li>Seraph — Bill of Materials (BOM)</li>
+      </ol>
+    </section>
+
+    <section class="doc" id="section-01">
+      <h2>01 — Board Overview &amp; Hardware Setup</h2>
+      <p>Seraph is a breakout board for the Teensy 4.1 that simplifies wiring, power regulation, and I/O routing so you can focus on instrument and installation design.</p>
+      <h3>What's on the Board</h3>
+      <div class="grid-3">
+        <figure>
+          <img src="./Images/Seraph_Front.png" alt="Seraph board front">
+          <figcaption>Seraph Front</figcaption>
+        </figure>
+        <figure>
+          <img src="./Images/Seraph_Back.jpg" alt="Seraph board back">
+          <figcaption>Seraph Back</figcaption>
+        </figure>
+        <figure>
+          <img src="./Images/Seraph_TraceView.png" alt="Seraph board trace view">
+          <figcaption>Seraph Trace View</figcaption>
+        </figure>
+      </div>
+      <h3>First-Time Setup</h3>
+      <h4>Step 1 — Install Arduino IDE &amp; Teensyduino</h4>
+      <ol>
+        <li>Download Arduino IDE from <a href="https://arduino.cc/en/software">arduino.cc/en/software</a>.</li>
+        <li>Download Teensyduino from <a href="https://www.pjrc.com/teensy/teensyduino.html">pjrc.com/teensy/teensyduino.html</a>.</li>
+        <li>Run Teensyduino installer and let it detect your Arduino IDE.</li>
+        <li>Verify Teensy boards appear in <code>Tools &gt; Board &gt; Teensyduino</code>.</li>
+      </ol>
+      <h4>Step 2 — Mount the Teensy on Seraph</h4>
+      <ul>
+        <li>Use header pins (do not solder Teensy directly to the board).</li>
+        <li>Seat Teensy 4.1 in the socket with USB facing the board edge.</li>
+        <li>Verify all pins are aligned and fully seated.</li>
+      </ul>
+      <h4>Step 3 — Configure USB-MIDI Mode</h4>
+      <ol>
+        <li>Select <code>Tools &gt; Board &gt; Teensy 4.1</code>.</li>
+        <li>Select <code>Tools &gt; USB Type &gt; Serial + MIDI</code>.</li>
+        <li>Connect over USB and verify serial + MIDI device visibility.</li>
+      </ol>
+    </section>
+
+    <section class="doc" id="section-02">
+      <h2>02 — First Wiring Tutorial: Button &amp; LED</h2>
+      <p>Build your first test circuit: button press drives LED output and sends MIDI Note On/Off events.</p>
+      <h3>What You'll Need</h3>
+      <div class="grid-3">
+        <div class="tile"><strong>Seraph + Teensy 4.1</strong><br>Mounted and powered.</div>
+        <div class="tile"><strong>1x momentary push button</strong><br>Digital input trigger.</div>
+        <div class="tile"><strong>1x LED + 470Ω resistor</strong><br>Visual output indicator.</div>
+        <div class="tile"><strong>Jumper wires</strong><br>For signal and ground routing.</div>
+      </div>
+      <h3>Wiring Diagram</h3>
+      <div class="grid-2">
+        <figure>
+          <img src="./Tutorial%20Diagrams/SeraphButton_Diagram.png" alt="Button and LED wiring diagram">
+          <figcaption>Button + LED Wiring</figcaption>
+        </figure>
+        <div class="tile">
+          <p>Digital channel strips provide <strong>+</strong>, <strong>−</strong>, and <strong>S</strong> pins.</p>
+          <ul>
+            <li>Buttons use <strong>S</strong> + <strong>−</strong>.</li>
+            <li>LEDs use <strong>S</strong> + <strong>−</strong> with current-limiting resistor.</li>
+          </ul>
+        </div>
+      </div>
+      <h3>The Code</h3>
+      <pre><code>const int BUTTON_PIN = 1;
+const int LED_PIN = 2;
+const int MIDI_CHANNEL = 1;
+const int MIDI_NOTE = 60;
+const int MIDI_VELOCITY = 100;
+int lastButtonState = HIGH;
+
+void setup() {
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+  int buttonState = digitalRead(BUTTON_PIN);
+
+  if (buttonState == LOW &amp;&amp; lastButtonState == HIGH) {
+    digitalWrite(LED_PIN, HIGH);
+    usbMIDI.sendNoteOn(MIDI_NOTE, MIDI_VELOCITY, MIDI_CHANNEL);
+  }
+
+  if (buttonState == HIGH &amp;&amp; lastButtonState == LOW) {
+    digitalWrite(LED_PIN, LOW);
+    usbMIDI.sendNoteOff(MIDI_NOTE, 0, MIDI_CHANNEL);
+  }
+
+  lastButtonState = buttonState;
+  while (usbMIDI.read()) {}
+}</code></pre>
+      <h3>INPUT_PULLUP</h3>
+      <p>Internal pullup keeps input HIGH by default and reads LOW on button press, removing need for an external resistor for simple buttons.</p>
+      <h3>Event-Based MIDI</h3>
+      <p>Transmit only on state transitions to avoid MIDI flooding and preserve timing stability.</p>
+      <h3>usbMIDI.read()</h3>
+      <p>Always flush USB MIDI at loop end with <code>while (usbMIDI.read()) {}</code> to maintain connection stability.</p>
+      <h3>Testing</h3>
+      <ol>
+        <li>Set USB Type to <code>Serial + MIDI</code>.</li>
+        <li>Upload sketch.</li>
+        <li>Open MIDI monitor (MIDI Monitor or MIDI-OX).</li>
+        <li>Confirm LED response and Note On/Off output.</li>
+      </ol>
+    </section>
+
+    <section class="doc" id="section-03">
+      <h2>03 — Analog Sensors: Potentiometers &amp; FSRs</h2>
+      <p>Analog channels convert variable voltages into usable data for expressive MIDI control.</p>
+      <h3>3A — Potentiometer (No Pulldown Required)</h3>
+      <div class="grid-2">
+        <figure>
+          <img src="./Tutorial%20Diagrams/SeraphPot_Diagram.png" alt="Potentiometer wiring diagram">
+          <figcaption>Potentiometer Wiring</figcaption>
+        </figure>
+        <div class="tile">
+          <p>Potentiometers use power, ground, and signal; map 0–1023 analog values to 0–127 MIDI CC values and send only changed values.</p>
+          <pre><code>int rawValue = analogRead(A1);
+int ccValue = map(rawValue, 0, 1023, 0, 127);
+if (ccValue != lastCCValue) {
+  usbMIDI.sendControlChange(74, ccValue, 1);
+}</code></pre>
+        </div>
+      </div>
+      <h3>3B — FSR / LDR (Pulldown Resistor Required)</h3>
+      <h4>Why a Pulldown Resistor?</h4>
+      <p>FSRs/LDRs are variable resistors; use a fixed pulldown resistor to form a voltage divider so the analog pin reads a stable voltage.</p>
+      <h4>Wiring Diagram</h4>
+      <figure>
+        <img src="./Tutorial%20Diagrams/SeraphLDR_Diagram.png" alt="FSR and LDR wiring diagram">
+        <figcaption>FSR / LDR Wiring</figcaption>
+      </figure>
+      <h4>Recommended Resistor Values</h4>
+      <ul>
+        <li>Start with <strong>10kΩ</strong> for FSR/LDR channels.</li>
+        <li>Tune resistor value based on sensor sensitivity and target dynamic range.</li>
+      </ul>
+      <h4>Code</h4>
+      <pre><code>const int FSR_MIN = 50;
+const int FSR_MAX = 900;
+int rawValue = analogRead(A2);
+int ccValue = map(constrain(rawValue, FSR_MIN, FSR_MAX), FSR_MIN, FSR_MAX, 0, 127);
+usbMIDI.sendControlChange(11, ccValue, 1);</code></pre>
+    </section>
+
+    <section class="doc" id="section-04">
+      <h2>04 — I²C Devices: IMUs, Displays &amp; More</h2>
+      <p>I²C lets multiple devices share SDA and SCL lines; Seraph provides I²C blocks A/B/C on the same I²C0 bus.</p>
+      <h3>Common I²C Devices for NIME Projects</h3>
+      <div class="grid-3">
+        <div class="tile"><strong>MPU-6050 / BNO055</strong><br>Motion and gesture control.</div>
+        <div class="tile"><strong>SSD1306 OLED</strong><br>Parameter and status display.</div>
+        <div class="tile"><strong>ADS1115</strong><br>Additional high-res analog inputs.</div>
+        <div class="tile"><strong>VL53L0X</strong><br>Distance sensing.</div>
+        <div class="tile"><strong>TCS34725</strong><br>Color sensing for interactive systems.</div>
+      </div>
+      <h3>Wiring</h3>
+      <figure>
+        <img src="./Tutorial%20Diagrams/SeraphI2C_Diagram.png" alt="I2C wiring diagram">
+        <figcaption>I²C Wiring Reference</figcaption>
+      </figure>
+      <div class="table-wrap">
+        <table>
+          <caption>I²C sensor wiring reference (pins, suggested wire colors, and Seraph header mapping)</caption>
+          <thead>
+            <tr><th>Component Pin</th><th>Wire Color</th><th>Seraph Header</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>SDA</td><td>Blue</td><td>I²C Block A — SDA</td></tr>
+            <tr><td>SCL</td><td>Yellow</td><td>I²C Block A — SCL</td></tr>
+            <tr><td>VCC</td><td>Red</td><td>I²C Block A — Power (+)</td></tr>
+            <tr><td>GND</td><td>Black</td><td>I²C Block A — GND (−)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The pin/function labels are the primary reference; wire colors are suggested only and can be replaced with any clear labeling scheme.</p>
+      <h3>Using Multiple I²C Devices</h3>
+      <ul>
+        <li>All blocks share one bus, so each device needs a unique address.</li>
+        <li>For dual MPU-6050, choose either one of the two sensors and set its ADDR pin high (tie ADDR to 3.3V/VCC) to shift that device from <code>0x68</code> to <code>0x69</code>.</li>
+        <li>Mixed device types generally work with default addresses.</li>
+      </ul>
+      <h3>Code Example: MPU-6050 IMU to MIDI Pitch Bend</h3>
+      <pre><code>#include "Wire.h"
+#include "Adafruit_MPU6050.h"
+Adafruit_MPU6050 mpu;
+
+void setup() {
+  Wire.begin();
+  mpu.begin();
+  mpu.setAccelerometerRange(MPU6050_RANGE_2_G);
+  mpu.setGyroRange(MPU6050_RANGE_250_DEG);
+}
+
+void loop() {
+  sensors_event_t accel, gyro, temp;
+  mpu.getEvent(&amp;accel, &amp;gyro, &amp;temp);
+  int pitchBend = map(constrain(accel.acceleration.x * 100, -1000, 1000), -1000, 1000, -8192, 8191);
+  usbMIDI.sendPitchBend(pitchBend, 1);
+  delay(10);
+  while (usbMIDI.read()) {}
+}</code></pre>
+      <h3>Troubleshooting I²C</h3>
+      <ul>
+        <li>Check sensor power and shared ground.</li>
+        <li>Verify address conflicts and required pullups for your module.</li>
+        <li>Confirm libraries are installed and bus initialized with <code>Wire.begin()</code>.</li>
+      </ul>
+    </section>
+
+    <section class="doc" id="section-05">
+      <h2>05 — MIDI Mapping in Code</h2>
+      <p>Use Teensyduino USB-MIDI primitives to map sensors to musical control behavior.</p>
+      <h3>Core MIDI Message Types</h3>
+      <div class="grid-3">
+        <div class="tile"><strong>Note On/Off</strong><br>Trigger and release note events.</div>
+        <div class="tile"><strong>Control Change</strong><br>Continuous parameter control (0–127).</div>
+        <div class="tile"><strong>Pitch Bend</strong><br>Signed bend range: −8192 to +8191.</div>
+        <div class="tile"><strong>Program Change</strong><br>Patch switching per channel.</div>
+      </div>
+      <h3>usbMIDI Cheat Sheet</h3>
+      <pre><code>usbMIDI.sendNoteOn(note, velocity, channel);
+usbMIDI.sendNoteOff(note, 0, channel);
+usbMIDI.sendControlChange(ccNumber, value, channel);
+usbMIDI.sendPitchBend(value, channel);
+usbMIDI.sendProgramChange(program, channel);
+while (usbMIDI.read()) {}</code></pre>
+      <h3>Useful MIDI CC Numbers</h3>
+      <ul>
+        <li>CC 1: Mod Wheel</li>
+        <li>CC 7: Volume</li>
+        <li>CC 10: Pan</li>
+        <li>CC 11: Expression</li>
+        <li>CC 74: Filter Cutoff</li>
+      </ul>
+      <h3>Combining Multiple Sensors</h3>
+      <pre><code>// Pot -> CC74, FSR -> CC11, Button -> Note On/Off
+// Track previous states and only send on change.
+// End loop with while (usbMIDI.read()) {}</code></pre>
+    </section>
+
+    <section class="doc" id="section-06">
+      <h2>06 — Connecting to a DAW</h2>
+      <p>Route Seraph MIDI into Ableton, Max/MSP, and any DAW supporting USB MIDI input.</p>
+      <h3>6A — Ableton Live</h3>
+      <h4>Enable MIDI Input</h4>
+      <ol>
+        <li>Open Preferences and go to Link / Tempo / MIDI.</li>
+        <li>Enable <strong>Track</strong> for Teensy MIDI input.</li>
+        <li>Enable <strong>Remote</strong> when mapping controls.</li>
+      </ol>
+      <h4>Mapping CC to a Parameter</h4>
+      <ol>
+        <li>Enter MIDI Map Mode (<code>Cmd/Ctrl + M</code>).</li>
+        <li>Select parameter and move Seraph control.</li>
+        <li>Exit map mode and fine-tune min/max ranges.</li>
+      </ol>
+      <h4>Triggering Clips with Buttons</h4>
+      <ol>
+        <li>Enter MIDI Map Mode.</li>
+        <li>Select clip slot and press Seraph button.</li>
+        <li>Exit map mode.</li>
+      </ol>
+
+      <h3>6B — Max/MSP</h3>
+      <p>Use <code>notein</code>, <code>ctlin</code>, and <code>bendin</code> objects for USB MIDI workflows.</p>
+      <h4>Receiving MIDI in Max</h4>
+      <pre><code>[notein]
+[ctlin]
+[bendin]
+
+[notein Teensy MIDI]
+[ctlin Teensy MIDI]
+
+[ctlin 74 Teensy MIDI]
+    |
+ [/ 127.]
+    |
+ [cutoff~]</code></pre>
+      <h4>Serial vs USB-MIDI in Max</h4>
+      <p>Default Seraph sketches use USB MIDI; some advanced projects use serial streams that require manual parsing with Max's <code>serial</code> object.</p>
+
+      <h3>6C — General MIDI Routing (Any DAW)</h3>
+      <h4><span aria-hidden="true">🎛️</span> DAW / Software MIDI Setup</h4>
+      <div class="table-wrap">
+        <table>
+          <caption>Common DAW and software locations for enabling Seraph MIDI input</caption>
+          <thead>
+            <tr><th>DAW / Software</th><th>Where to Enable MIDI</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Ableton Live</td><td>Preferences → MIDI → Enable Track Input for Teensy</td></tr>
+            <tr><td>Logic Pro</td><td>File → Project Settings → MIDI → Input Devices</td></tr>
+            <tr><td>Bitwig Studio</td><td>Preferences → Controllers → Add Generic MIDI</td></tr>
+            <tr><td>Reaper</td><td>Options → Preferences → MIDI Devices → Enable Input</td></tr>
+            <tr><td>GarageBand</td><td>Auto-detects USB MIDI</td></tr>
+            <tr><td>Pure Data</td><td>Use <code>[notein]</code> / <code>[ctlin]</code></td></tr>
+            <tr><td>SuperCollider</td><td><code>MIDIClient.init;</code> + <code>MIDIIn.connectAll;</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Common DAW Issues</h4>
+      <ul>
+        <li>Device missing: verify <code>Serial + MIDI</code> and re-upload.</li>
+        <li>Stuck notes: ensure every Note On has matching Note Off.</li>
+        <li>Noisy CC: apply smoothing and tune resistor/sensor setup.</li>
+        <li>Channel mismatch: align DAW channel input with sketch output channel.</li>
+      </ul>
+
+      <h4>Adding Smoothing to Reduce Jitter</h4>
+      <pre><code>float smoothed = 0;
+const float ALPHA = 0.1;
+
+void loop() {
+  float raw = analogRead(A1);
+  smoothed = ALPHA * raw + (1.0 - ALPHA) * smoothed;
+  int ccValue = map((int)smoothed, 0, 1023, 0, 127);
+  while (usbMIDI.read()) {}
+}</code></pre>
+      <p><strong>You're ready to build.</strong></p>
+    </section>
+
+    <section class="doc" id="bom">
+      <h2><span aria-hidden="true">🧾</span> Seraph — Bill of Materials (BOM)</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Seraph bill of materials from the README reference list</caption>
+          <thead>
+            <tr><th>#</th><th>Component</th><th>SKU / MPN</th><th>Qty</th><th>Supplier</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Teensy 4.1</td><td>DEV-16771</td><td>1</td><td>SparkFun</td></tr>
+            <tr><td>2</td><td>ADXL335 Triple-Axis Accelerometer</td><td>SEN-09269</td><td>1</td><td>Adafruit</td></tr>
+            <tr><td>24</td><td>ULN2003A Darlington Array</td><td>497-2344-5-ND</td><td>1</td><td>DigiKey</td></tr>
+            <tr><td>4</td><td>Male Pin Headers 2.54mm</td><td>PRT-00116</td><td>3</td><td>SparkFun</td></tr>
+            <tr><td>20</td><td>Molex 3-Pin Vertical Header</td><td>WM4201-ND</td><td>16</td><td>DigiKey</td></tr>
+            <tr><td>21</td><td>Molex 2-Pin Vertical Header</td><td>900-0022232021-ND</td><td>5</td><td>DigiKey</td></tr>
+            <tr><td>22</td><td>Molex 4-Pin Vertical Header</td><td>WM4202-ND</td><td>3</td><td>DigiKey</td></tr>
+            <tr><td>23</td><td>Sullins 24-Pin Female Socket Header</td><td>S7057-ND</td><td>2</td><td>DigiKey</td></tr>
+            <tr><td>25</td><td>16-Pin DIP IC Socket</td><td>A120349-ND</td><td>1</td><td>DigiKey</td></tr>
+            <tr><td>26</td><td>Molex KK 2-Pin Wire Assembly</td><td>900-2177971022-ND</td><td>5</td><td>DigiKey</td></tr>
+            <tr><td>27</td><td>Molex KK 3-Pin Wire Assembly</td><td>900-2177971032-ND</td><td>8</td><td>DigiKey</td></tr>
+            <tr><td>28</td><td>Molex KK 4-Pin Wire Assembly</td><td>900-2177971042-ND</td><td>1</td><td>DigiKey</td></tr>
+            <tr><td>7</td><td>10kΩ Resistors (1/4W)</td><td>CF14JT10K0CT-ND</td><td>1</td><td>DigiKey</td></tr>
+            <tr><td>8</td><td>220Ω Resistors (1/4W)</td><td>CF14JT220RCT-ND</td><td>1</td><td>DigiKey</td></tr>
+            <tr><td>9</td><td>Push Buttons — 12mm Momentary</td><td>COM-09190</td><td>10</td><td>SparkFun</td></tr>
+            <tr><td>10</td><td>Rotary Potentiometers — 10kΩ</td><td>COM-09939</td><td>8</td><td>SparkFun</td></tr>
+            <tr><td>11</td><td>FSR 402</td><td>SEN-09375</td><td>4</td><td>SparkFun</td></tr>
+            <tr><td>12</td><td>LEDs — 5mm Assorted</td><td>COM-12062</td><td>1</td><td>SparkFun</td></tr>
+            <tr><td>13</td><td>MPU-6050 IMU</td><td>SEN-11028</td><td>1</td><td>SparkFun</td></tr>
+            <tr><td>14</td><td>SSD1306 OLED Display</td><td>LCD-17153</td><td>1</td><td>SparkFun</td></tr>
+            <tr><td>15</td><td>TCS34725 RGB Color Sensor</td><td>SEN-12829</td><td>1</td><td>SparkFun</td></tr>
+            <tr><td>16</td><td>VL53L0X Distance Sensor</td><td>SEN-14032</td><td>1</td><td>SparkFun</td></tr>
+            <tr><td>17</td><td>Lead-Free Rosin Core Solder</td><td>TOL-09325</td><td>1</td><td>SparkFun</td></tr>
+            <tr><td>18</td><td>Jumper Wires Female-to-Female 6\"</td><td>PRT-12796</td><td>2</td><td>SparkFun</td></tr>
+            <tr><td>19</td><td>USB Micro-B Cable</td><td>CAB-13244</td><td>1</td><td>SparkFun</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc" id="creative-computing">
+      <h2>Creative Computing at CalArts</h2>
+      <p>Creative Computing at California Institute of the Arts combines computational engineering with artistic expression, preparing students to build meaningful work across art, music, and technology. The program emphasizes computer science, electrical engineering, signal processing, and emerging areas including VR/AR, robotics, and machine learning.</p>
+      <p><a class="btn" href="https://creativecomputing.calarts.edu/">Learn More</a></p>
+    </section>
+
+    <footer>
+      Built from the complete Seraph README structure with a modern, developer-focused documentation layout.
+    </footer>
+  </main>
 </body>
 </html>
