@@ -33,43 +33,118 @@
     h1, h2, h3 { line-height: 1.2; margin-top: 0; }
     h1 { font-size: 2rem; }
     h2 { font-size: 1.4rem; margin-top: 2rem; }
+    h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
     p, li { color: var(--muted); }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 0.85rem;
-    }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 0.9rem;
-    }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
+
+    /* image grid */
+    .img-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.85rem;
+      margin-top: 0.75rem;
+    }
+    .img-grid figure {
+      margin: 0;
+    }
+    .img-grid figcaption {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.35rem;
+      text-align: center;
+    }
     img {
       width: 100%;
       border-radius: 12px;
       border: 1px solid var(--border);
       background: #0e1320;
+      display: block;
     }
-    .pdf-embed {
-      margin-top: 1rem;
+
+    /* tutorial diagram rows */
+    .tutorial {
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      margin-top: 1.25rem;
+    }
+    .tutorial:first-child { border-top: none; margin-top: 0; }
+    .tutorial-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      margin-top: 0.75rem;
+    }
+    @media (max-width: 640px) {
+      .tutorial-body { grid-template-columns: 1fr; }
+    }
+    .tutorial-body ol { margin: 0; padding-left: 1.2rem; }
+    .tutorial-body li { color: var(--muted); }
+    .tutorial img { border-radius: 10px; }
+
+    /* code blocks */
+    .code-file {
+      margin-top: 0.75rem;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
-      background: var(--panel);
     }
-    iframe {
+    .code-file summary {
+      background: var(--panel);
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.875rem;
+      color: var(--accent);
+      list-style: none;
+      user-select: none;
+    }
+    .code-file summary::-webkit-details-marker { display: none; }
+    .code-file summary::before { content: "▶ "; font-size: 0.7rem; }
+    details[open] > summary::before { content: "▼ "; }
+    .code-file pre {
+      margin: 0;
+      padding: 1rem;
+      overflow-x: auto;
+      background: #0b0e16;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: #c9d1f5;
+    }
+
+    /* gerber */
+    .gerber-note {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* full-bleed PDF */
+    .pdf-fullbleed {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 1rem;
+    }
+    .pdf-fullbleed iframe {
+      display: block;
       width: 100%;
-      height: 700px;
+      height: 100vh;
       border: 0;
-      background: #fff;
     }
   </style>
 </head>
 <body>
 <main>
+
+  <!-- ── Hero ── -->
   <section class="hero">
     <h1>Seraph</h1>
     <p><strong>Seraph – Open-Source Teensy MIDI Controller Platform.</strong> An open platform for developing Teensy-based MIDI controllers and interactive musical interfaces.</p>
@@ -79,34 +154,9 @@
     </p>
   </section>
 
+  <!-- ── What's Inside ── -->
   <section>
-    <h2>Project Tour</h2>
-    <div class="grid">
-      <article class="card">
-        <h3>Demo Code</h3>
-        <p>Ready-to-use Teensy sketches for buttons, potentiometers, accelerometers, and sensor combinations.</p>
-        <a href="./Demo%20Code/">Open folder</a>
-      </article>
-      <article class="card">
-        <h3>Gerber</h3>
-        <p>PCB manufacturing export files for producing Seraph hardware.</p>
-        <a href="./Gerber/">Open folder</a>
-      </article>
-      <article class="card">
-        <h3>Images</h3>
-        <p>Front/back board images and trace views for reference.</p>
-        <a href="./Images/">Open folder</a>
-      </article>
-      <article class="card">
-        <h3>Tutorial Diagrams</h3>
-        <p>Wiring diagrams that correspond to quickstart sensor tutorials.</p>
-        <a href="./Tutorial%20Diagrams/">Open folder</a>
-      </article>
-    </div>
-  </section>
-
-  <section>
-    <h2>What’s Inside</h2>
+    <h2>What's Inside</h2>
     <ul>
       <li><strong>Seraph PCB design</strong> – A hardware platform for connecting various sensors and controls.</li>
       <li><strong>Demo code</strong> – Examples showing how to interface different sensors with the Seraph PCB.</li>
@@ -114,6 +164,7 @@
     </ul>
   </section>
 
+  <!-- ── Quick Start ── -->
   <section>
     <h2>Quick Start</h2>
     <ol>
@@ -124,33 +175,342 @@
     </ol>
   </section>
 
+  <!-- ── Board Images ── -->
   <section>
-    <h2>Tutorial Highlights</h2>
-    <ul>
-      <li>Analog sensor wiring without pulldown resistor (e.g., potentiometer)</li>
-      <li>Analog sensor wiring with pulldown resistor (e.g., LDR, FSR)</li>
-      <li>Digital input wiring (e.g., buttons)</li>
-      <li>I²C sensor wiring (SDA/SCL + power/ground)</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Board Preview</h2>
-    <img src="./Images/Seraph_Front.png" alt="Seraph PCB front view">
-  </section>
-
-  <section>
-    <h2>Getting Started Guide (PDF)</h2>
-    <p>This embedded guide complements the README quick start and wiring resources.</p>
-    <div class="pdf-embed">
-      <iframe src="https://mtiid.calarts.edu/wp-content/uploads/2026/06/Seraph_Getting_Started_Guide.pdf" title="Seraph Getting Started Guide PDF" aria-label="Embedded Seraph Getting Started Guide PDF">
-        <p aria-live="polite">
-          Your browser cannot display the embedded PDF.
-          <a href="https://mtiid.calarts.edu/wp-content/uploads/2026/06/Seraph_Getting_Started_Guide.pdf">Open the guide directly</a>.
-        </p>
-      </iframe>
+    <h2>Board Images</h2>
+    <div class="img-grid">
+      <figure>
+        <img src="./Images/Seraph_Front.png" alt="Seraph PCB front view">
+        <figcaption>Front</figcaption>
+      </figure>
+      <figure>
+        <img src="./Images/Seraph_Back.jpg" alt="Seraph PCB back view">
+        <figcaption>Back</figcaption>
+      </figure>
+      <figure>
+        <img src="./Images/Seraph_TraceView.png" alt="Seraph PCB trace view">
+        <figcaption>Trace View</figcaption>
+      </figure>
     </div>
   </section>
+
+  <!-- ── Tutorial Diagrams ── -->
+  <section>
+    <h2>Quickstart Tutorials &amp; Wiring Diagrams</h2>
+
+    <div class="tutorial">
+      <h3>Connecting an Analog Sensor (No Pulldown Resistor)</h3>
+      <p>For simple analog sensors like potentiometers that do not require pulldown resistors.</p>
+      <div class="tutorial-body">
+        <ol>
+          <li>Connect your power lead to any <strong>+</strong> (power) via.</li>
+          <li>Connect your ground lead to any <strong>–</strong> (ground) via.</li>
+          <li>Connect your data lead to any available analog input via, and update your code to match the pin you chose.</li>
+        </ol>
+        <img src="./Tutorial%20Diagrams/SeraphPot_Diagram.png" alt="Potentiometer wiring diagram">
+      </div>
+    </div>
+
+    <div class="tutorial">
+      <h3>Connecting an Analog Sensor with a Pulldown Resistor</h3>
+      <p>For sensors such as LDRs or FSRs that require a pulldown resistor.</p>
+      <div class="tutorial-body">
+        <ol>
+          <li>Connect your power lead to any <strong>+</strong> (power) via.</li>
+          <li>Connect your data lead to your desired analog input via, and reflect this in your code.</li>
+          <li>Place your pulldown resistor in the allocated resistor area on the PCB in the same row as your chosen analog input.</li>
+        </ol>
+        <img src="./Tutorial%20Diagrams/SeraphLDR_Diagram.png" alt="LDR/FSR wiring diagram">
+      </div>
+    </div>
+
+    <div class="tutorial">
+      <h3>Connecting a Digital Sensor</h3>
+      <p>For basic digital inputs like buttons that don't require pull resistors.</p>
+      <div class="tutorial-body">
+        <ol>
+          <li>Connect one lead of the button to any <strong>–</strong> (ground) via.</li>
+          <li>Connect the other lead to the desired digital input via, and reflect this in your code.</li>
+          <li>To add an LED, place it in an allocated LED slot and add a resistor in the same row.</li>
+        </ol>
+        <img src="./Tutorial%20Diagrams/SeraphButton_Diagram.png" alt="Button wiring diagram">
+      </div>
+    </div>
+
+    <div class="tutorial">
+      <h3>Connecting an I²C Sensor</h3>
+      <p>For I²C sensors such as IMUs or environmental sensors.</p>
+      <div class="tutorial-body">
+        <ol>
+          <li>Connect the <strong>SDA</strong> (Data) pin on your sensor to an SDA pin on Seraph.</li>
+          <li>Connect the <strong>SCL</strong> (Clock) pin on your sensor to an SCL pin on Seraph.</li>
+          <li>Connect the Power (VCC) pin to a <strong>+</strong> (power) via.</li>
+          <li>Connect the Ground (GND) pin to a <strong>–</strong> (ground) via.</li>
+        </ol>
+        <img src="./Tutorial%20Diagrams/SeraphI2C_Diagram.png" alt="I2C sensor wiring diagram">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Demo Code ── -->
+  <section>
+    <h2>Demo Code</h2>
+    <p>Ready-to-use Teensy sketches. Click a file name to expand its source.</p>
+
+    <details class="code-file">
+      <summary>Seraph_PotentiometerDemo.ino</summary>
+      <pre><code>//SERAPH POTENTIOMETER DEMO
+
+#include &lt;usb_midi.h&gt;
+#include &lt;Wire.h&gt;
+
+int pot_pin = A9;
+int pot_val_prev = 0;
+int pot_val_lp = 0;
+
+void setup() {
+  Serial.begin(9600);
+  usbMIDI.begin();
+}
+
+void loop() {
+  int pot_val = map(analogRead(pot_pin), 1023, 0, 0, 127);
+  pot_val_lp = (pot_val_prev + pot_val) / 2;
+
+  Serial.print(" pot value:");
+  Serial.print(pot_val);
+  Serial.println();
+
+  if (abs(pot_val_prev - pot_val) &gt; 1) {
+    usbMIDI.sendControlChange(19, pot_val_lp, 1);
+  }
+
+  while (usbMIDI.read()) {}
+  pot_val_prev = pot_val;
+  delay(1);
+}</code></pre>
+    </details>
+
+    <details class="code-file">
+      <summary>Seraph_FSRDemo.ino</summary>
+      <pre><code>//SERAPH FSR DEMO
+
+#include &lt;usb_midi.h&gt;
+#include &lt;Wire.h&gt;
+
+int fsr_pin = A9;
+int fsr_val_prev = 0;
+int fsr_val_lp = 0;
+
+void setup() {
+  Serial.begin(9600);
+  usbMIDI.begin();
+}
+
+void loop() {
+  int fsr_val = map(analogRead(fsr_pin), 1023, 0, 0, 127);
+  fsr_val_lp = (fsr_val_prev + fsr_val) / 2;
+
+  Serial.print(" fsr value:");
+  Serial.print(fsr_val_lp);
+  Serial.println();
+
+  if (abs(fsr_val_prev - fsr_val) &gt; 1) {
+    usbMIDI.sendControlChange(19, fsr_val_lp, 1);
+  }
+
+  while (usbMIDI.read()) {}
+  fsr_val_prev = fsr_val;
+  delay(1);
+}</code></pre>
+    </details>
+
+    <details class="code-file">
+      <summary>Seraph_ButtonDemo.ino</summary>
+      <pre><code>//SERAPH BUTTON DEMO
+
+#include &lt;usb_midi.h&gt;
+
+int button_pin = 0;
+int led_pin = 3;
+int button_val_prev = 0;
+
+void setup() {
+  Serial.begin(9600);
+  usbMIDI.begin();
+}
+
+void loop() {
+  int button_val = map(digitalRead(button_pin), 0, 1, 0, 127);
+  int button_state = digitalRead(button_pin);
+
+  Serial.print(" button value:");
+  Serial.print(button_val);
+  Serial.println();
+
+  if (button_val_prev != button_val) {
+    usbMIDI.sendControlChange(20, button_val, 1);
+    button_val_prev = button_val;
+  }
+
+  if (button_state == HIGH) {
+    usbMIDI.sendNoteOn(60, 127, 1);
+    digitalWrite(led_pin, HIGH);
+  } else {
+    usbMIDI.sendNoteOff(60, 127, 1);
+    digitalWrite(led_pin, LOW);
+  }
+
+  while (usbMIDI.read()) {}
+  button_val_prev = button_val;
+  delay(1);
+}</code></pre>
+    </details>
+
+    <details class="code-file">
+      <summary>Seraph_6ButtonDemo.ino</summary>
+      <pre><code>//SERAPH MULTIPLE BUTTON DEMO
+
+#include &lt;usb_midi.h&gt;
+
+int button1_pin = 0, button2_pin = 1, button3_pin = 2;
+int button4_pin = 3, button5_pin = 4, button6_pin = 5;
+int button1_val_prev = 0, button2_val_prev = 0, button3_val_prev = 0;
+int button4_val_prev = 0, button5_val_prev = 0, button6_val_prev = 0;
+
+void setup() {
+  Serial.begin(9600);
+  usbMIDI.begin();
+}
+
+void loop() {
+  int button1_val = map(digitalRead(button1_pin), 0, 1, 0, 127);
+  int button2_val = map(digitalRead(button2_pin), 0, 1, 0, 127);
+  int button3_val = map(digitalRead(button3_pin), 0, 1, 0, 127);
+  int button4_val = map(digitalRead(button4_pin), 0, 1, 0, 127);
+  int button5_val = map(digitalRead(button5_pin), 0, 1, 0, 127);
+  int button6_val = map(digitalRead(button6_pin), 0, 1, 0, 127);
+
+  if (button1_val_prev != button1_val) { usbMIDI.sendControlChange(20, button1_val, 1); usbMIDI.sendNoteOn(60, 127, 1); } else { usbMIDI.sendNoteOff(60, 127, 1); }
+  if (button2_val_prev != button2_val) { usbMIDI.sendControlChange(21, button2_val, 1); usbMIDI.sendNoteOn(64, 127, 1); } else { usbMIDI.sendNoteOff(64, 127, 1); }
+  if (button3_val_prev != button3_val) { usbMIDI.sendControlChange(22, button3_val, 1); usbMIDI.sendNoteOn(67, 127, 1); } else { usbMIDI.sendNoteOff(67, 127, 1); }
+  if (button4_val_prev != button4_val) { usbMIDI.sendControlChange(23, button4_val, 1); usbMIDI.sendNoteOn(71, 127, 1); } else { usbMIDI.sendNoteOff(71, 127, 1); }
+  if (button5_val_prev != button5_val) { usbMIDI.sendControlChange(24, button5_val, 1); usbMIDI.sendNoteOn(72, 127, 1); } else { usbMIDI.sendNoteOff(72, 127, 1); }
+  if (button6_val_prev != button6_val) { usbMIDI.sendControlChange(25, button6_val, 1); usbMIDI.sendNoteOn(76, 127, 1); } else { usbMIDI.sendNoteOff(76, 127, 1); }
+
+  while (usbMIDI.read()) {}
+  button1_val_prev = button1_val; button2_val_prev = button2_val; button3_val_prev = button3_val;
+  button4_val_prev = button4_val; button5_val_prev = button5_val; button6_val_prev = button6_val;
+  delay(1);
+}</code></pre>
+    </details>
+
+    <details class="code-file">
+      <summary>Seraph_AccelDemo.ino</summary>
+      <pre><code>//SERAPH ACCELEROMETER DEMO
+
+#include &lt;usb_midi.h&gt;
+#include &lt;Wire.h&gt;
+
+// Built-in Seraph accelerometer pins
+int accelX_pin = A15, accelY_pin = A16, accelZ_pin = A17;
+int accelX_val_prev = 0, accelY_val_prev = 0, accelZ_val_prev = 0;
+int accelX_val_lp = 0, accelY_val_lp = 0, accelZ_val_lp = 0;
+
+void setup() {
+  Serial.begin(9600);
+  usbMIDI.begin();
+}
+
+void loop() {
+  int accelX_val = map(analogRead(accelX_pin), 1023, 0, 0, 127);
+  int accelY_val = map(analogRead(accelY_pin), 1023, 0, 0, 127);
+  int accelZ_val = map(analogRead(accelZ_pin), 1023, 0, 0, 127);
+
+  accelX_val_lp = (accelX_val_prev + accelX_val) / 2;
+  accelY_val_lp = (accelY_val_prev + accelY_val) / 2;
+  accelZ_val_lp = (accelZ_val_prev + accelZ_val) / 2;
+
+  if (accelX_val_lp &gt; 10 || abs(accelX_val - accelX_val_prev) &gt; 1) { usbMIDI.sendControlChange(16, accelX_val, 1); accelX_val_prev = accelX_val; }
+  if (accelY_val_lp &gt; 10 || abs(accelY_val - accelY_val_prev) &gt; 1) { usbMIDI.sendControlChange(17, accelY_val, 1); accelY_val_prev = accelY_val; }
+  if (accelZ_val_lp &gt; 10 || abs(accelZ_val - accelZ_val_prev) &gt; 1) { usbMIDI.sendControlChange(18, accelZ_val, 1); accelZ_val_prev = accelZ_val; }
+
+  while (usbMIDI.read()) {}
+  accelX_val_prev = accelX_val; accelY_val_prev = accelY_val; accelZ_val_prev = accelZ_val;
+  delay(1);
+}</code></pre>
+    </details>
+
+    <details class="code-file">
+      <summary>Seraph_Accel_Pot_ButtonDemo.ino</summary>
+      <pre><code>//SERAPH ACCELEROMETER, BUTTON, and POTENTIOMETER DEMO
+
+#include &lt;usb_midi.h&gt;
+#include &lt;Wire.h&gt;
+
+int accelX_pin = A15, accelY_pin = A16, accelZ_pin = A17;
+int pot_pin = A9;
+int button_pin = 0;
+int accelX_val_prev = 0, accelY_val_prev = 0, accelZ_val_prev = 0;
+int accelX_val_lp = 0, accelY_val_lp = 0, accelZ_val_lp = 0;
+int pot_val_prev = 0, button_val_prev = 0;
+
+void setup() {
+  Serial.begin(9600);
+  usbMIDI.begin();
+}
+
+void loop() {
+  int accelX_val = map(analogRead(accelX_pin), 1023, 0, 0, 127);
+  int accelY_val = map(analogRead(accelY_pin), 1023, 0, 0, 127);
+  int accelZ_val = map(analogRead(accelZ_pin), 1023, 0, 0, 127);
+  int pot_val    = map(analogRead(pot_pin),    1023, 0, 0, 127);
+  int button_val = map(digitalRead(button_pin), 0, 1, 0, 127);
+
+  accelX_val_lp = (accelX_val_prev + accelX_val) / 2;
+  accelY_val_lp = (accelY_val_prev + accelY_val) / 2;
+  accelZ_val_lp = (accelZ_val_prev + accelZ_val) / 2;
+
+  if (accelX_val_lp &gt; 10 || abs(accelX_val - accelX_val_prev) &gt; 1) { usbMIDI.sendControlChange(16, accelX_val, 1); accelX_val_prev = accelX_val; }
+  if (accelY_val_lp &gt; 10 || abs(accelY_val - accelY_val_prev) &gt; 1) { usbMIDI.sendControlChange(17, accelY_val, 1); accelY_val_prev = accelY_val; }
+  if (accelZ_val_lp &gt; 10 || abs(accelZ_val - accelZ_val_prev) &gt; 1) { usbMIDI.sendControlChange(18, accelZ_val, 1); accelZ_val_prev = accelZ_val; }
+  if (abs(pot_val_prev - pot_val) &gt; 1)    { usbMIDI.sendControlChange(19, pot_val, 1); }
+  if (button_val_prev != button_val)       { usbMIDI.sendControlChange(20, button_val, 1); button_val_prev = button_val; }
+
+  while (usbMIDI.read()) {}
+  accelX_val_prev = accelX_val; accelY_val_prev = accelY_val; accelZ_val_prev = accelZ_val;
+  pot_val_prev = pot_val; button_val_prev = button_val;
+  delay(1);
+}</code></pre>
+    </details>
+  </section>
+
+  <!-- ── Gerber ── -->
+  <section>
+    <h2>Gerber Files</h2>
+    <div class="gerber-note">
+      Seraph Gerber zip file — for print information visit <a href="https://jlcpcb.com" target="_blank" rel="noopener">JLCPCB.com</a>.
+    </div>
+    <p><a href="./Gerber/SeraphGerber.zip" download>⬇ Download SeraphGerber.zip</a></p>
+  </section>
+
 </main>
+
+<!-- ── Getting Started Guide PDF (full-bleed) ── -->
+<section style="margin-top:2rem;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 1rem 0.5rem;">
+    <h2 style="margin-top:0;">Getting Started Guide</h2>
+  </div>
+  <div class="pdf-fullbleed">
+    <iframe src="https://mtiid.calarts.edu/wp-content/uploads/2026/06/Seraph_Getting_Started_Guide.pdf"
+            title="Seraph Getting Started Guide PDF"
+            aria-label="Embedded Seraph Getting Started Guide PDF">
+      <p>Your browser cannot display the embedded PDF.
+        <a href="https://mtiid.calarts.edu/wp-content/uploads/2026/06/Seraph_Getting_Started_Guide.pdf">Open the guide directly</a>.
+      </p>
+    </iframe>
+  </div>
+</section>
+
 </body>
 </html>
