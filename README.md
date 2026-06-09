@@ -1,6 +1,3 @@
-![Calarts Creative Computing Logo](https://i.imgur.com/XZpdi2e.png)
-
-
 # Seraph
 
 
@@ -700,3 +697,4 @@ Creative Computing at California Institute of the Arts is a forward-thinking int
   <a href="https://creativecomputing.calarts.edu/">Learn More</a>
 </p>
 
+![Calarts Creative Computing Logo](https://i.imgur.com/XZpdi2e.png)
