@@ -6,47 +6,106 @@
 
 
 **Seraph – Open-Source Teensy MIDI Controller Platform**  
-Welcome to Seraph!
 
-Seraph is an open platform for developing Teensy-based MIDI controllers and interactive musical interfaces. This repository provides a PCB design and sample demo code to help you build and customize your own MIDI devices.
-
-<p align="center">
-  <a href="https://github.com/Calarts-Creative-Computing/Seraph/stargazers">
-    <img src="https://img.shields.io/github/stars/Calarts-Creative-Computing/Seraph?style=social" alt="Stars">
-  </a>
-  <a href="https://github.com/Calarts-Creative-Computing/Seraph/watchers">
-    <img src="https://img.shields.io/github/watchers/Calarts-Creative-Computing/Seraph?style=social" alt="Watchers">
-  </a>
-  <a href="https://github.com/Calarts-Creative-Computing/Seraph/network/members">
-    <img src="https://img.shields.io/github/forks/Calarts-Creative-Computing/Seraph?style=social" alt="Forks">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/Calarts-Creative-Computing/Seraph/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/Calarts-Creative-Computing/Seraph" alt="License">
-  </a>
-  <a href="https://github.com/Calarts-Creative-Computing/Seraph/issues">
-    <img src="https://img.shields.io/github/issues/Calarts-Creative-Computing/Seraph" alt="Issues">
-  </a>
-  <a href="https://github.com/Calarts-Creative-Computing/Seraph/pulls">
-    <img src="https://img.shields.io/github/issues-pr/Calarts-Creative-Computing/Seraph" alt="Pull Requests">
-  </a>
-  <a href="https://github.com/Calarts-Creative-Computing/Seraph/commits/main">
-    <img src="https://img.shields.io/github/last-commit/Calarts-Creative-Computing/Seraph" alt="Last Commit">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/Calarts-Creative-Computing/Seraph">
-    <img src="https://img.shields.io/badge/View_on-GitHub-181717?logo=github&logoColor=white" alt="View on GitHub">
-  </a>
-  <a href="https://github.com/Calarts-Creative-Computing/Seraph/archive/refs/heads/main.zip">
-    <img src="https://img.shields.io/badge/Download-ZIP-28a745?logo=github" alt="Download ZIP">
-  </a>
-</p>
+An open-source platform for building USB-MIDI controllers and sensor-based interactive art projects. This repository provides a PCB design and sample demo code to help you build and customize your own MIDI devices.
 
 ---
+
+
+**Getting Started Guide**
+
+What You'll Learn
+
+**01 — Board Overview & Hardware Setup
+02 — First Wiring Tutorial: Button & LED
+03 — Analog Sensors: Potentiometers & FSRs
+04 — I²C Devices: IMUs, Displays & More
+05 — MIDI Mapping in Code
+06 — Connecting to a DAW**
+
+---
+
+# 01 — Board Overview & Hardware Setup
+
+
+Seraph is a breakout board for the Teensy 4.1 microcontroller. It handles all the messy wiring, power regulation, and I/O routing so you can focus on building your instrument or installation — not on debugging circuits.
+
+## What's on the Board
+![](https://i.imgur.com/RNhljU7.png)
+
+
+![](https://i.imgur.com/WtuQLjl.png)
+
+## First-Time Setup
+
+### Step 1 — Install Arduino IDE & Teensyduino
+
+Seraph uses the Arduino IDE with the Teensyduino add-on, which gives your computer the tools to compile code and talk to the Teensy 4.1.
+
+1.  Download Arduino IDE from arduino.cc/en/software
+    
+2.  Download Teensyduino from pjrc.com/teensy/teensyduino.html
+    
+3.  Run the Teensyduino installer — it will find your Arduino IDE automatically
+    
+4.  Open Arduino IDE. You should now see Teensy boards in Tools > Board > Teensyduino
+    
+
+  
+
+### Step 2 — Mount the Teensy on Seraph
+
+⚠️ Always use header pins when mounting the Teensy. Soldering it directly means you cannot reuse it in other projects.
+
+5.  Solder male header pins to the Teensy 4.1 (if not pre-soldered)
+    
+6.  Press the Teensy firmly into the MCU socket on the Seraph board — the USB port should face toward the board edge
+    
+7.  Double-check alignment: all pins seated, none bent
+
+### Step 3 — Configure USB-MIDI Mode
+
+This is the most important setting. Without it, your computer won't recognise the Teensy as a MIDI device.
+
+1.  In Arduino IDE, go to Tools > Board and select Teensy 4.1
+    
+2.  Go to Tools > USB Type and select Serial + MIDI
+    
+3.  Connect the Teensy to your computer via USB
+    
+4.  You should see it appear in your system as both a serial port and a MIDI device
+
+💡 On macOS, check Audio MIDI Setup (Applications > Utilities) to confirm the device appears. On Windows, check Device Manager.
+
+    
+# 02 — First Wiring Tutorial: Button & LED
+
+This is your first circuit. You'll wire a push button and an LED to Seraph, then upload code that lights the LED when the button is pressed and sends a MIDI Note On message to your computer.
+
+## What You'll Need
+
+-   Seraph board with Teensy 4.1 mounted
+    
+-   1x tactile push button (momentary)
+    
+-   1x LED (any color, 3mm or 5mm)
+    
+-   1x 470Ω resistor (for LED current limiting)
+    
+-   Jumper wires
+  
+## Wiring Diagram
+
+![](https://i.imgur.com/f4wfXpq.png)
+
+![Descriptive alt text](https://i.imgur.com/JGOtWVS.png)
+💡 Each channel strip on the digital bank has three pins in a row: + (power/3.3V), – (ground), and S (signal). For buttons, you only need S and –. For LEDs, S and –, with a resistor in series.
+
+## The Code
+Create a new sketch in Arduino IDE and paste in the following code. This is adapted from the Seraph_ButtonDemo in the GitHub repository.
+
+    
+
 
 
 
