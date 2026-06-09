@@ -240,6 +240,13 @@
     @media (max-width: 760px) {
       .doc-index { columns: 1; }
       .topbar-inner { align-items: flex-start; flex-direction: column; }
+      .nav-links {
+        max-height: 6.2rem;
+        overflow-y: auto;
+        width: 100%;
+        justify-content: flex-start;
+        padding-right: .2rem;
+      }
     }
   </style>
 </head>
@@ -623,7 +630,7 @@ while (usbMIDI.read()) {}</code></pre>
       <p>Default Seraph sketches use USB MIDI; some advanced projects use serial streams that require manual parsing with Max's <code>serial</code> object.</p>
 
       <h3>6C — General MIDI Routing (Any DAW)</h3>
-      <h4>🎛️ DAW / Software MIDI Setup</h4>
+      <h4><span aria-hidden="true">🎛️</span> DAW / Software MIDI Setup</h4>
       <div class="table-wrap">
         <table>
           <thead>
@@ -663,7 +670,7 @@ void loop() {
     </section>
 
     <section class="doc" id="bom">
-      <h2>🧾 Seraph — Bill of Materials (BOM)</h2>
+      <h2><span aria-hidden="true">🧾</span> Seraph — Bill of Materials (BOM)</h2>
       <div class="table-wrap">
         <table>
           <thead>
