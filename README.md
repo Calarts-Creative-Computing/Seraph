@@ -282,6 +282,156 @@ void loop() {
 ```
 💡 Use constrain() before map() when your sensor's real-world range doesn't match the theoretical 0–1023. This prevents the mapped value from going outside 0–127.
 
+# 04 — I²C Devices: IMUs, Displays & More
+I²C (Inter-Integrated Circuit) is a communication protocol that lets you connect multiple sensors to just two wires: SDA (data) and SCL (clock). Seraph exposes three I²C blocks (A, B, C), all defaulting to the Teensy's I2C0 port for maximum compatibility.
+
+## Common I²C Devices for NIME Projects
+
+-   IMU (MPU-6050, BNO055) — 6-axis or 9-axis motion sensing for gesture control
+    
+-   OLED Display (SSD1306) — small screen for parameter feedback
+    
+-   ADC Expander (ADS1115) — adds 4 extra high-resolution analog inputs
+    
+-   Distance Sensor (VL53L0X) — time-of-flight distance measuring
+    
+-   Color Sensor (TCS34725) — reads RGB color values
+    
+
+  
+
+## Wiring
+![](https://i.imgur.com/VopP0T5.png)
+All I²C devices use the same four-pin connection regardless of which sensor you're using:
+### 🔌 I²C Device (e.g. MPU-6050 IMU)
+
+  
+
+| Component Pin | → | Wire Color | → | Seraph Header |
+
+
+
+  
+
+| Sensor — SDA | → | Blue | → | I²C Block A — SDA |
+
+  
+
+| Sensor — SCL | → | Yellow | → | I²C Block A — SCL |
+
+  
+
+| Sensor — VCC | → | Red | → | I²C Block A — Power (+) |
+
+  
+
+| Sensor — GND | → | Black | → | I²C Block A — GND (−) |
+
+💡 If your sensor has additional pins (INT, ADDR, etc.) beyond the four core I²C pins, refer to your sensor's datasheet. ADDR pins often let you change the I²C address to avoid conflicts when using multiple devices of the same type.
+
+## Using Multiple I²C Devices
+
+Multiple I²C devices can share the same two wires as long as each has a unique address. Seraph's three I²C blocks (A, B, C) are all wired to the same I2C0 bus — they're just convenient connection points, not separate buses.
+
+-   Connecting two MPU-6050s: bridge the ADDR pin on one to 3.3V to change its address from 0x68 to 0x69
+    
+-   Connecting an OLED + IMU: different device types usually have different addresses by default — no configuration needed
+    
+
+  
+
+## Code Example: MPU-6050 IMU to MIDI Pitch Bend
+
+Install the Adafruit MPU6050 library via Tools > Manage Libraries in Arduino IDE before uploading this sketch.
+
+```cpp
+// Seraph — IMU (MPU-6050) to MIDI Pitch Bend Demo
+
+#include "Wire.h"
+#include "Adafruit_MPU6050.h"
+
+Adafruit_MPU6050 mpu;
+
+const int MIDI_CHANNEL = 1;
+
+void setup() {
+  Wire.begin();
+
+  mpu.begin();
+
+  mpu.setAccelerometerRange(MPU6050_RANGE_2_G);
+  mpu.setGyroRange(MPU6050_RANGE_250_DEG);
+}
+
+void loop() {
+  sensors_event_t accel, gyro, temp;
+
+  mpu.getEvent(&accel, &gyro, &temp);
+
+  // Map X-axis tilt (-10 to +10 m/s^2)
+  // to MIDI pitch bend (-8192 to +8191)
+  int pitchBend = map(
+    constrain(accel.acceleration.x * 100, -1000, 1000),
+    -1000,
+    1000,
+    -8192,
+    8191
+  );
+
+  usbMIDI.sendPitchBend(pitchBend, MIDI_CHANNEL);
+
+  delay(10); // ~100 updates/second
+
+  while (usbMIDI.read()) {}
+}
+```
+## Troubleshooting I²C
+![enter image description here](https://i.imgur.com/9vpSpay.png)
+
+# 05 — MIDI Mapping in Code
+
+This section explains the core MIDI message types you'll use in Seraph projects and how to send them using the Teensyduino USB-MIDI library. Understanding these building blocks lets you map any sensor to any parameter in your DAW or audio software.
+## Core MIDI Message Types
+![enter image description here](https://i.imgur.com/09eKWef.png)
+## usbMIDI Cheat Sheet
+
+These are the most commonly used usbMIDI functions in Seraph projects:
+```cpp
+// Note On — play a note
+usbMIDI.sendNoteOn(note, velocity, channel);
+
+//   note:     0–127  (60 = Middle C)
+//   velocity: 0–127  (0 = silent, 127 = max)
+//   channel:  1–16
+
+
+// Note Off — stop a note
+usbMIDI.sendNoteOff(note, 0, channel);
+
+
+// Control Change — continuous parameter
+usbMIDI.sendControlChange(cc_number, value, channel);
+
+//   cc_number: 0–127 (see MIDI CC list below)
+//   value:     0–127
+
+
+// Pitch Bend — continuous pitch movement
+usbMIDI.sendPitchBend(value, channel);
+
+//   value: -8192 to +8191
+//   0 = center / no bend
+
+
+// Program Change — switch patches
+usbMIDI.sendProgramChange(program, channel);
+
+//   program: 0–127
+
+
+// Always flush MIDI messages at end of loop()
+while (usbMIDI.read()) {}
+```
 
 Creative Computing at California Institute of the Arts is a forward-thinking interdisciplinary program that fuses the power of computational engineering skills with the limitless possibilities of artistic expression. This innovative degree encourages students to explore the intersection of technology and creativity, using computational tools to craft work that is both personally and culturally meaningful, while preparing them for industry. Our program is designed to provide an integrative learning experience that equips students with the skills to push the boundaries of art, music, and technology. With a strong foundation in computer science, electrical engineering, signal processing, and emerging technologies including virtual/augmented reality, robotics, and machine learning, students will be empowered to innovate, experiment, and reimagine what technology can do in artistic contexts.
 
