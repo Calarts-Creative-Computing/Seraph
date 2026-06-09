@@ -433,6 +433,79 @@ usbMIDI.sendProgramChange(program, channel);
 while (usbMIDI.read()) {}
 ```
 
+## Useful MIDI CC Numbers
+
+CC numbers are standardized. Here are the ones most useful for NIME and music production:
+![](https://i.imgur.com/8wxerxz.png)
+## Combining Multiple Sensors
+
+Real Seraph projects typically combine several sensors sending different MIDI messages. Here's the structure to follow:
+```cpp
+// Multi-sensor Seraph template
+
+const int POT_PIN    = A1;
+const int FSR_PIN    = A2;
+const int BUTTON_PIN = 1;
+
+int lastPotCC = -1;
+int lastFSRCC = -1;
+int lastBtn   = HIGH;
+
+void setup() {
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+}
+
+void loop() {
+
+  // --- Potentiometer -> CC 74 (Filter) ---
+  int potCC = map(
+    analogRead(POT_PIN),
+    0,
+    1023,
+    0,
+    127
+  );
+
+  if (potCC != lastPotCC) {
+    usbMIDI.sendControlChange(74, potCC, 1);
+    lastPotCC = potCC;
+  }
+
+
+  // --- FSR -> CC 11 (Expression) ---
+  int fsrCC = map(
+    constrain(analogRead(FSR_PIN), 50, 900),
+    50,
+    900,
+    0,
+    127
+  );
+
+  if (fsrCC != lastFSRCC) {
+    usbMIDI.sendControlChange(11, fsrCC, 1);
+    lastFSRCC = fsrCC;
+  }
+
+
+  // --- Button -> Note On/Off ---
+  int btn = digitalRead(BUTTON_PIN);
+
+  if (btn == LOW && lastBtn == HIGH) {
+    usbMIDI.sendNoteOn(60, 100, 1);
+  }
+
+  if (btn == HIGH && lastBtn == LOW) {
+    usbMIDI.sendNoteOff(60, 0, 1);
+  }
+
+  lastBtn = btn;
+
+
+  // Always flush MIDI messages
+  while (usbMIDI.read()) {}
+}
+```
+
 Creative Computing at California Institute of the Arts is a forward-thinking interdisciplinary program that fuses the power of computational engineering skills with the limitless possibilities of artistic expression. This innovative degree encourages students to explore the intersection of technology and creativity, using computational tools to craft work that is both personally and culturally meaningful, while preparing them for industry. Our program is designed to provide an integrative learning experience that equips students with the skills to push the boundaries of art, music, and technology. With a strong foundation in computer science, electrical engineering, signal processing, and emerging technologies including virtual/augmented reality, robotics, and machine learning, students will be empowered to innovate, experiment, and reimagine what technology can do in artistic contexts.
 
 <p align="center">
