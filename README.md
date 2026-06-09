@@ -164,6 +164,32 @@ Notice the code only sends MIDI when the button state changes — not every loop
 
 The line while (usbMIDI.read()) {} at the end of loop() flushes any incoming MIDI data. Even if you're not receiving MIDI, the USB library needs this to maintain a stable connection. Always include it.
 
+## Testing
+
+1.  Select Tools > USB Type > Serial + MIDI in Arduino IDE
+    
+2.  Upload the sketch (Ctrl+U / Cmd+U)
+    
+3.  Open a MIDI monitor app (e.g. MIDI Monitor on macOS, MIDI-OX on Windows) to confirm notes are being sent
+    
+4.  Press the button — the LED should light and you should see a Note On message for Middle C
+    
+
+  
+
+💡 If nothing happens, check that the Teensy appears as a MIDI device in your system, and that your pin numbers in the code match where you physically wired the components.
+
+# 03 — Analog Sensors: Potentiometers & FSRs
+
+Analog sensors output a continuously varying voltage rather than just on/off. Seraph's analog bank reads these voltages and converts them to numbers your code can use. This section covers the two most common types: potentiometers (knobs) and FSRs (force-sensitive resistors).
+
+  
+
+## 3A — Potentiometer (No Pulldown Required)
+
+Potentiometers are the simplest analog sensors — they're essentially volume knobs. They have three leads: power, ground, and a wiper that outputs a voltage proportional to rotation.
+
+## Wiring Diagram
 
 Creative Computing at California Institute of the Arts is a forward-thinking interdisciplinary program that fuses the power of computational engineering skills with the limitless possibilities of artistic expression. This innovative degree encourages students to explore the intersection of technology and creativity, using computational tools to craft work that is both personally and culturally meaningful, while preparing them for industry. Our program is designed to provide an integrative learning experience that equips students with the skills to push the boundaries of art, music, and technology. With a strong foundation in computer science, electrical engineering, signal processing, and emerging technologies including virtual/augmented reality, robotics, and machine learning, students will be empowered to innovate, experiment, and reimagine what technology can do in artistic contexts.
 
