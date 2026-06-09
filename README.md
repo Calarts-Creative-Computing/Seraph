@@ -505,6 +505,164 @@ void loop() {
   while (usbMIDI.read()) {}
 }
 ```
+# 06 — Connecting to a DAW
+
+Once your Seraph is sending MIDI, the final step is getting that data into your DAW or audio software. This section covers Ableton Live, Max/MSP, and general MIDI routing — the three most common environments in NIME and music production contexts.
+
+  
+
+## 6A — Ableton Live
+
+### Enable MIDI Input
+
+1.  Go to Live > Preferences (Mac) or Options > Preferences (PC)
+    
+2.  Click the Link / Tempo / MIDI tab
+    
+3.  Find your Teensy in the MIDI Ports list — it will appear as something like "Teensy MIDI"
+    
+4.  Turn ON Track under the Input column for your Teensy
+    
+5.  Optionally turn ON Remote if you want to use it for Live's remote control
+    
+
+  
+
+💡 If your Teensy doesn't appear, check that USB Type is set to Serial + MIDI in Arduino IDE and that the sketch is running (the board is powered and the code is uploaded).
+
+  
+
+### Mapping CC to a Parameter
+
+6.  Enter MIDI Map Mode (Cmd+M on Mac, Ctrl+M on PC) — everything mappable turns blue
+    
+7.  Click the parameter you want to control (e.g. a filter knob on an instrument)
+    
+8.  Turn your potentiometer on Seraph — Live will detect the CC and assign it
+    
+9.  Exit MIDI Map Mode (Cmd+M / Ctrl+M again)
+    
+
+  
+
+💡 In MIDI Map Mode you can also set min/max ranges for each mapping. This lets you limit a potentiometer to only sweep part of a parameter's range.
+
+  
+
+### Triggering Clips with Buttons
+
+10.  Enter MIDI Map Mode
+    
+11.  Click a clip slot in Session View
+    
+12.  Press your button on Seraph — Live assigns it
+    
+13.  Exit MIDI Map Mode
+    
+
+  
+
+## 6B — Max/MSP
+
+Max/MSP is the most common environment for custom interactive music systems. The Lumaphone and H.A.I. projects from the Seraph case studies both used Max for audio processing.
+
+### Receiving MIDI in Max
+
+Use the midiin or notein / ctlin objects to receive MIDI from Seraph:
+```cpp
+// In a Max patch, create these objects:
+
+[notein]          // receives Note On/Off from any MIDI device
+[ctlin]           // receives Control Change messages
+[bendin]          // receives Pitch Bend
+
+
+// To receive from Seraph specifically:
+
+[notein Teensy MIDI]    // specify device name in the argument
+[ctlin Teensy MIDI]
+
+
+// Example: map CC 74 to a filter cutoff
+
+[ctlin 74 Teensy MIDI]  // only listens to CC 74 from Teensy
+        |
+     [/ 127.]           // normalize 0-127 to 0.0-1.0
+        |
+    [cutoff~]           // connect to your audio object
+```
+💡 If Max doesn't list your Teensy as a MIDI device, go to Max > Preferences > MIDI and click Refresh. Make sure the Teensy is plugged in and the sketch is running.
+
+### Serial vs USB-MIDI in Max
+
+Seraph defaults to USB-MIDI, but some advanced Seraph projects (like the Lumaphone) communicate over serial instead, sending raw data rather than formatted MIDI messages. For USB-MIDI, use notein/ctlin as above. For serial, use the serial object and parse the data manually.
+
+  
+
+## 6C — General MIDI Routing (Any DAW)
+
+Any DAW that accepts MIDI input will work with Seraph. The general process is the same across tools:
+## 🎛️ DAW / Software MIDI Setup
+
+| DAW / Software | Where to Enable MIDI |
+|---|---|
+| **Ableton Live** | Preferences → MIDI → Enable **Track Input** for Teensy |
+| **Logic Pro** | File → Project Settings → MIDI → Input Devices |
+| **Bitwig Studio** | Preferences → Controllers → Add Controller → Generic MIDI |
+| **Reaper** | Options → Preferences → MIDI Devices → Enable Teensy Input |
+| **GarageBand** | Auto-detects USB MIDI — just connect and play |
+| **Pure Data** | Use `[notein]` / `[ctlin]` objects (same as Max/MSP) |
+| **SuperCollider** | `MIDIClient.init;` → `MIDIIn.connectAll;` → `MIDIdef.cc(...)` |
+
+## Common DAW Issues
+
+-   MIDI device not appearing: Confirm USB Type is Serial + MIDI in Arduino IDE and re-upload the sketch
+    
+-   Notes stuck on: Add usbMIDI.sendNoteOff() for every Note On — always pair them
+    
+-   CC values jumpy or noisy: Add smoothing in your sketch (see below), or adjust the sensor's pulldown resistor value
+    
+-   Wrong channel: Make sure the MIDI channel in your sketch matches what the DAW is listening on
+    
+
+  
+
+### Adding Smoothing to Reduce Jitter
+```cpp
+// Exponential moving average — reduces sensor noise
+
+float smoothed = 0;
+
+const float ALPHA = 0.1;
+// Lower = smoother, less responsive
+// Higher = faster response, more jitter
+
+void loop() {
+
+  float raw = analogRead(A1);
+
+  // Smooth incoming sensor data
+  smoothed = ALPHA * raw + (1.0 - ALPHA) * smoothed;
+
+  // Convert analog range (0-1023)
+  // into MIDI range (0-127)
+  int ccValue = map(
+    (int)smoothed,
+    0,
+    1023,
+    0,
+    127
+  );
+
+  // Send MIDI as normal
+  // usbMIDI.sendControlChange(CC, ccValue, CHANNEL);
+
+  while (usbMIDI.read()) {}
+}
+```
+You're ready to build.
+
+Visit github.com/Calarts-Creative-Computing/Seraph for demo code, schematics, and community builds.
 
 Creative Computing at California Institute of the Arts is a forward-thinking interdisciplinary program that fuses the power of computational engineering skills with the limitless possibilities of artistic expression. This innovative degree encourages students to explore the intersection of technology and creativity, using computational tools to craft work that is both personally and culturally meaningful, while preparing them for industry. Our program is designed to provide an integrative learning experience that equips students with the skills to push the boundaries of art, music, and technology. With a strong foundation in computer science, electrical engineering, signal processing, and emerging technologies including virtual/augmented reality, robotics, and machine learning, students will be empowered to innovate, experiment, and reimagine what technology can do in artistic contexts.
 
@@ -513,4 +671,3 @@ Creative Computing at California Institute of the Arts is a forward-thinking int
 </p>
 
 
-https://i.imgur.com/CjAuKit.png
