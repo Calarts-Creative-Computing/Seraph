@@ -16,20 +16,16 @@ An open-source platform for building USB-MIDI controllers and sensor-based inter
 
 What You'll Learn
 
-1 — Board Overview & Hardware Setup 
-
-2 — First Wiring Tutorial: Button & LED 
-
-3 — Analog Sensors: Potentiometers & FSRs 
-
-4 — I²C Devices: IMUs, Displays & More 
-
-5 — MIDI Mapping in Code 
-
-6 — Connecting to a DAW
+- [1 — Board Overview & Hardware Setup](#section-01)
+- [2 — First Wiring Tutorial: Button & LED](#section-02)
+- [3 — Analog Sensors: Potentiometers & FSRs](#section-03)
+- [4 — I²C Devices: IMUs, Displays & More](#section-04)
+- [5 — MIDI Mapping in Code](#section-05)
+- [6 — Connecting to a DAW](#section-06)
 
 ---
 
+<a id="section-01"></a>
 # 01 — Board Overview & Hardware Setup
 
 
@@ -83,6 +79,7 @@ This is the most important setting. Without it, your computer won't recognise th
 💡 On macOS, check Audio MIDI Setup (Applications > Utilities) to confirm the device appears. On Windows, check Device Manager.
 
     
+<a id="section-02"></a>
 # 02 — First Wiring Tutorial: Button & LED
 
 This is your first circuit. You'll wire a push button and an LED to Seraph, then upload code that lights the LED when the button is pressed and sends a MIDI Note On message to your computer.
@@ -179,6 +176,7 @@ The line while (usbMIDI.read()) {} at the end of loop() flushes any incoming MID
 
 💡 If nothing happens, check that the Teensy appears as a MIDI device in your system, and that your pin numbers in the code match where you physically wired the components.
 
+<a id="section-03"></a>
 # 03 — Analog Sensors: Potentiometers & FSRs
 
 Analog sensors output a continuously varying voltage rather than just on/off. Seraph's analog bank reads these voltages and converts them to numbers your code can use. This section covers the two most common types: potentiometers (knobs) and FSRs (force-sensitive resistors).
@@ -282,6 +280,7 @@ void loop() {
 ```
 💡 Use constrain() before map() when your sensor's real-world range doesn't match the theoretical 0–1023. This prevents the mapped value from going outside 0–127.
 
+<a id="section-04"></a>
 # 04 — I²C Devices: IMUs, Displays & More
 I²C (Inter-Integrated Circuit) is a communication protocol that lets you connect multiple sensors to just two wires: SDA (data) and SCL (clock). Seraph exposes three I²C blocks (A, B, C), all defaulting to the Teensy's I2C0 port for maximum compatibility.
 
@@ -388,6 +387,7 @@ void loop() {
 ## Troubleshooting I²C
 ![enter image description here](https://i.imgur.com/9vpSpay.png)
 
+<a id="section-05"></a>
 # 05 — MIDI Mapping in Code
 
 This section explains the core MIDI message types you'll use in Seraph projects and how to send them using the Teensyduino USB-MIDI library. Understanding these building blocks lets you map any sensor to any parameter in your DAW or audio software.
@@ -505,6 +505,7 @@ void loop() {
   while (usbMIDI.read()) {}
 }
 ```
+<a id="section-06"></a>
 # 06 — Connecting to a DAW
 
 Once your Seraph is sending MIDI, the final step is getting that data into your DAW or audio software. This section covers Ableton Live, Max/MSP, and general MIDI routing — the three most common environments in NIME and music production contexts.
@@ -698,5 +699,4 @@ Creative Computing at California Institute of the Arts is a forward-thinking int
 <p align="center">
   <a href="https://creativecomputing.calarts.edu/">Learn More</a>
 </p>
-
 
