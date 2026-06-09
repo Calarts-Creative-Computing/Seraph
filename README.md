@@ -662,6 +662,36 @@ void loop() {
 ```
 You're ready to build.
 
+## 🧾 Seraph — Bill of Materials (BOM)
+
+| # | Component | SKU / MPN | Qty | Supplier |
+|---|---|---|---|---|
+| 1 | Teensy 4.1 — ARM Cortex-M7 @ 600 MHz, 8MB Flash, 1MB RAM | DEV-16771 | 1 | SparkFun |
+| 2 | ADXL335 Triple-Axis Accelerometer Breakout — ±3g analog output | SEN-09269 | 1 | Adafruit |
+| 24 | STMicroelectronics ULN2003A — 7-ch Darlington Array DIP-16 | 497-2344-5-ND | 1 | DigiKey |
+| 4 | Male Pin Headers — 2.54mm straight breakaway 40-pin strip | PRT-00116 | 3 | SparkFun |
+| 20 | Molex 3-Pin Vertical Header 2.54mm | WM4201-ND | 16 | DigiKey |
+| 21 | Molex 2-Pin Vertical Header 2.54mm | 900-0022232021-ND | 5 | DigiKey |
+| 22 | Molex 4-Pin Vertical Header 2.54mm (I²C Blocks A/B/C) | WM4202-ND | 3 | DigiKey |
+| 23 | Sullins 24-Pin Female Socket Header (Teensy Socket) | S7057-ND | 2 | DigiKey |
+| 25 | TE Connectivity 16-Pin DIP IC Socket (ULN2003A) | A120349-ND | 1 | DigiKey |
+| 26 | Molex KK 2-Pin Pre-Crimped Wire Assembly 300mm | 900-2177971022-ND | 5 | DigiKey |
+| 27 | Molex KK 3-Pin Pre-Crimped Wire Assembly 300mm | 900-2177971032-ND | 8 | DigiKey |
+| 28 | Molex KK 4-Pin Pre-Crimped Wire Assembly 300mm | 900-2177971042-ND | 1 | DigiKey |
+| 7 | 10kΩ Resistors — 1/4W Through-Hole (100 pack) | CF14JT10K0CT-ND | 1 | DigiKey |
+| 8 | 220Ω Resistors — 1/4W Through-Hole (100 pack) | CF14JT220RCT-ND | 1 | DigiKey |
+| 9 | Push Buttons — 12mm Momentary | COM-09190 | 10 | SparkFun |
+| 10 | Rotary Potentiometers — 10kΩ Linear Taper | COM-09939 | 8 | SparkFun |
+| 11 | Force Sensitive Resistors — FSR 402 | SEN-09375 | 4 | SparkFun |
+| 12 | LEDs — 5mm Assorted Colors | COM-12062 | 1 | SparkFun |
+| 13 | MPU-6050 IMU — Gyro + Accelerometer (I²C) | SEN-11028 | 1 | SparkFun |
+| 14 | SSD1306 OLED Display — 0.96" 128×64 I²C | LCD-17153 | 1 | SparkFun |
+| 15 | TCS34725 RGB Color Sensor (I²C) | SEN-12829 | 1 | SparkFun |
+| 16 | VL53L0X Time-of-Flight Distance Sensor (I²C) | SEN-14032 | 1 | SparkFun |
+| 17 | Lead-Free Rosin Core Solder | TOL-09325 | 1 | SparkFun |
+| 18 | Jumper Wires — Female-to-Female 6" | PRT-12796 | 2 | SparkFun |
+| 19 | USB Micro-B Cable | CAB-13244 | 1 | SparkFun |
+
 
 Creative Computing at California Institute of the Arts is a forward-thinking interdisciplinary program that fuses the power of computational engineering skills with the limitless possibilities of artistic expression. This innovative degree encourages students to explore the intersection of technology and creativity, using computational tools to craft work that is both personally and culturally meaningful, while preparing them for industry. Our program is designed to provide an integrative learning experience that equips students with the skills to push the boundaries of art, music, and technology. With a strong foundation in computer science, electrical engineering, signal processing, and emerging technologies including virtual/augmented reality, robotics, and machine learning, students will be empowered to innovate, experiment, and reimagine what technology can do in artistic contexts.
 
