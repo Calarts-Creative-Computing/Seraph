@@ -192,10 +192,54 @@ Potentiometers are the simplest analog sensors — they're essentially volume kn
 ## Wiring Diagram
 
 ![](https://i.imgur.com/VT83PWb.png)
-![](https://i.imgur.com/CjAuKit.png
+![](https://i.imgur.com/CjAuKit.png)
+💡  The left/right orientation depends on how you're holding the pot. If your value goes the wrong direction when you turn it, just swap the + and – leads.
+
+```cpp
+// Seraph — Potentiometer Demo
+// Maps pot position to MIDI CC (Control Change)
+
+const int POT_PIN      = A1;  // Analog channel 1
+const int MIDI_CC      = 74;  // CC 74 = Filter Cutoff (common choice)
+const int MIDI_CHANNEL = 1;
+
+int lastCCValue = -1; // Track last sent value to avoid redundant messages
+
+void setup() {
+  // No pinMode needed for analog inputs
+}
+
+void loop() {
+  int rawValue = analogRead(POT_PIN);  // 0-1023
+
+  // Map 10-bit ADC range to 7-bit MIDI CC range (0-127)
+  int ccValue = map(rawValue, 0, 1023, 0, 127);
+
+  // Only send if value has changed
+  if (ccValue != lastCCValue) {
+    usbMIDI.sendControlChange(MIDI_CC, ccValue, MIDI_CHANNEL);
+    lastCCValue = ccValue;
+  }
+
+  while (usbMIDI.read()) {}
+}
+```
+## 3B — FSR / LDR (Pulldown Resistor Required)
+
+Force-Sensitive Resistors (FSRs) and Light-Dependent Resistors (LDRs) change their resistance based on physical input. Unlike potentiometers, they only have two leads — you need to add a pulldown resistor to create the voltage divider that makes them readable.
+
+### Why a Pulldown Resistor?
+
+An FSR is just a variable resistor. To read it as a voltage, you pair it with a fixed resistor to form a voltage divider. Seraph has a resistor footprint on each analog channel strip for exactly this purpose — no breadboard required.
+
+## Wiring Diagram
+
+![](https://i.imgur.com/dIB1qCb.png)
+
+![](https://i.imgur.com/BHXqAIf.png
 )
 
-
+💡 Each channel strip on the digital bank has three pins in a row: + (power/3.3V), – (ground), and S (signal). For buttons, you only need S and –. For LEDs, S and –, with a resistor in series.
 
 
 Creative Computing at California Institute of the Arts is a forward-thinking interdisciplinary program that fuses the power of computational engineering skills with the limitless possibilities of artistic expression. This innovative degree encourages students to explore the intersection of technology and creativity, using computational tools to craft work that is both personally and culturally meaningful, while preparing them for industry. Our program is designed to provide an integrative learning experience that equips students with the skills to push the boundaries of art, music, and technology. With a strong foundation in computer science, electrical engineering, signal processing, and emerging technologies including virtual/augmented reality, robotics, and machine learning, students will be empowered to innovate, experiment, and reimagine what technology can do in artistic contexts.
