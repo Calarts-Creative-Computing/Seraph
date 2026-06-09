@@ -496,7 +496,7 @@ usbMIDI.sendControlChange(11, ccValue, 1);</code></pre>
 
     <section class="doc" id="section-04">
       <h2>04 — I²C Devices: IMUs, Displays &amp; More</h2>
-      <p>I²C lets multiple devices share SDA and SCL lines; Seraph provides I²C blocks A/B/C on the same I2C0 bus.</p>
+      <p>I²C lets multiple devices share SDA and SCL lines; Seraph provides I²C blocks A/B/C on the same I²C0 bus.</p>
       <h3>Common I²C Devices for NIME Projects</h3>
       <div class="grid-3">
         <div class="tile"><strong>MPU-6050 / BNO055</strong><br>Motion and gesture control.</div>
@@ -512,6 +512,7 @@ usbMIDI.sendControlChange(11, ccValue, 1);</code></pre>
       </figure>
       <div class="table-wrap">
         <table>
+          <caption>I²C sensor wiring reference (pins, suggested wire colors, and Seraph header mapping)</caption>
           <thead>
             <tr><th>Component Pin</th><th>Wire Color</th><th>Seraph Header</th></tr>
           </thead>
@@ -523,10 +524,11 @@ usbMIDI.sendControlChange(11, ccValue, 1);</code></pre>
           </tbody>
         </table>
       </div>
+      <p>The pin/function labels are the primary reference; wire colors are suggested only and can be replaced with any clear labeling scheme.</p>
       <h3>Using Multiple I²C Devices</h3>
       <ul>
         <li>All blocks share one bus, so each device needs a unique address.</li>
-        <li>For dual MPU-6050, set one ADDR pin high (tie ADDR to 3.3V/VCC) to shift from <code>0x68</code> to <code>0x69</code>.</li>
+        <li>For dual MPU-6050, choose either one of the two sensors and set its ADDR pin high (tie ADDR to 3.3V/VCC) to shift that device from <code>0x68</code> to <code>0x69</code>.</li>
         <li>Mixed device types generally work with default addresses.</li>
       </ul>
       <h3>Code Example: MPU-6050 IMU to MIDI Pitch Bend</h3>
@@ -633,6 +635,7 @@ while (usbMIDI.read()) {}</code></pre>
       <h4><span aria-hidden="true">🎛️</span> DAW / Software MIDI Setup</h4>
       <div class="table-wrap">
         <table>
+          <caption>Common DAW and software locations for enabling Seraph MIDI input</caption>
           <thead>
             <tr><th>DAW / Software</th><th>Where to Enable MIDI</th></tr>
           </thead>
@@ -673,6 +676,7 @@ void loop() {
       <h2><span aria-hidden="true">🧾</span> Seraph — Bill of Materials (BOM)</h2>
       <div class="table-wrap">
         <table>
+          <caption>Seraph bill of materials from the README reference list</caption>
           <thead>
             <tr><th>#</th><th>Component</th><th>SKU / MPN</th><th>Qty</th><th>Supplier</th></tr>
           </thead>
