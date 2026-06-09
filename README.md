@@ -149,8 +149,20 @@ void loop() {
   while (usbMIDI.read()) {}
 }
 ```    
+**Key Concepts**
 
 
+### INPUT_PULLUP
+
+When you use INPUT_PULLUP, the Teensy internally connects the pin to 3.3V through a resistor. This means the pin reads HIGH when nothing is connected, and LOW when the button pulls it to ground. This is why you only need two wires for a button — no external resistor needed.
+
+### Event-Based MIDI
+
+Notice the code only sends MIDI when the button state changes — not every loop iteration. This is called event-based transmission, and it's important: sending MIDI every millisecond would flood the connection with redundant messages. Always track the previous state and only transmit on transitions.
+
+### usbMIDI.read()
+
+The line while (usbMIDI.read()) {} at the end of loop() flushes any incoming MIDI data. Even if you're not receiving MIDI, the USB library needs this to maintain a stable connection. Always include it.
 
 
 Creative Computing at California Institute of the Arts is a forward-thinking interdisciplinary program that fuses the power of computational engineering skills with the limitless possibilities of artistic expression. This innovative degree encourages students to explore the intersection of technology and creativity, using computational tools to craft work that is both personally and culturally meaningful, while preparing them for industry. Our program is designed to provide an integrative learning experience that equips students with the skills to push the boundaries of art, music, and technology. With a strong foundation in computer science, electrical engineering, signal processing, and emerging technologies including virtual/augmented reality, robotics, and machine learning, students will be empowered to innovate, experiment, and reimagine what technology can do in artistic contexts.
