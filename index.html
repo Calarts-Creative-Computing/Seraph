@@ -35,6 +35,12 @@
     }
     .hero h1 { margin: 0; font-size: clamp(1.7rem, 3.3vw, 2.5rem); }
     .hero p { margin: .6rem 0 0; color: var(--muted); }
+    .hero-logo {
+      max-width: 280px;
+      border: 0;
+      background: transparent;
+      border-radius: 0;
+    }
     .hero-links { margin-top: 1rem; display: flex; gap: .7rem; flex-wrap: wrap; }
     .pill {
       border: 1px solid var(--border);
@@ -80,6 +86,7 @@
     }
     .code-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: .8rem; }
     .code-links a { font-weight: 600; }
+    .code-links p { margin: .35rem 0 0; }
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; min-width: 560px; }
     th, td { border: 1px solid var(--border); padding: .5rem .6rem; text-align: left; font-size: .92rem; }
@@ -97,7 +104,7 @@
 <body>
 <main>
   <section class="card hero">
-    <img src="https://i.imgur.com/XZpdi2e.png" alt="CalArts Creative Computing logo" style="max-width:280px;border:0;background:transparent;border-radius:0;">
+    <img class="hero-logo" src="https://i.imgur.com/XZpdi2e.png" alt="CalArts Creative Computing logo">
     <h1>Seraph</h1>
     <p><strong>Open-Source Teensy MIDI Controller Platform</strong> for building USB-MIDI controllers and sensor-based interactive art projects.</p>
     <div class="hero-links">
@@ -190,12 +197,12 @@
     <h2>Demo Code</h2>
     <p>Use these Teensy sketches as starting points for MIDI mapping, interaction design, and performance workflows.</p>
     <div class="code-links">
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_PotentiometerDemo/Seraph_PotentiometerDemo.ino">Seraph_PotentiometerDemo.ino</a><br>Analog potentiometer to MIDI CC.</div>
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_FSRDemo/Seraph_FSRDemo.ino">Seraph_FSRDemo.ino</a><br>Pressure/light sensor with smoothing.</div>
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_ButtonDemo/Seraph_ButtonDemo.ino">Seraph_ButtonDemo.ino</a><br>Button trigger + LED + MIDI notes.</div>
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_6ButtonDemo/Seraph_6ButtonDemo.ino">Seraph_6ButtonDemo.ino</a><br>Multiple button lanes for notes and CC.</div>
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_AccelDemo/Seraph_accelDemo/Seraph_accelDemo.ino">Seraph_accelDemo.ino</a><br>Built-in accelerometer to MIDI CC.</div>
-      <div class="mini-card"><a href="./Demo%20Code/Seraph_Accel_Pot_ButtonDemo/Seraph_Accel_Pot_ButtonDemo.ino">Seraph_Accel_Pot_ButtonDemo.ino</a><br>Combined accelerometer, pot, and button mapping.</div>
+      <div class="mini-card"><a href="./Demo%20Code/Seraph_PotentiometerDemo/Seraph_PotentiometerDemo.ino">Seraph_PotentiometerDemo.ino</a><p>Analog potentiometer to MIDI CC.</p></div>
+      <div class="mini-card"><a href="./Demo%20Code/Seraph_FSRDemo/Seraph_FSRDemo.ino">Seraph_FSRDemo.ino</a><p>Pressure/light sensor with smoothing.</p></div>
+      <div class="mini-card"><a href="./Demo%20Code/Seraph_ButtonDemo/Seraph_ButtonDemo.ino">Seraph_ButtonDemo.ino</a><p>Button trigger + LED + MIDI notes.</p></div>
+      <div class="mini-card"><a href="./Demo%20Code/Seraph_6ButtonDemo/Seraph_6ButtonDemo.ino">Seraph_6ButtonDemo.ino</a><p>Multiple button lanes for notes and CC.</p></div>
+      <div class="mini-card"><a href="./Demo%20Code/Seraph_AccelDemo/Seraph_accelDemo/Seraph_accelDemo.ino">Seraph_accelDemo.ino</a><p>Built-in accelerometer to MIDI CC.</p></div>
+      <div class="mini-card"><a href="./Demo%20Code/Seraph_Accel_Pot_ButtonDemo/Seraph_Accel_Pot_ButtonDemo.ino">Seraph_Accel_Pot_ButtonDemo.ino</a><p>Combined accelerometer, pot, and button mapping.</p></div>
     </div>
   </section>
 
