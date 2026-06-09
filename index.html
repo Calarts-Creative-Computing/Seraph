@@ -21,6 +21,9 @@
       --seraph-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
       --seraph-radius: 1.25rem;
       --seraph-mono: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+      --seraph-sidebar-offset: 5.5rem;
+      --seraph-sidebar-bottom-gap: 0.5rem;
+      --seraph-sidebar-scrollbar-gap: 0.3rem;
     }
 
     html { scroll-behavior: smooth; }
@@ -108,10 +111,7 @@
       padding-bottom: 3rem;
     }
 
-    .sidebar-menu {
-      position: sticky;
-      top: 5.5rem;
-    }
+    .sidebar-menu { gap: 1.5rem; }
 
     .sidebar-card,
     .doc {
@@ -294,9 +294,19 @@
       font-size: 0.92rem;
     }
 
+    @media (min-width: 992px) {
+      .sidebar-column {
+        position: sticky;
+        top: var(--seraph-sidebar-offset);
+        align-self: flex-start;
+        max-height: calc(100vh - var(--seraph-sidebar-offset) - var(--seraph-sidebar-bottom-gap));
+        overflow-y: auto;
+        padding-right: var(--seraph-sidebar-scrollbar-gap);
+      }
+    }
+
     @media (max-width: 991.98px) {
       .hero-shell { padding-top: 3rem; }
-      .sidebar-menu { position: static; }
       .doc { padding: 1.3rem; }
     }
   </style>
@@ -343,7 +353,7 @@
   <main class="docs-layout">
     <div class="container">
       <div class="row g-4 align-items-start">
-        <aside class="col-lg-4 col-xl-3">
+        <aside class="col-lg-4 col-xl-3 sidebar-column">
           <div class="d-grid gap-4 sidebar-menu">
             <div class="sidebar-card card border-0 shadow-sm">
               <div class="card-header py-3">On this page</div>
