@@ -259,7 +259,7 @@
 
     <details class="code-file">
       <summary>Seraph_PotentiometerDemo.ino</summary>
-      <pre><code>//SERAPH POTENIOMETER DEMO
+      <pre><code>//SERAPH POTENTIOMETER DEMO
 
 #include &lt;usb_midi.h&gt;
 #include &lt;Wire.h&gt;
@@ -311,7 +311,7 @@ void loop() {
   int fsr_val = map(analogRead(fsr_pin), 1023, 0, 0, 127);
   fsr_val_lp = (fsr_val_prev + fsr_val) / 2;
 
-  Serial.print(" pot value:");
+  Serial.print(" fsr value:");
   Serial.print(fsr_val_lp);
   Serial.println();
 
