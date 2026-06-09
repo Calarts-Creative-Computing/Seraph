@@ -16,12 +16,17 @@ An open-source platform for building USB-MIDI controllers and sensor-based inter
 
 What You'll Learn
 
-**01 — Board Overview & Hardware Setup
-02 — First Wiring Tutorial: Button & LED
-03 — Analog Sensors: Potentiometers & FSRs
-04 — I²C Devices: IMUs, Displays & More
-05 — MIDI Mapping in Code
-06 — Connecting to a DAW**
+1 — Board Overview & Hardware Setup 
+
+2 — First Wiring Tutorial: Button & LED 
+
+3 — Analog Sensors: Potentiometers & FSRs 
+
+4 — I²C Devices: IMUs, Displays & More 
+
+5 — MIDI Mapping in Code 
+
+6 — Connecting to a DAW
 
 ---
 
@@ -104,7 +109,46 @@ This is your first circuit. You'll wire a push button and an LED to Seraph, then
 ## The Code
 Create a new sketch in Arduino IDE and paste in the following code. This is adapted from the Seraph_ButtonDemo in the GitHub repository.
 
-    
+```cpp
+// Seraph — Button + LED Demo
+// Digital Channel 1 = Button input
+// Digital Channel 2 = LED output
+
+const int BUTTON_PIN = 1;   // Change to match your wiring
+const int LED_PIN    = 2;   // Change to match your wiring
+
+const int MIDI_CHANNEL = 1;  // MIDI channel 1
+const int MIDI_NOTE    = 60; // Middle C
+const int MIDI_VELOCITY = 100;
+
+int lastButtonState = HIGH; // Buttons default HIGH (internal pullup)
+
+void setup() {
+  pinMode(BUTTON_PIN, INPUT_PULLUP); // Enable internal pullup resistor
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+  int buttonState = digitalRead(BUTTON_PIN);
+
+  // Button pressed (LOW because of pullup)
+  if (buttonState == LOW && lastButtonState == HIGH) {
+    digitalWrite(LED_PIN, HIGH); // Turn LED on
+    usbMIDI.sendNoteOn(MIDI_NOTE, MIDI_VELOCITY, MIDI_CHANNEL);
+  }
+
+  // Button released
+  if (buttonState == HIGH && lastButtonState == LOW) {
+    digitalWrite(LED_PIN, LOW); // Turn LED off
+    usbMIDI.sendNoteOff(MIDI_NOTE, 0, MIDI_CHANNEL);
+  }
+
+  lastButtonState = buttonState;
+
+  // Always flush MIDI at the end of loop()
+  while (usbMIDI.read()) {}
+}
+```    
 
 
 
