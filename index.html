@@ -5,291 +5,469 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Seraph | Developer Docs + Getting Started</title>
   <meta name="description" content="Seraph developer-focused documentation site for hardware setup, wiring tutorials, MIDI mapping, DAW integration, and BOM.">
+  <meta name="theme-color" content="#111827">
   <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAAAYFBMVEUKi7n///8olL4Yj7wAhLUAibgAh7ft9PhUoMX0+fslj7uawNgAgLOHudNrpskAerCixtzf7POy0uNDl8Bdpsi/2Oapy96Vwtl8tNDR4+2Pu9Rsq8s2k712r87Z5/DG3ekivg6PAAAENUlEQVR4nO2a246DOAyGoY3NYUIhoVBObd//LddOgIa2mb3Zi9HK32gkyMH5E8dOkJqc/iAJ/EESQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRD+SwAVIv0HJUohhCVU/a2nUgrCTg6EV23AaozHCtrEUHjvbWebq14HxjqfbEcls14tqarry8/JLD8/TbuZh/P0w0xDrjQXKv++cQcnaW6sJcvfJ7mvQdkUqScb3AA4mHQrubu+kFOT5sOMulGTbi8us61b0ZdAE0mP5JDgvLUpmt805Sbo1yNPMLRUqbiommeTtZ+iqPSEqnkTNQMOb2PFNHndmXEWC5qN6vnBPB7GreAVY6LU3fW9beUsqjDGWzIIpTHrW8YPzwUXp5csc+EtKqp069RfSyhnm6Yj+Q/KIr1dQGuVd1RndUwUjH5COhBlaQsvFbUurgAqoX924gWBXAduunbRGtvJjEtsr/tVySmE6E+dBieeo8j9Sg40Sc7qiCiYeQj6H1QgCsmSZsexLVh31sX/7M6ZK51lCsDYOiXIHpq3egiTAqNZc0xUTetYII0z4kFU4oVUvnQV5Z5ZVJrrf/ldIF6p1Vi/F4OCJScu8yMuCk5UN9WN885LlFZKlyMvfyjKP7s5pt29PetfZLmYHt43HGIzmoLwURIRxSNklKTWbbeKetx+GssL8lhbh6KgXUPzYfM6Kktbnz6OmuZjJEdEtW5dvIkzbKL2lLC5KBQV5h9ziQXfN1HOpT6sTDdGRSEPdlaouLmvCkT1e2gdRCW43PZGc0SVd9+bW7hXl9eO+Eavi/SFWTZRj8Yet+lRFL3XydD59fo8t7zw/HOjn3mQ2lvBqKg3H98x2TZ6zapuW+76EMVFqrzzlKpIVsAsTAmKzl9gnVuSjovixFlkHqozehNFafIR+uYgCtYjH1T+io9PURzRRcv3D0BdmRxdhFgfsqi7L6Jc8mOj1dIyC9vgBLDmKbf82TdRgF0HnJfB7UQby5/I00qba1ku9yefo4nmgiHRdMzMT35ecBWVlMyJB/Bq/WYGjsPuJSrR4eUhFKXYXn9pl5wPIneqfhfVug0bHMju5EnN0z7X8O2VF1UY5yxjzuCy0+5OVlhQxtpEQcJBO3wmz5MfwzmchogndmwfwYadSEDyDMKqcDnDidoZUK2Jc/Vn6yXuxwws3PxTlAv23XT7S1bH8raNOF7d5Qnt+l50eHMXJjyIalF14eUuUSOLgnO2XZJYSebrFV+hLlsmzZ+76SV6c3ETVXRF7W0/tduJpMsfuh73Ex1Rqrct9T5VL2grQGm7U3A5b/uJ3tRst6SJk+vmhPT2dZCBPlW9tX1VRiIvXK3wZp+s3w3KL5v/MsDjBwCow4ZA//2AuH9GBB8UoWF/aTl8bgiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiC8D/l/Af5ByY8PAXZ72kjAAAAAElFTkSuQmCC">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <style>
     :root {
-      color-scheme: light;
-      --bg: #f7f7f7;
-      --bg-soft: #efefef;
-      --card: #ffffff;
-      --card-2: #f2f2f2;
-      --text: #101010;
-      --muted: #2f2f2f;
-      --accent: #000000;
-      --accent-2: #000000;
-      --border: #d7d7d7;
-      --shadow: 0 14px 30px rgba(0, 0, 0, .08);
-      --mono: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+      --seraph-bg: #f3f6fb;
+      --seraph-surface: #ffffff;
+      --seraph-surface-soft: #eef3fb;
+      --seraph-border: #d9e2ef;
+      --seraph-text: #0f172a;
+      --seraph-muted: #475569;
+      --seraph-accent: #111827;
+      --seraph-accent-soft: #1d4ed8;
+      --seraph-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --seraph-radius: 1.25rem;
+      --seraph-mono: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
     }
 
-    * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(circle at top, #f1f1f1 0%, var(--bg) 42%);
-      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 32%),
+        linear-gradient(180deg, #f8fbff 0%, var(--seraph-bg) 18%, #eef2f8 100%);
+      color: var(--seraph-text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.65;
     }
 
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a { color: var(--seraph-accent-soft); }
+    a:hover { color: #1e40af; }
 
-    .container { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, .9);
-      border-bottom: 1px solid var(--border);
+    .navbar {
+      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid rgba(217, 226, 239, 0.9);
     }
 
-    .topbar-inner {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      justify-content: space-between;
-      padding: .9rem 0;
+    .navbar-brand {
+      letter-spacing: 0.01em;
+      color: var(--seraph-text);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: .7rem;
-      font-weight: 700;
-      letter-spacing: .02em;
+    .brand-mark {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 0.85rem;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7), 0 10px 24px rgba(37, 99, 235, 0.16);
+      background: linear-gradient(180deg, #ffffff, #dbe7ff);
+      padding: 0.2rem;
+      flex-shrink: 0;
     }
 
-    .brand img {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: #fff;
-      filter: grayscale(100%);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: .5rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links a {
-      border: 1px solid var(--border);
-      background: rgba(0, 0, 0, .04);
-      padding: .3rem .6rem;
+    .navbar .nav-link {
+      font-size: 0.95rem;
+      color: var(--seraph-muted);
       border-radius: 999px;
-      font-size: .82rem;
-      color: var(--text);
+      padding-inline: 0.9rem;
     }
 
-    header.hero {
-      padding: 3.4rem 0 1.2rem;
+    .navbar .nav-link:hover,
+    .navbar .nav-link:focus {
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--seraph-text);
     }
 
-    .hero-card {
-      border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(0, 0, 0, .04), rgba(0, 0, 0, .01)), var(--card);
-      box-shadow: var(--shadow);
-      border-radius: 20px;
-      padding: 1.5rem;
+    .hero-shell {
+      padding: 4rem 0 2rem;
     }
 
-    h1 {
-      margin: .3rem 0;
-      font-size: clamp(1.85rem, 5vw, 3rem);
-      line-height: 1.15;
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 1.75rem;
+      background:
+        linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.92)),
+        linear-gradient(135deg, rgba(59, 130, 246, 0.16), rgba(56, 189, 248, 0.04));
+      box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
     }
 
-    .kicker {
-      font-size: .75rem;
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -45% auto;
+      width: 28rem;
+      height: 28rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.28), transparent 62%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--accent-2);
-      font-weight: 700;
+      font-size: 0.74rem;
+      color: rgba(191, 219, 254, 0.9);
     }
 
-    .lead { color: var(--muted); max-width: 80ch; }
-
-    .hero-actions {
-      margin-top: 1rem;
-      display: flex;
-      gap: .6rem;
-      flex-wrap: wrap;
+    .hero-panel h1 {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
     }
 
-    .btn {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: .52rem .86rem;
-      display: inline-block;
-      color: var(--text);
-      background: var(--card-2);
+    .hero-panel .lead {
+      max-width: 60rem;
+      color: rgba(226, 232, 240, 0.86);
+    }
+
+    .hero-actions .btn {
+      border-radius: 999px;
+      padding-inline: 1rem;
       font-weight: 600;
     }
 
-    main { padding: 1rem 0 3rem; }
-
-    section.doc {
-      margin-top: .9rem;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      box-shadow: var(--shadow);
-      padding: 1.2rem;
+    .hero-metric {
+      height: 100%;
+      border-radius: 1.1rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      backdrop-filter: blur(14px);
     }
 
-    h2, h3, h4 { line-height: 1.25; margin: .15rem 0 .7rem; }
-    h2 { font-size: clamp(1.3rem, 2.8vw, 1.8rem); }
-    h3 { font-size: 1.1rem; }
-    h4 { font-size: 1rem; color: var(--accent-2); }
+    .hero-metric .metric-label {
+      color: rgba(191, 219, 254, 0.78);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.72rem;
+    }
 
-    p, li, td, th { color: var(--muted); }
-    ul, ol { padding-left: 1.2rem; margin: .5rem 0; }
+    .docs-layout {
+      padding-bottom: 3rem;
+    }
 
-    .grid-2, .grid-3 {
+    .sidebar-stack {
+      position: sticky;
+      top: 5.5rem;
+    }
+
+    .sidebar-card,
+    .doc {
+      border-radius: var(--seraph-radius);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--seraph-shadow);
+      border: 1px solid rgba(217, 226, 239, 0.85);
+    }
+
+    .sidebar-card {
+      overflow: hidden;
+    }
+
+    .sidebar-card .card-header {
+      background: linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(241, 245, 249, 0.9));
+      border-bottom: 1px solid rgba(217, 226, 239, 0.9);
+      font-weight: 700;
+    }
+
+    .sidebar-card .nav-pills .nav-link {
+      border-radius: 0.9rem;
+      color: var(--seraph-muted);
+      padding: 0.7rem 0.85rem;
+      font-weight: 500;
+    }
+
+    .sidebar-card .nav-pills .nav-link:hover,
+    .sidebar-card .nav-pills .nav-link:focus {
+      color: var(--seraph-text);
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    .resource-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(217, 226, 239, 0.75);
+    }
+
+    .resource-link:last-child { border-bottom: 0; }
+    .resource-link:hover { color: var(--seraph-accent-soft); }
+
+    .doc {
+      padding: 1.6rem;
+      scroll-margin-top: 6.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .doc-accent {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.03), rgba(255, 255, 255, 0.96));
+      border-color: rgba(191, 219, 254, 0.9);
+    }
+
+    .doc h2,
+    .doc h3,
+    .doc h4 {
+      color: var(--seraph-text);
+      letter-spacing: -0.02em;
+    }
+
+    .doc h2 {
+      font-size: clamp(1.55rem, 2.8vw, 2rem);
+      margin-bottom: 0.85rem;
+    }
+
+    .doc h3 {
+      margin-top: 1.6rem;
+      margin-bottom: 0.7rem;
+      font-size: 1.16rem;
+    }
+
+    .doc h4 {
+      margin-top: 1.1rem;
+      margin-bottom: 0.55rem;
+      font-size: 1rem;
+      color: #1e3a8a;
+    }
+
+    .doc p,
+    .doc li,
+    .doc td,
+    .doc th,
+    .doc figcaption {
+      color: var(--seraph-muted);
+    }
+
+    .doc ul,
+    .doc ol {
+      padding-left: 1.25rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .grid-2,
+    .grid-3 {
       display: grid;
-      gap: .75rem;
+      gap: 1rem;
     }
 
     .grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 
     .tile {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(0, 0, 0, .03);
-      padding: .85rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(217, 226, 239, 0.95);
+      background: linear-gradient(180deg, rgba(248, 250, 252, 0.96), rgba(255, 255, 255, 0.98));
+      padding: 1rem;
     }
 
-    .tile strong { color: var(--text); }
-
-    pre {
-      margin: .5rem 0;
-      padding: .8rem;
-      overflow: auto;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: #f3f3f3;
-      color: #111;
-      font-family: var(--mono);
-      font-size: .85rem;
-      line-height: 1.45;
+    .tile strong {
+      color: var(--seraph-text);
+      display: inline-block;
+      margin-bottom: 0.2rem;
     }
 
-    code {
-      font-family: var(--mono);
-      background: rgba(0, 0, 0, .06);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: .08rem .34rem;
-      color: #111;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 420px;
-    }
-
-    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
-
-    th, td {
-      border: 1px solid var(--border);
-      padding: .48rem .55rem;
-      text-align: left;
-      vertical-align: top;
-      font-size: .91rem;
-    }
-
-    th { color: var(--text); background: rgba(0, 0, 0, .05); }
-
-    figure { margin: .6rem 0; }
+    figure { margin: 0.85rem 0; }
 
     img {
       width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 1rem;
+      border: 1px solid rgba(217, 226, 239, 0.95);
       background: #fff;
       display: block;
+      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
     }
 
     figcaption {
-      font-size: .82rem;
+      margin-top: 0.55rem;
       text-align: center;
-      color: var(--muted);
-      margin-top: .35rem;
+      font-size: 0.9rem;
     }
 
-    .doc-index {
-      columns: 2;
-      column-gap: 1.5rem;
+    pre {
+      margin: 0.75rem 0;
+      padding: 1rem 1.05rem;
+      border-radius: 1rem;
+      overflow-x: auto;
+      border: 1px solid rgba(30, 41, 59, 0.08);
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: var(--seraph-mono);
+      font-size: 0.87rem;
+      line-height: 1.55;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
     }
 
-    .doc-index li { break-inside: avoid; margin-bottom: .2rem; }
+    code {
+      font-family: var(--seraph-mono);
+      color: #0f172a;
+      background: rgba(148, 163, 184, 0.16);
+      padding: 0.1rem 0.35rem;
+      border-radius: 0.45rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 1rem;
+      border: 1px solid rgba(217, 226, 239, 0.95);
+      background: #fff;
+    }
+
+    .table { margin-bottom: 0; min-width: 420px; }
+    .table caption {
+      caption-side: top;
+      padding: 0.95rem 1rem 0;
+      color: var(--seraph-muted);
+      font-size: 0.92rem;
+    }
 
     footer {
-      margin: 2rem 0 1rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: .9rem;
+      color: #64748b;
+      font-size: 0.92rem;
     }
 
-    @media (max-width: 760px) {
-      .doc-index { columns: 1; }
-      .topbar-inner { align-items: flex-start; flex-direction: column; }
-      .nav-links {
-        max-height: 6.2rem;
-        overflow-y: auto;
-        width: 100%;
-        justify-content: flex-start;
-        padding-right: .2rem;
-      }
+    @media (max-width: 991.98px) {
+      .hero-shell { padding-top: 3rem; }
+      .sidebar-stack { position: static; }
+      .doc { padding: 1.3rem; }
     }
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <div class="brand">
-        <img src="https://i.imgur.com/XZpdi2e.png" alt="CalArts Creative Computing logo">
-        <span>Seraph Docs</span>
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container py-2">
+      <a class="navbar-brand d-flex align-items-center gap-3 fw-semibold" href="#overview">
+        <img class="brand-mark" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAAAYFBMVEUKi7n///8olL4Yj7wAhLUAibgAh7ft9PhUoMX0+fslj7uawNgAgLOHudNrpskAerCixtzf7POy0uNDl8Bdpsi/2Oapy96Vwtl8tNDR4+2Pu9Rsq8s2k712r87Z5/DG3ekivg6PAAAENUlEQVR4nO2a246DOAyGoY3NYUIhoVBObd//LddOgIa2mb3Zi9HK32gkyMH5E8dOkJqc/iAJ/EESQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEQRD+SwAVIv0HJUohhCVU/a2nUgrCTg6EV23AaozHCtrEUHjvbWebq14HxjqfbEcls14tqarry8/JLD8/TbuZh/P0w0xDrjQXKv++cQcnaW6sJcvfJ7mvQdkUqScb3AA4mHQrubu+kFOT5sOMulGTbi8us61b0ZdAE0mP5JDgvLUpmt805Sbo1yNPMLRUqbiommeTtZ+iqPSEqnkTNQMOb2PFNHndmXEWC5qN6vnBPB7GreAVY6LU3fW9beUsqjDGWzIIpTHrW8YPzwUXp5csc+EtKqp069RfSyhnm6Yj+Q/KIr1dQGuVd1RndUwUjH5COhBlaQsvFbUurgAqoX924gWBXAduunbRGtvJjEtsr/tVySmE6E+dBieeo8j9Sg40Sc7qiCiYeQj6H1QgCsmSZsexLVh31sX/7M6ZK51lCsDYOiXIHpq3egiTAqNZc0xUTetYII0z4kFU4oVUvnQV5Z5ZVJrrf/ldIF6p1Vi/F4OCJScu8yMuCk5UN9WN885LlFZKlyMvfyjKP7s5pt29PetfZLmYHt43HGIzmoLwURIRxSNklKTWbbeKetx+GssL8lhbh6KgXUPzYfM6Kktbnz6OmuZjJEdEtW5dvIkzbKL2lLC5KBQV5h9ziQXfN1HOpT6sTDdGRSEPdlaouLmvCkT1e2gdRCW43PZGc0SVd9+bW7hXl9eO+Eavi/SFWTZRj8Yet+lRFL3XydD59fo8t7zw/HOjn3mQ2lvBqKg3H98x2TZ6zapuW+76EMVFqrzzlKpIVsAsTAmKzl9gnVuSjovixFlkHqozehNFafIR+uYgCtYjH1T+io9PURzRRcv3D0BdmRxdhFgfsqi7L6Jc8mOj1dIyC9vgBLDmKbf82TdRgF0HnJfB7UQby5/I00qba1ku9yefo4nmgiHRdMzMT35ecBWVlMyJB/Bq/WYGjsPuJSrR4eUhFKXYXn9pl5wPIneqfhfVug0bHMju5EnN0z7X8O2VF1UY5yxjzuCy0+5OVlhQxtpEQcJBO3wmz5MfwzmchogndmwfwYadSEDyDMKqcDnDidoZUK2Jc/Vn6yXuxwws3PxTlAv23XT7S1bH8raNOF7d5Qnt+l50eHMXJjyIalF14eUuUSOLgnO2XZJYSebrFV+hLlsmzZ+76SV6c3ETVXRF7W0/tduJpMsfuh73Ex1Rqrct9T5VL2grQGm7U3A5b/uJ3tRst6SJk+vmhPT2dZCBPlW9tX1VRiIvXK3wZp+s3w3KL5v/MsDjBwCow4ZA//2AuH9GBB8UoWF/aTl8bgiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiC8D/l/Af5ByY8PAXZ72kjAAAAAElFTkSuQmCC" alt="Seraph documentation logo">
+        <span>
+          <span class="d-block small text-uppercase text-secondary-emphasis">Seraph</span>
+          <span class="d-block">Hardware Documentation</span>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#docsNavbar" aria-controls="docsNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="docsNavbar">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2 mt-3 mt-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#section-01">Setup</a></li>
+          <li class="nav-item"><a class="nav-link" href="#section-02">Wiring</a></li>
+          <li class="nav-item"><a class="nav-link" href="#section-04">I²C</a></li>
+          <li class="nav-item"><a class="nav-link" href="#section-05">MIDI</a></li>
+          <li class="nav-item"><a class="nav-link" href="#bom">BOM</a></li>
+          <li class="nav-item ms-lg-2"><a class="btn btn-dark rounded-pill px-3" href="https://github.com/Calarts-Creative-Computing/Seraph">GitHub</a></li>
+        </ul>
       </div>
-      <nav class="nav-links" aria-label="Section navigation">
-        <a href="#overview">Overview</a>
-        <a href="#section-01">01 Setup</a>
-        <a href="#section-02">02 Button + LED</a>
-        <a href="#section-03">03 Analog</a>
-        <a href="#section-04">04 I²C</a>
-        <a href="#section-05">05 MIDI</a>
-        <a href="#section-06">06 DAW</a>
-        <a href="#bom">BOM</a>
-      </nav>
     </div>
-  </div>
+  </nav>
 
-  <header class="hero">
+  <header class="hero-shell">
     <div class="container">
-      <div class="hero-card">
-        <div class="kicker">Open-Source Teensy MIDI Controller Platform</div>
-        <h1>Seraph</h1>
-        <p class="lead">An open-source platform for building USB-MIDI controllers and sensor-based interactive art projects. This developer-focused site mirrors the complete README guide and organizes setup, wiring, code patterns, and DAW integration into clear sections.</p>
-        <div class="hero-actions">
-          <a class="btn" href="https://github.com/Calarts-Creative-Computing/Seraph">GitHub Repository</a>
-          <a class="btn" href="https://github.com/Calarts-Creative-Computing/Seraph/archive/refs/heads/main.zip">Download ZIP</a>
-          <a class="btn" href="./Gerber/SeraphGerber.zip" download>Download Gerbers</a>
-          <a class="btn" href="https://creativecomputing.calarts.edu/">Creative Computing @ CalArts</a>
+      <div class="hero-panel text-white p-4 p-lg-5">
+        <div class="row g-4 align-items-end position-relative">
+          <div class="col-xl-7">
+            <div class="eyebrow fw-semibold mb-3">Open-source Teensy MIDI Controller Platform</div>
+            <h1 class="fw-semibold mb-3">Professional reference docs for building with Seraph.</h1>
+            <p class="lead mb-4">This GitHub Pages site now presents the Seraph README as a cleaner internal-documentation experience for hardware setup, wiring patterns, MIDI implementation, DAW routing, and BOM review.</p>
+            <div class="d-flex flex-wrap gap-2 hero-actions">
+              <a class="btn btn-light text-dark" href="#overview">Start with the guide</a>
+              <a class="btn btn-outline-light" href="https://github.com/Calarts-Creative-Computing/Seraph/archive/refs/heads/main.zip">Download ZIP</a>
+              <a class="btn btn-outline-light" href="./Gerber/SeraphGerber.zip" download>Download Gerbers</a>
+              <a class="btn btn-outline-light" href="https://creativecomputing.calarts.edu/">Creative Computing @ CalArts</a>
+            </div>
+          </div>
+          <div class="col-xl-5">
+            <div class="row g-3">
+              <div class="col-sm-4 col-xl-12">
+                <div class="hero-metric p-3">
+                  <div class="metric-label mb-2">Documentation scope</div>
+                  <div class="fs-5 fw-semibold">End-to-end onboarding</div>
+                  <div class="small opacity-75">From first boot to DAW integration.</div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-xl-12">
+                <div class="hero-metric p-3">
+                  <div class="metric-label mb-2">Coverage</div>
+                  <div class="fs-5 fw-semibold">6 core guides + BOM</div>
+                  <div class="small opacity-75">Hardware, sensors, MIDI, and routing references.</div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-xl-12">
+                <div class="hero-metric p-3">
+                  <div class="metric-label mb-2">Audience</div>
+                  <div class="fs-5 fw-semibold">Builders and teaching labs</div>
+                  <div class="small opacity-75">Designed to feel like internal product documentation.</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </header>
 
-  <main class="container">
-    <section class="doc" id="overview">
+  <main class="docs-layout">
+    <div class="container">
+      <div class="row g-4 align-items-start">
+        <aside class="col-lg-4 col-xl-3">
+          <div class="sidebar-stack d-grid gap-4">
+            <div class="sidebar-card card border-0 shadow-sm">
+              <div class="card-header py-3">On this page</div>
+              <div class="card-body">
+                <nav class="nav nav-pills flex-column gap-1" aria-label="Section navigation">
+                  <a class="nav-link" href="#overview">Overview</a>
+                  <a class="nav-link" href="#section-01">01 — Setup</a>
+                  <a class="nav-link" href="#section-02">02 — Button + LED</a>
+                  <a class="nav-link" href="#section-03">03 — Analog Sensors</a>
+                  <a class="nav-link" href="#section-04">04 — I²C Devices</a>
+                  <a class="nav-link" href="#section-05">05 — MIDI Mapping</a>
+                  <a class="nav-link" href="#section-06">06 — DAW Integration</a>
+                  <a class="nav-link" href="#bom">Bill of Materials</a>
+                  <a class="nav-link" href="#creative-computing">Program Info</a>
+                </nav>
+              </div>
+            </div>
+
+            <div class="sidebar-card card border-0 shadow-sm">
+              <div class="card-header py-3">Resources</div>
+              <div class="card-body pt-2">
+                <a class="resource-link" href="https://github.com/Calarts-Creative-Computing/Seraph">
+                  <span>
+                    <strong class="d-block text-body">Repository</strong>
+                    <span class="small text-body-secondary">Source, issues, and example sketches</span>
+                  </span>
+                  <span aria-hidden="true">→</span>
+                </a>
+                <a class="resource-link" href="./Gerber/SeraphGerber.zip" download>
+                  <span>
+                    <strong class="d-block text-body">Gerber package</strong>
+                    <span class="small text-body-secondary">Manufacturing files for PCB fabrication</span>
+                  </span>
+                  <span aria-hidden="true">↓</span>
+                </a>
+                <a class="resource-link" href="https://creativecomputing.calarts.edu/">
+                  <span>
+                    <strong class="d-block text-body">Creative Computing</strong>
+                    <span class="small text-body-secondary">Program overview and additional context</span>
+                  </span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="sidebar-card card border-0 shadow-sm">
+              <div class="card-header py-3">Operational defaults</div>
+              <div class="card-body">
+                <ul class="small mb-0 text-body-secondary ps-3">
+                  <li class="mb-2">Use <code>Serial + MIDI</code> before testing in a DAW.</li>
+                  <li class="mb-2">Prefer change-based MIDI events to avoid noisy output.</li>
+                  <li>Keep the Teensy socketed with headers for reuse and maintenance.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="col-lg-8 col-xl-9">
+          <section class="doc doc-accent card border-0 shadow-sm" id="overview">
       <h2>Getting Started Guide</h2>
       <p>What you'll learn:</p>
       <ul>
@@ -303,7 +481,7 @@
 
     </section>
 
-    <section class="doc" id="section-01">
+        <section class="doc card border-0 shadow-sm" id="section-01">
       <h2>01 — Board Overview &amp; Hardware Setup</h2>
       <p>Seraph is a breakout board for the Teensy 4.1 that simplifies wiring, power regulation, and I/O routing so you can focus on instrument and installation design.</p>
       <h3>What's on the Board</h3>
@@ -339,7 +517,7 @@
       </ol>
     </section>
 
-    <section class="doc" id="section-02">
+        <section class="doc card border-0 shadow-sm" id="section-02">
       <h2>02 — First Wiring Tutorial: Button &amp; LED</h2>
       <p>Build your first test circuit: button press drives LED output and sends MIDI Note On/Off events.</p>
       <h3>What You'll Need</h3>
@@ -411,7 +589,7 @@ void loop() {
       </ol>
     </section>
 
-    <section class="doc" id="section-03">
+        <section class="doc card border-0 shadow-sm" id="section-03">
       <h2>03 — Analog Sensors: Potentiometers &amp; FSRs</h2>
       <p>Analog channels convert variable voltages into usable data for expressive MIDI control.</p>
       <h3>3A — Potentiometer (No Pulldown Required)</h3>
@@ -464,7 +642,7 @@ int ccValue = map(constrain(rawValue, FSR_MIN, FSR_MAX), FSR_MIN, FSR_MAX, 0, 12
 usbMIDI.sendControlChange(11, ccValue, 1);</code></pre>
     </section>
 
-    <section class="doc" id="section-04">
+        <section class="doc card border-0 shadow-sm" id="section-04">
       <h2>04 — I²C Devices: IMUs, Displays &amp; More</h2>
       <p>I²C lets multiple devices share SDA and SCL lines; Seraph provides I²C blocks A/B/C on the same I²C0 bus.</p>
       <h3>Common I²C Devices for NIME Projects</h3>
@@ -477,7 +655,7 @@ usbMIDI.sendControlChange(11, ccValue, 1);</code></pre>
       </div>
       <h3>Wiring</h3>
       <div class="table-wrap">
-        <table>
+        <table class="table table-striped table-hover align-middle mb-0">
           <caption>I²C sensor wiring reference (pins, suggested wire colors, and Seraph header mapping)</caption>
           <thead>
             <tr><th>Component Pin</th><th>Wire Color</th><th>Seraph Header</th></tr>
@@ -525,7 +703,7 @@ void loop() {
       </ul>
     </section>
 
-    <section class="doc" id="section-05">
+        <section class="doc card border-0 shadow-sm" id="section-05">
       <h2>05 — MIDI Mapping in Code</h2>
       <p>Use Teensyduino USB-MIDI primitives to map sensors to musical control behavior.</p>
       <h3>Core MIDI Message Types</h3>
@@ -556,7 +734,7 @@ while (usbMIDI.read()) {}</code></pre>
 // End loop with while (usbMIDI.read()) {}</code></pre>
     </section>
 
-    <section class="doc" id="section-06">
+        <section class="doc card border-0 shadow-sm" id="section-06">
       <h2>06 — Connecting to a DAW</h2>
       <p>Route Seraph MIDI into Ableton, Max/MSP, and any DAW supporting USB MIDI input.</p>
       <h3>6A — Ableton Live</h3>
@@ -600,7 +778,7 @@ while (usbMIDI.read()) {}</code></pre>
       <h3>6C — General MIDI Routing (Any DAW)</h3>
       <h4><span aria-hidden="true">🎛️</span> DAW / Software MIDI Setup</h4>
       <div class="table-wrap">
-        <table>
+        <table class="table table-striped table-hover align-middle mb-0">
           <caption>Common DAW and software locations for enabling Seraph MIDI input</caption>
           <thead>
             <tr><th>DAW / Software</th><th>Where to Enable MIDI</th></tr>
@@ -638,10 +816,10 @@ void loop() {
       <p><strong>You're ready to build.</strong></p>
     </section>
 
-    <section class="doc" id="bom">
+        <section class="doc card border-0 shadow-sm" id="bom">
       <h2><span aria-hidden="true">🧾</span> Seraph — Bill of Materials (BOM)</h2>
       <div class="table-wrap">
-        <table>
+        <table class="table table-striped table-hover align-middle mb-0">
           <caption>Seraph bill of materials from the README reference list</caption>
           <thead>
             <tr><th>#</th><th>Component</th><th>SKU / MPN</th><th>Qty</th><th>Supplier</th></tr>
@@ -677,15 +855,18 @@ void loop() {
       </div>
     </section>
 
-    <section class="doc" id="creative-computing">
+        <section class="doc card border-0 shadow-sm" id="creative-computing">
       <h2>Creative Computing at CalArts</h2>
       <p>Creative Computing at California Institute of the Arts combines computational engineering with artistic expression, preparing students to build meaningful work across art, music, and technology. The program emphasizes computer science, electrical engineering, signal processing, and emerging areas including VR/AR, robotics, and machine learning.</p>
-      <p><a class="btn" href="https://creativecomputing.calarts.edu/">Learn More</a></p>
+      <p><a class="btn btn-outline-dark" href="https://creativecomputing.calarts.edu/">Learn More</a></p>
     </section>
 
-    <footer>
-      Built from the complete Seraph README structure with a modern, developer-focused documentation layout.
-    </footer>
+          <footer class="pt-2 pb-4 text-center">Refined GitHub Pages documentation experience for Seraph, built from the repository guide and optimized for a cleaner technical-docs presentation.</footer>
+        </div>
+      </div>
+    </div>
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
