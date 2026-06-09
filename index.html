@@ -7,17 +7,17 @@
   <meta name="description" content="Seraph developer-focused documentation site for hardware setup, wiring tutorials, MIDI mapping, DAW integration, and BOM.">
   <style>
     :root {
-      color-scheme: dark;
-      --bg: #090f1a;
-      --bg-soft: #111b2b;
-      --card: #132236;
-      --card-2: #1a2b42;
-      --text: #e8eef7;
-      --muted: #9fb2c8;
-      --accent: #59d0ff;
-      --accent-2: #7dffce;
-      --border: #294766;
-      --shadow: 0 18px 45px rgba(2, 8, 24, .45);
+      color-scheme: light;
+      --bg: #f4f8fd;
+      --bg-soft: #e6f0fb;
+      --card: #ffffff;
+      --card-2: #edf4ff;
+      --text: #17324d;
+      --muted: #4e6781;
+      --accent: #1f6feb;
+      --accent-2: #3a8cff;
+      --border: #c9d9ec;
+      --shadow: 0 18px 45px rgba(31, 84, 147, .12);
       --mono: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
     }
 
@@ -26,7 +26,7 @@
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(circle at top, #16263d 0%, var(--bg) 35%);
+      background: radial-gradient(circle at top, #dbeafe 0%, var(--bg) 42%);
       color: var(--text);
       line-height: 1.65;
     }
@@ -41,7 +41,7 @@
       top: 0;
       z-index: 20;
       backdrop-filter: blur(12px);
-      background: rgba(9, 15, 26, .88);
+      background: rgba(255, 255, 255, .9);
       border-bottom: 1px solid var(--border);
     }
 
@@ -78,7 +78,7 @@
 
     .nav-links a {
       border: 1px solid var(--border);
-      background: rgba(89, 208, 255, .08);
+      background: rgba(31, 111, 235, .08);
       padding: .3rem .6rem;
       border-radius: 999px;
       font-size: .82rem;
@@ -91,7 +91,7 @@
 
     .hero-card {
       border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(89, 208, 255, .12), rgba(125, 255, 206, .1)), var(--card);
+      background: linear-gradient(135deg, rgba(31, 111, 235, .12), rgba(58, 140, 255, .1)), var(--card);
       box-shadow: var(--shadow);
       border-radius: 20px;
       padding: 1.5rem;
@@ -160,7 +160,7 @@
     .tile {
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: rgba(159, 178, 200, .07);
+      background: rgba(31, 111, 235, .05);
       padding: .85rem;
     }
 
@@ -172,8 +172,8 @@
       overflow: auto;
       border-radius: 10px;
       border: 1px solid var(--border);
-      background: #0b1525;
-      color: #d7e8ff;
+      background: #eef5ff;
+      color: #204266;
       font-family: var(--mono);
       font-size: .85rem;
       line-height: 1.45;
@@ -181,11 +181,11 @@
 
     code {
       font-family: var(--mono);
-      background: rgba(137, 193, 255, .12);
+      background: rgba(31, 111, 235, .08);
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: .08rem .34rem;
-      color: #c6dcff;
+      color: #1d4d8f;
     }
 
     table {
@@ -204,7 +204,7 @@
       font-size: .91rem;
     }
 
-    th { color: var(--text); background: rgba(89, 208, 255, .1); }
+    th { color: var(--text); background: rgba(31, 111, 235, .08); }
 
     figure { margin: .6rem 0; }
 
@@ -351,18 +351,14 @@
       <h2>01 — Board Overview &amp; Hardware Setup</h2>
       <p>Seraph is a breakout board for the Teensy 4.1 that simplifies wiring, power regulation, and I/O routing so you can focus on instrument and installation design.</p>
       <h3>What's on the Board</h3>
-      <div class="grid-3">
+      <div class="grid-2">
         <figure>
-          <img src="./Images/Seraph_Front.png" alt="Seraph board front">
-          <figcaption>Seraph Front</figcaption>
+          <img src="https://i.imgur.com/RNhljU7.png" alt="Seraph board overview image">
+          <figcaption>Seraph board overview</figcaption>
         </figure>
         <figure>
-          <img src="./Images/Seraph_Back.jpg" alt="Seraph board back">
-          <figcaption>Seraph Back</figcaption>
-        </figure>
-        <figure>
-          <img src="./Images/Seraph_TraceView.png" alt="Seraph board trace view">
-          <figcaption>Seraph Trace View</figcaption>
+          <img src="https://i.imgur.com/WtuQLjl.png" alt="Seraph board detail image">
+          <figcaption>Seraph board detail</figcaption>
         </figure>
       </div>
       <h3>First-Time Setup</h3>
@@ -400,16 +396,20 @@
       <h3>Wiring Diagram</h3>
       <div class="grid-2">
         <figure>
-          <img src="./Tutorial%20Diagrams/SeraphButton_Diagram.png" alt="Button and LED wiring diagram">
-          <figcaption>Button + LED Wiring</figcaption>
+          <img src="https://i.imgur.com/f4wfXpq.png" alt="Button and LED wiring overview">
+          <figcaption>Button + LED wiring overview</figcaption>
         </figure>
-        <div class="tile">
-          <p>Digital channel strips provide <strong>+</strong>, <strong>−</strong>, and <strong>S</strong> pins.</p>
-          <ul>
-            <li>Buttons use <strong>S</strong> + <strong>−</strong>.</li>
-            <li>LEDs use <strong>S</strong> + <strong>−</strong> with current-limiting resistor.</li>
-          </ul>
-        </div>
+        <figure>
+          <img src="https://i.imgur.com/JGOtWVS.png" alt="Button and LED connection detail">
+          <figcaption>Button + LED connection detail</figcaption>
+        </figure>
+      </div>
+      <div class="tile">
+        <p>Digital channel strips provide <strong>+</strong>, <strong>−</strong>, and <strong>S</strong> pins.</p>
+        <ul>
+          <li>Buttons use <strong>S</strong> + <strong>−</strong>.</li>
+          <li>LEDs use <strong>S</strong> + <strong>−</strong> with current-limiting resistor.</li>
+        </ul>
       </div>
       <h3>The Code</h3>
       <pre><code>const int BUTTON_PIN = 1;
@@ -461,27 +461,41 @@ void loop() {
       <h3>3A — Potentiometer (No Pulldown Required)</h3>
       <div class="grid-2">
         <figure>
-          <img src="./Tutorial%20Diagrams/SeraphPot_Diagram.png" alt="Potentiometer wiring diagram">
-          <figcaption>Potentiometer Wiring</figcaption>
+         <img src="https://i.imgur.com/VT83PWb.png" alt="Potentiometer wiring overview">
+         <figcaption>Potentiometer wiring overview</figcaption>
         </figure>
-        <div class="tile">
-          <p>Potentiometers use power, ground, and signal; map 0–1023 analog values to 0–127 MIDI CC values and send only changed values.</p>
-          <pre><code>int rawValue = analogRead(A1);
+       <figure>
+         <img src="https://i.imgur.com/CjAuKit.png" alt="Potentiometer wiring detail">
+         <figcaption>Potentiometer wiring detail</figcaption>
+       </figure>
+     </div>
+     <div class="tile">
+       <p>Potentiometers use power, ground, and signal; map 0–1023 analog values to 0–127 MIDI CC values and send only changed values.</p>
+       <pre><code>int rawValue = analogRead(A1);
 int ccValue = map(rawValue, 0, 1023, 0, 127);
 if (ccValue != lastCCValue) {
   usbMIDI.sendControlChange(74, ccValue, 1);
 }</code></pre>
-        </div>
-      </div>
+     </div>
       <h3>3B — FSR / LDR (Pulldown Resistor Required)</h3>
       <h4>Why a Pulldown Resistor?</h4>
       <p>FSRs/LDRs are variable resistors; use a fixed pulldown resistor to form a voltage divider so the analog pin reads a stable voltage.</p>
       <h4>Wiring Diagram</h4>
-      <figure>
-        <img src="./Tutorial%20Diagrams/SeraphLDR_Diagram.png" alt="FSR and LDR wiring diagram">
-        <figcaption>FSR / LDR Wiring</figcaption>
-      </figure>
+      <div class="grid-2">
+        <figure>
+          <img src="https://i.imgur.com/dIB1qCb.png" alt="FSR and LDR wiring overview">
+          <figcaption>FSR / LDR wiring overview</figcaption>
+        </figure>
+        <figure>
+          <img src="https://i.imgur.com/BHXqAIf.png" alt="FSR and LDR wiring detail">
+          <figcaption>FSR / LDR wiring detail</figcaption>
+        </figure>
+      </div>
       <h4>Recommended Resistor Values</h4>
+      <figure>
+        <img src="https://i.imgur.com/k0FOzIM.png" alt="Recommended resistor values for FSR and LDR sensors">
+        <figcaption>Recommended resistor values</figcaption>
+      </figure>
       <ul>
         <li>Start with <strong>10kΩ</strong> for FSR/LDR channels.</li>
         <li>Tune resistor value based on sensor sensitivity and target dynamic range.</li>
@@ -506,10 +520,6 @@ usbMIDI.sendControlChange(11, ccValue, 1);</code></pre>
         <div class="tile"><strong>TCS34725</strong><br>Color sensing for interactive systems.</div>
       </div>
       <h3>Wiring</h3>
-      <figure>
-        <img src="./Tutorial%20Diagrams/SeraphI2C_Diagram.png" alt="I2C wiring diagram">
-        <figcaption>I²C Wiring Reference</figcaption>
-      </figure>
       <div class="table-wrap">
         <table>
           <caption>I²C sensor wiring reference (pins, suggested wire colors, and Seraph header mapping)</caption>
