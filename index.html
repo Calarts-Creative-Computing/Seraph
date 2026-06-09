@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seraph | GitHub Pages</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1117;
+      --panel: #171a23;
+      --text: #e7ebff;
+      --muted: #b2bddf;
+      --accent: #82a8ff;
+      --border: #2a3147;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      line-height: 1.6;
+    }
+    main { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+    .hero {
+      background: linear-gradient(145deg, #1b2030 0%, #111523 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    h1, h2, h3 { line-height: 1.2; margin-top: 0; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.4rem; margin-top: 2rem; }
+    p, li { color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.85rem;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.9rem;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0e1320;
+    }
+    .pdf-embed {
+      margin-top: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--panel);
+    }
+    iframe {
+      width: 100%;
+      height: 700px;
+      border: 0;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <h1>Seraph</h1>
+    <p><strong>Seraph – Open-Source Teensy MIDI Controller Platform.</strong> An open platform for developing Teensy-based MIDI controllers and interactive musical interfaces.</p>
+    <p>
+      <a href="https://github.com/Calarts-Creative-Computing/Seraph">View on GitHub</a> ·
+      <a href="https://github.com/Calarts-Creative-Computing/Seraph/archive/refs/heads/main.zip">Download ZIP</a>
+    </p>
+  </section>
+
+  <section>
+    <h2>Project Tour</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Demo Code</h3>
+        <p>Ready-to-use Teensy sketches for buttons, potentiometers, accelerometers, and sensor combinations.</p>
+        <a href="./Demo%20Code/">Open folder</a>
+      </article>
+      <article class="card">
+        <h3>Gerber</h3>
+        <p>PCB manufacturing export files for producing Seraph hardware.</p>
+        <a href="./Gerber/">Open folder</a>
+      </article>
+      <article class="card">
+        <h3>Images</h3>
+        <p>Front/back board images and trace views for reference.</p>
+        <a href="./Images/">Open folder</a>
+      </article>
+      <article class="card">
+        <h3>Tutorial Diagrams</h3>
+        <p>Wiring diagrams that correspond to quickstart sensor tutorials.</p>
+        <a href="./Tutorial%20Diagrams/">Open folder</a>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>What’s Inside</h2>
+    <ul>
+      <li><strong>Seraph PCB design</strong> – A hardware platform for connecting various sensors and controls.</li>
+      <li><strong>Demo code</strong> – Examples showing how to interface different sensors with the Seraph PCB.</li>
+      <li><strong>Customization support</strong> – A flexible base for custom MIDI and interactive art projects.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Quick Start</h2>
+    <ol>
+      <li>Solder your Teensy to headers so it can be removed and reused later.</li>
+      <li>Install required Arduino libraries (most demos use the Teensy USBMIDI library).</li>
+      <li>Set Teensy board mode to <strong>Serial + MIDI</strong> in the Arduino IDE.</li>
+      <li>Upload a demo and start experimenting with interactive MIDI control.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Tutorial Highlights</h2>
+    <ul>
+      <li>Analog sensor wiring without pulldown resistor (e.g., potentiometer)</li>
+      <li>Analog sensor wiring with pulldown resistor (e.g., LDR, FSR)</li>
+      <li>Digital input wiring (e.g., buttons)</li>
+      <li>I²C sensor wiring (SDA/SCL + power/ground)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Board Preview</h2>
+    <img src="./Images/Seraph_Front.png" alt="Seraph PCB front view">
+  </section>
+
+  <section>
+    <h2>Getting Started Guide (PDF)</h2>
+    <p>This embedded guide complements the README quick start and wiring resources.</p>
+    <div class="pdf-embed">
+      <iframe src="http://mtiid.calarts.edu/wp-content/uploads/2026/06/Seraph_Getting_Started_Guide.pdf" title="Seraph Getting Started Guide PDF">
+        <p>
+          Your browser cannot display the embedded PDF.
+          <a href="http://mtiid.calarts.edu/wp-content/uploads/2026/06/Seraph_Getting_Started_Guide.pdf">Open the guide directly</a>.
+        </p>
+      </iframe>
+    </div>
+  </section>
+</main>
+</body>
+</html>
